@@ -1,0 +1,31 @@
+group 'io.github.cmdq.sparrow'
+version '1.0.0'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.12.613'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: "kotlin"
+
+sourceSets {
+    //noinspection GrUnresolvedAccess
+    main.kotlin.srcDirs += 'src/main/kotlin'
+    main.java.srcDirs += 'src/main/java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.12.613'
+    compile 'com.sparkjava:spark-core:2.2'
+    compile 'com.google.code.gson:gson:2.3.1'
+}
