@@ -6,7 +6,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.12.613'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:0.13.1514'
     }
 }
 
@@ -24,8 +24,8 @@ repositories {
 }
 
 dependencies {
-    //testCompile group: 'junit', name: 'junit', version: '4.11'
-    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.12.613'
-    compile 'com.sparkjava:spark-core:2.2'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+    compile 'org.jetbrains.kotlin:kotlin-stdlib:0.13.1514'
+    compile 'com.sparkjava:spark-core:2.3'
     compile 'com.google.code.gson:gson:2.3.1'
 }
