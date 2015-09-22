@@ -2,8 +2,6 @@ package io.github.cmdq.sparrow.server
 
 import spark.Spark
 
-private val usageMessage = "usage: sparrow <port>"
-
 fun main(args: Array<String>) {
     try {
         val port = getPort(args)

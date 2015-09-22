@@ -1,6 +1,6 @@
-import org.junit.Test
-import io.github.cmdq.sparrow.server.getPort
 import io.github.cmdq.sparrow.server.SparrowException
+import io.github.cmdq.sparrow.server.getPort
+import org.junit.Test
 import kotlin.test.fail
 
 public class MainKtTest {
@@ -10,7 +10,8 @@ public class MainKtTest {
         try {
             getPort(args)
             fail()
-        } catch (e: SparrowException) {}
+        } catch (e: SparrowException) {
+        }
     }
 
     @Test
@@ -19,7 +20,8 @@ public class MainKtTest {
         try {
             getPort(args)
             fail()
-        } catch (e: SparrowException) {}
+        } catch (e: SparrowException) {
+        }
     }
 
     @Test
@@ -28,7 +30,8 @@ public class MainKtTest {
         try {
             getPort(args)
             fail()
-        } catch (e: SparrowException) {}
+        } catch (e: SparrowException) {
+        }
     }
 
     @Test
@@ -37,7 +40,8 @@ public class MainKtTest {
         try {
             getPort(args)
             fail()
-        } catch (e: SparrowException) {}
+        } catch (e: SparrowException) {
+        }
     }
 
     @Test
@@ -46,7 +50,8 @@ public class MainKtTest {
         try {
             getPort(args)
             fail()
-        } catch (e: SparrowException) {}
+        } catch (e: SparrowException) {
+        }
     }
 
     @Test
