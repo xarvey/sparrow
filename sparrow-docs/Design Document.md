@@ -13,36 +13,36 @@ The system consists of a back end and a front end. The front end consists of the
 The general process for communication between the different components is as follows:
 
 ```sequence
-Client->Service: JSON request over HTTP
-Service->Database: SQL query
+Client-]Service: JSON request over HTTP
+Service-]Database: SQL query
 Note right of Database: Query is executed
-Database-->Service: SQL response table
-Service-->Client: JSON response over HTTP
+Database--]Service: SQL response table
+Service--]Client: JSON response over HTTP
 ```
 
 The process that the back end uses to handle a request is as follows:
 
 ```flow
-start=>start: Request arrives
-parse=>operation: Parse the JSON
-valid=>condition: Valid request?
-check=>operation: Check user permissions
-perm=>condition: User has permission?
-db=>operation: Perform DB query
-success=>condition: Successful?
-response=>operation: Translate response object to JSON
-err404=>end: 404 error
-err403=>end: 403 error
-err500=>end: 500 error
-end=>end: JSON response is sent
+start=]start: Request arrives
+parse=]operation: Parse the JSON
+valid=]condition: Valid request?
+check=]operation: Check user permissions
+perm=]condition: User has permission?
+db=]operation: Perform DB query
+success=]condition: Successful?
+response=]operation: Translate response object to JSON
+err404=]end: 404 error
+err403=]end: 403 error
+err500=]end: 500 error
+end=]end: JSON response is sent
 
-start->parse->valid
-valid(no)->err404
-valid(yes)->check->perm
-perm(no)->err403
-perm(yes)->db->success
-success(no)->err500
-success(yes)->response->end
+start-]parse-]valid
+valid(no)-]err404
+valid(yes)-]check-]perm
+perm(no)-]err403
+perm(yes)-]db-]success
+success(no)-]err500
+success(yes)-]response-]end
 ```
 
 Detailed Design
@@ -73,12 +73,12 @@ This object represents a user's profile.
 | name           | String    | The user's public display name                |
 | zipCode        | String    | The user's USA zip code                       |
 | creationDate   | Int       | The date this user was created, in UNIX time  |
-| friends        | List<Int> | The ids of the user's friends                 |
-| borrowListings | List<Int> | The ids of the user's request listings        |
-| lendListings   | List<Int> | The ids of the user's lend listings           |
-| comments       | List<Int> | The ids of the comments on the user's profile |
-| upVotes        | List<Int> | The users who have upvoted this user          |
-| downVotes      | List<Int> | The users who have downvoted this user        |
+| friends        | List[Int] | The ids of the user's friends                 |
+| borrowListings | List[Int] | The ids of the user's request listings        |
+| lendListings   | List[Int] | The ids of the user's lend listings           |
+| comments       | List[Int] | The ids of the comments on the user's profile |
+| upVotes        | List[Int] | The users who have upvoted this user          |
+| downVotes      | List[Int] | The users who have downvoted this user        |
 
 #### Listing Object
 
@@ -91,8 +91,8 @@ This object represents a item available for lending or an item requested for bor
 | creationDate | Int          | The date this listing was created, in UNIX time |
 | title        | String       | The title of the listing                        |
 | description  | String       | The description of listing, in Markdown format  |
-| tags         | List<String> | The list of tags of the listing                 |
-| comments     | List<Int>    | The list of comment ids on this item            |
+| tags         | List[String] | The list of tags of the listing                 |
+| comments     | List[Int]    | The list of comment ids on this item            |
 | bounty       | Int          | The bounty on this item, in US cents            |
 
 #### Comment Object
@@ -115,7 +115,7 @@ This object represents a filter query
 | Field     | Type         | Description                   |
 |:----------|:-------------|:------------------------------|
 | keywords  | String?      | The search text to search for |
-| zipcode   | List<String> | The location to search in     |
+| zipcode   | List[String] | The location to search in     |
 | bountyMin | Int?         | The minimum bounty applied    |
 | bountyMax | Int?         | The maximum bounty applied    |
 
