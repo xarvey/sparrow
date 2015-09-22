@@ -13,36 +13,36 @@ The system consists of a back end and a front end. The front end consists of the
 The general process for communication between the different components is as follows:
 
 ```sequence
-Client-]Service: JSON request over HTTP
-Service-]Database: SQL query
+Client->Service: JSON request over HTTP
+Service->Database: SQL query
 Note right of Database: Query is executed
-Database--]Service: SQL response table
-Service--]Client: JSON response over HTTP
+Database-->Service: SQL response table
+Service-->Client: JSON response over HTTP
 ```
 
 The process that the back end uses to handle a request is as follows:
 
 ```flow
-start=]start: Request arrives
-parse=]operation: Parse the JSON
-valid=]condition: Valid request?
-check=]operation: Check user permissions
-perm=]condition: User has permission?
-db=]operation: Perform DB query
-success=]condition: Successful?
-response=]operation: Translate response object to JSON
-err404=]end: 404 error
-err403=]end: 403 error
-err500=]end: 500 error
-end=]end: JSON response is sent
+start=>start: Request arrives
+parse=>operation: Parse the JSON
+valid=>condition: Valid request?
+check=>operation: Check user permissions
+perm=>condition: User has permission?
+db=>operation: Perform DB query
+success=>condition: Successful?
+response=>operation: Translate response object to JSON
+err404=>end: 404 error
+err403=>end: 403 error
+err500=>end: 500 error
+end=>end: JSON response is sent
 
-start-]parse-]valid
-valid(no)-]err404
-valid(yes)-]check-]perm
-perm(no)-]err403
-perm(yes)-]db-]success
-success(no)-]err500
-success(yes)-]response-]end
+start->parse->valid
+valid(no)->err404
+valid(yes)->check->perm
+perm(no)->err403
+perm(yes)->db->success
+success(no)->err500
+success(yes)->response->end
 ```
 
 Detailed Design
