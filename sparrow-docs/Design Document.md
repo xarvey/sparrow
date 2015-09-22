@@ -78,7 +78,7 @@ This object represents a user's profile.
 | lendListings   | List<Int> | The ids of the user's lend listings           |
 | comments       | List<Int> | The ids of the comments on the user's profile |
 | upVotes        | List<Int> | The users who have upvoted this user          |
-| downVotes      | Int       | The users who have downvoted this user        |
+| downVotes      | List<Int> | The users who have downvoted this user        |
 
 #### Listing Object
 
