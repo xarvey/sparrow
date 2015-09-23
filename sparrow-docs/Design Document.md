@@ -72,7 +72,7 @@ This object represents a user's profile.
 | id             | Int       | The user's unique id                          |
 | name           | String    | The user's public display name                |
 | zipCode        | String    | The user's USA zip code                       |
-| creationDate   | Int       | The date this user was created, in UNIX time  |
+| creationDate   | Long      | The date this user was created, in UNIX time  |
 | friends        | List[Int] | The ids of the user's friends                 |
 | borrowListings | List[Int] | The ids of the user's request listings        |
 | lendListings   | List[Int] | The ids of the user's lend listings           |
@@ -88,7 +88,7 @@ This object represents a item available for lending or an item requested for bor
 |:-------------|:-------------|:------------------------------------------------|
 | id           | Int          | The listing's unique id                         |
 | owner        | Int          | The id of the user who posted the listing       |
-| creationDate | Int          | The date this listing was created, in UNIX time |
+| creationDate | Long         | The date this listing was created, in UNIX time |
 | title        | String       | The title of the listing                        |
 | description  | String       | The description of listing, in Markdown format  |
 | tags         | List[String] | The list of tags of the listing                 |
@@ -104,7 +104,7 @@ This object represents a comment on a listing
 | id           | Int    | The comment's unique id                                                       |
 | owner        | Int    | The id of the user who posted the comment                                     |
 | parent       | Int    | The id of the user or listing this comment is on                              |
-| creationDate | Int    | The date this comment was created, in UNIX time                               |
+| creationDate | Long   | The date this comment was created, in UNIX time                               |
 | isPrivate    | Bool   | If true, this comment is only visible to the poster and the owner of the page |
 | text         | String | The text of the comment                                                       |
 

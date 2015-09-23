@@ -1,5 +1,6 @@
 package io.github.cmdq.sparrow.server
 
+import io.github.cmdq.sparrow.server.endpoints
 import spark.Spark
 
 fun main(args: Array<String>) {
@@ -11,9 +12,10 @@ fun main(args: Array<String>) {
         System.exit(1)
     }
 
-    Spark.get("/") { request, response ->
-        "hello world\n"
-    }
+    endpoints.users()
+    endpoints.frontpage()
+    endpoints.listings()
+    endpoints.comments()
 }
 
 fun getPort(args: Array<String>): Int {
