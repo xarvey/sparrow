@@ -1,7 +1,7 @@
 package io.github.cmdq.sparrow.server
 
 data class ServiceResponse(
-        val body: CharSequence = "",
+        val body: Any = "",
         val status: Int = 200
 )
 

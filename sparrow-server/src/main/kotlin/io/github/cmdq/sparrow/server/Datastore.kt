@@ -1,28 +1,11 @@
 package io.github.cmdq.sparrow.server
 
-import java.util.*
+public interface Datastore {
+    fun retrieveUser(id: Int): User?
+    fun updateUser(user: User)
+    fun storeNewUser(newUser: UserCreation): Int
 
-public class Datastore {
-    private var nextId = 0
-    private val userTable = HashMap<Int, User>()
-
-    public fun retrieveUser(id: Int):User? {
-        return userTable[id]
-    }
-
-    public fun storeUser(user: User) {
-        userTable[user.id] = user
-    }
-
-    public fun storeNewUser(newUser: UserCreation): Int {
-        val user = User(
-                id = nextId++,
-                name = newUser.name,
-                email = newUser.email,
-                zipCode = newUser.zipCode,
-                creationDate = Date().time
-        )
-        userTable[user.id] = user
-        return user.id
-    }
+    fun retrieveListing(id: Int): Listing?
+    fun updateListing(listing: Listing)
+    fun storeLendListing(listing: Listing): Int
 }
