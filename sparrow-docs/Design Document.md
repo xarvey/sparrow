@@ -31,13 +31,13 @@ perm=>condition: User has permission?
 db=>operation: Perform DB query
 success=>condition: Successful?
 response=>operation: Translate response object to JSON
-err404=>end: 404 error
+err400=>end: 400 error
 err403=>end: 403 error
 err500=>end: 500 error
 end=>end: JSON response is sent
 
 start->parse->valid
-valid(no)->err404
+valid(no)->err400
 valid(yes)->check->perm
 perm(no)->err403
 perm(yes)->db->success
