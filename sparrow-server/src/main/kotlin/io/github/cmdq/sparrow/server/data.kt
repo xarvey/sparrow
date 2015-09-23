@@ -1,24 +1,32 @@
 package io.github.cmdq.sparrow.server
 
+data class ServiceResponse(
+        val body: CharSequence = "",
+        val status: Int = 200
+)
+
+abstract class SparrowData
+
 data class UserCreation(
         val name: String,
         val email: String,
         val passcode: String,
         val zipCode: String
-)
+) : SparrowData()
 
 data class User(
         val id: Int,
         val name: String,
+        val email: String,
         val zipCode: String,
         val creationDate: Long,
-        val friends: List<Int>,
-        val borrowListings: List<Int>,
-        val lendListings: List<Int>,
-        val comments: List<Int>,
-        val upVotes: List<Int>,
-        val downVotes: List<Int>
-)
+        val friends: List<Int> = emptyList(),
+        val borrowListings: List<Int> = emptyList(),
+        val lendListings: List<Int> = emptyList(),
+        val comments: List<Int> = emptyList(),
+        val upVotes: List<Int> = emptyList(),
+        val downVotes: List<Int> = emptyList()
+) : SparrowData()
 
 data class Listing(
         val id: Int,
@@ -29,7 +37,7 @@ data class Listing(
         val tags: List<String>,
         val comments: List<String>,
         val bounty: Int
-)
+) : SparrowData()
 
 data class Comment(
         val id: Int,
@@ -38,11 +46,11 @@ data class Comment(
         val creationDate: Long,
         val isPrivate: Boolean,
         val text: String
-)
+) : SparrowData()
 
 data class FilterParams(
         val keywords: String?,
         val zipCode: List<String>,
         val bountyMin: Int?,
         val bountyMax: Int?
-)
+) : SparrowData()

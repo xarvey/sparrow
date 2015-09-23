@@ -1,8 +1,9 @@
 package io.github.cmdq.sparrow.server.endpoints
 
+import io.github.cmdq.sparrow.server.Sparrow
 import spark.Spark
 
-fun listings() {
+fun listings(service: Sparrow) {
     val dir = "listings"
 
     Spark.get("/$dir") { request, response ->

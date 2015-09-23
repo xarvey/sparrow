@@ -12,10 +12,13 @@ fun main(args: Array<String>) {
         System.exit(1)
     }
 
-    endpoints.users()
-    endpoints.frontpage()
-    endpoints.listings()
-    endpoints.comments()
+    val datastore = Datastore()
+    val service = Sparrow(datastore)
+
+    endpoints.users(service)
+    endpoints.frontpage(service)
+    endpoints.listings(service)
+    endpoints.comments(service)
 }
 
 fun getPort(args: Array<String>): Int {
