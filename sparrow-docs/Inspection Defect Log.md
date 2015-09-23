@@ -12,8 +12,8 @@ Inspection Defect Log
 
 | Defect # | Description                                                                            | Severity | How Corrected                                  |
 |:---------|:---------------------------------------------------------------------------------------|:---------|:-----------------------------------------------|
-| 1        | Borrow and lend API methods should not be duplicated wherever possible                 | 1        | Get and Edit calls were merged                 |
+| 1        | Borrow and lend API methods should not be duplicated wherever possible                 | 1        | Get and Edit calls were merged                     |
 | 2        | Downvotes should be a list of ids, not a count                                         | 3        | Changed the type from Int to List<Int>         |
 | 3        | Search terms should automaticalls search tags, so filters should not have a tags field | 2        | Removed the tags fields from the filter object |
-| 4        |                                                                                        |          |                                                |
-| 5        |                                                                                        |          |                                                |
+| 4        | Friend endpoints should use POST and DELETE not add and remove directories             | 1        |     Changed GET friend calls to POST and DELETE    |
+| 5        |                                                                                        |          |                                                    |
