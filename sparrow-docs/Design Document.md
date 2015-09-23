@@ -143,13 +143,13 @@ Replaces the user on the database with the user passed in the request body.
 
 ##### Add Friend
 
-`POST /users/friends/add/[id]`
+`POST /users/friends/[id]`
 
 Adds the user with the id passed in the call to the authenticated user's friend list.
 
 ##### Remove Friend
 
-`DELETE /users/friends/remove/[id]`
+`DELETE /users/friends/[id]`
 
 Removes the user with the id passed in the call from the authenticated user's friend list.
 
