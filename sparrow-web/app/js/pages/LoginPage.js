@@ -22,23 +22,27 @@ const LoginPage = React.createClass({
 
   render() {
     return (
+	<div className = "title">
       <DocumentTitle title="Sparrow">
+	  
         <section className="login-page">
 
-          <div>
+          <div className="input">
             <input type="text" className="textbox" id = "Username" placeholder ="Username"/>
             <br></br>
             <input type="password" className="textbox" id = "Password" placeholder ="Password"/>
           </div>
 
-          <div>
+          <div className="buttons">
             <button type="button" id="login" onClick={this.login}>Login</button>
-            <Link to="/register"><button type="button" id="register">Register</button></Link>
+          </div>  
+			<Link to="/register">Register</Link>
             {this.errorDisplay()}
-          </div>
+          
 
         </section>
       </DocumentTitle>
+	</div>
     );
   },
 

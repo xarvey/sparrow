@@ -1,0 +1,52 @@
+.title{
+	height: 90vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+	#Username{
+		width: 200px;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		text-align: left;
+		padding: 10px 0 10px 0;
+		font-size: 20px;
+	}
+	
+	#Password{
+		width: 200px;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		text-align: left;
+		padding: 10px 0 10px 0;
+		font-size: 20px;
+	}
+	
+	#ConfirmPassword{
+		width: 200px;
+		margin-top: 2px;
+		margin-bottom: 2px;
+		text-align: left;
+		padding: 10px 0 10px 0;
+		font-size: 20px;
+	}
+	
+	#login{
+		margin-top: 5px;
+		width: 200px;
+		height: 50px;
+		padding: 10px 0 10px 0;
+		font-size: 20px;
+		text-align: center;
+	}
+	
+	#register{
+		margin-top: 5px;
+		width: 204px;
+		height: 50px;
+		padding: 10px 0 10px 0;
+		font-size: 20px;
+		text-align: center;
+	}
+}
+
