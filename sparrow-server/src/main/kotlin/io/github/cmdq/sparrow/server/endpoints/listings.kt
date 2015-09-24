@@ -1,6 +1,5 @@
 package io.github.cmdq.sparrow.server.endpoints
 
-import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Listing
 import io.github.cmdq.sparrow.server.Sparrow
 import io.github.cmdq.sparrow.server.toJson
@@ -8,21 +7,20 @@ import io.github.cmdq.sparrow.server.toObject
 import spark.Spark
 
 fun listings(service: Sparrow) {
-    val gson = Gson()
     val dir = "listings"
 
     Spark.get("/$dir/:id") { request, response ->
         val id = request.params("id").toInt()
         val result = service.listings.getListing(id)
         response.status(result.status)
-        result.body.toJson(gson)
+        result.body.toJson(service.gson)
     }
 
     Spark.put("/$dir") { request, response ->
-        val listing: Listing = request.body().toObject(gson)
+        val listing: Listing = request.body().toObject(service.gson)
         val result = service.listings.editListing(listing)
         response.status(result.status)
-        result.body.toJson(gson)
+        result.body.toJson(service.gson)
     }
 
     Spark.put("/$dir/filter") { request, response ->
@@ -30,10 +28,10 @@ fun listings(service: Sparrow) {
     }
 
     Spark.post("/$dir") { request, response ->
-        val listing: Listing = request.body().toObject(gson)
+        val listing: Listing = request.body().toObject(service.gson)
         val result = service.listings.createListing(listing)
         response.status(result.status)
-        result.body.toJson(gson)
+        result.body.toJson(service.gson)
     }
 
     Spark.delete("/$dir/id") { request, response ->
