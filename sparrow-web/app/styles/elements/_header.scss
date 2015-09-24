@@ -22,6 +22,8 @@ header {
     .logo {
        flex: 1;
        h1 {
+         font-style: 'quicksandbold';
+         font-weight: bold;
          font-size: 24px;
          color: $blue;
          margin-top: 10px;
