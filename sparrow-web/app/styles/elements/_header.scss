@@ -1,4 +1,42 @@
 header {
-  height: 50px;
+  padding: 0 30px;
+  height: 70px;
   background: #ffffff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; 
+  border-bottom: 1px solid #eee;
+  .logo {
+     flex: 1;
+     h1 {
+       font-size: 24px;
+       color: $blue;
+       margin-top: 10px;
+       margin-bottom: -17px;
+     }
+     p {
+       font-size: 14px;
+     }  
+  }
+  .tabs {
+    flex: 4;
+    display: flex;
+    justify-content: center;
+    a {
+      margin: 0 10px;
+      color: $font-color--dark;
+      text-decoration: none;
+      padding: 10px;
+      border-radius: 5px;
+      &.active {
+        border: 1px solid $blue;
+        color: $blue;
+        font-weight: bold;
+      }
+    }
+  }
+  .login {
+    flex: 1;
+  }
 }
