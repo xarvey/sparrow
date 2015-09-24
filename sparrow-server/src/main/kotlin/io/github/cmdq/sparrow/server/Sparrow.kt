@@ -34,8 +34,8 @@ public class Sparrow(
             }
         }
 
-        override fun createLendListing(listing: Listing): ServiceResponse {
-            return ServiceResponse(datastore.storeLendListing(listing))
+        override fun createListing(listing: Listing): ServiceResponse {
+            return ServiceResponse(datastore.storeListing(listing))
         }
 
         override fun editListing(listing: Listing): ServiceResponse {
@@ -53,6 +53,6 @@ public interface UserEndpoint {
 
 public interface ListingEndpoint {
     fun getListing(id: Int): ServiceResponse
-    fun createLendListing(listing: Listing): ServiceResponse
+    fun createListing(listing: Listing): ServiceResponse
     fun editListing(listing: Listing): ServiceResponse
 }

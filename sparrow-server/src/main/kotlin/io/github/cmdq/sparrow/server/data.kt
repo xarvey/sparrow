@@ -31,6 +31,7 @@ data class User(
 data class Listing(
         val id: Int,
         val owner: Int,
+        val type: ListingType,
         val creationDate: Long,
         val title: String,
         val description: String,
@@ -49,8 +50,13 @@ data class Comment(
 ) : SparrowData()
 
 data class FilterParams(
+        val type: String,
         val keywords: String?,
         val zipCode: List<String>,
         val bountyMin: Int?,
         val bountyMax: Int?
 ) : SparrowData()
+
+public enum class ListingType() {
+    lend, borrow
+}

@@ -7,5 +7,5 @@ public interface Datastore {
 
     fun retrieveListing(id: Int): Listing?
     fun updateListing(listing: Listing)
-    fun storeLendListing(listing: Listing): Int
+    fun storeListing(listing: Listing): Int
 }

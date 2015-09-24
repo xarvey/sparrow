@@ -25,21 +25,13 @@ fun listings(service: Sparrow) {
         result.body.toJson(gson)
     }
 
-    Spark.put("/$dir/borrow/filter") { request, response ->
+    Spark.put("/$dir/filter") { request, response ->
 
     }
 
-    Spark.put("/$dir/lend/filter") { request, response ->
-
-    }
-
-    Spark.post("/$dir/borrow") { request, response ->
-
-    }
-
-    Spark.post("/$dir/lend") { request, response ->
+    Spark.post("/$dir") { request, response ->
         val listing: Listing = request.body().toObject(gson)
-        val result = service.listings.createLendListing(listing)
+        val result = service.listings.createListing(listing)
         response.status(result.status)
         result.body.toJson(gson)
     }

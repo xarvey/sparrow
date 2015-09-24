@@ -6,8 +6,7 @@ public class MockDatastore : Datastore {
     private var nextUserId = 0
     private var nextListingId = 0
     private val userTable = HashMap<Int, User>()
-    private val lendTable = HashMap<Int, Listing>()
-    private val borrowTable = HashMap<Int, Listing>()
+    private val listingTable = HashMap<Int, Listing>()
 
     override public fun retrieveUser(id: Int): User? {
         return userTable[id]
@@ -29,20 +28,15 @@ public class MockDatastore : Datastore {
         return user.id
     }
 
-    override fun retrieveListing(id: Int): Listing? {
-        return if (lendTable[id] != null) lendTable[id] else borrowTable[id]
-    }
+    override fun retrieveListing(id: Int): Listing? = listingTable[id]
 
     override fun updateListing(listing: Listing) {
-        if (lendTable[listing.id] != null)
-            lendTable[listing.id] = listing
-        else
-            borrowTable[listing.id] = listing
+        listingTable[listing.id] = listing
     }
 
-    override fun storeLendListing(listing: Listing): Int {
+    override fun storeListing(listing: Listing): Int {
         val newListing = listing.copy(id = nextListingId++)
-        lendTable[newListing.id] = newListing
+        listingTable[newListing.id] = newListing
         return newListing.id
     }
 
