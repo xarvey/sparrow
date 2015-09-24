@@ -36,7 +36,7 @@ const LoginPage = React.createClass({
           <div className="buttons">
             <button type="button" id="login" onClick={this.login}>Login</button>
           </div>  
-			<Link to="/register">Register</Link>
+			<Link to="/register">Need an account? Register</Link>
             {this.errorDisplay()}
           
 
