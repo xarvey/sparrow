@@ -1,0 +1,95 @@
+.home-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  .wrapper {
+    max-width: 1024px;
+    display: flex;
+
+    .list-container {
+      display: flex;
+      flex-direction: column;
+
+      .list-wrapper {
+        min-width: 600px;
+        border-radius: 5px;
+        border: 1px solid rgba(70, 171, 233, 0.35);
+        padding: 20px;
+        margin-top: 40px;
+        
+        .user-info {
+          display: flex;
+          flex-direction: row;
+        
+          .user-pic {
+            margin-right: 10px;
+            width: 37px;
+            height: 37px;
+            background: url(../images/cat.png);
+            border-radius: 50%;
+            border: 1px solid #eeeeee;
+          }
+          
+          .user-text {
+            margin-bottom: 10px;
+            h3 {
+              font-size: 16px;
+              margin: 10px 0 0 0;
+            }
+            
+            p {
+              font-size: 12px;
+              margin: 5px 0;
+            }
+          }
+        }
+        
+        .list-text {
+          font-size: 18px;
+          padding: 5px;
+        }
+        
+        .list-details {
+          display: flex;
+          flex-direction: row;
+          margin-top: 15px;
+          color: #999;
+          padding: 5px;
+          justify-content: space-between;
+          align-items: center;
+          
+          left {
+            display: flex;
+            
+            flex-direction: row;
+            .time {
+              margin-right: 12px;
+              padding-right: 12px;
+              border-right: 1px solid #eee;
+              i {
+                margin-right: 5px;  
+              }
+            }
+            .price {
+              color: $blue;
+              font-weight: bold;
+            }
+          }
+          .btn-lend {
+            -webkit-appearance: none;
+            border: 0;
+            border-radius: 3px;
+            background-color: $blue;
+            color: white;
+            font-family: Quicksand;
+            font-weight: bold;
+            font-size: 14px;
+            padding: 10px 15px;;
+          }
+        }
+        
+      }
+    }
+  }
+}
