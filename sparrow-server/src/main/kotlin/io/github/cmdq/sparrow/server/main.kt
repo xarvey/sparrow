@@ -24,6 +24,10 @@ fun main(args: Array<String>) {
     endpoints.listings(service)
     endpoints.comments(service)
 
+    Spark.after { request, response ->
+        response.header("Content-type", "application/json")
+    }
+
     Spark.exception(IllegalArgumentException::class.java, ::badRequestHandler)
     Spark.exception(JsonParseException::class.java, ::badRequestHandler)
 }
