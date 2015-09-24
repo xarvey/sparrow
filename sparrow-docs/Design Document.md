@@ -88,6 +88,7 @@ This object represents a item available for lending or an item requested for bor
 |:-------------|:-------------|:------------------------------------------------|
 | id           | Int          | The listing's unique id                         |
 | owner        | Int          | The id of the user who posted the listing       |
+| type         | String       | The type of listing, "lend" or "borrow"         |
 | creationDate | Long         | The date this listing was created, in UNIX time |
 | title        | String       | The title of the listing                        |
 | description  | String       | The description of listing, in Markdown format  |
@@ -114,10 +115,11 @@ This object represents a filter query
 
 | Field     | Type         | Description                   |
 |:----------|:-------------|:------------------------------|
-| keywords  | String?      | The search text to search for |
-| zipcode   | List[String] | The location to search in     |
-| bountyMin | Int?         | The minimum bounty applied    |
-| bountyMax | Int?         | The maximum bounty applied    |
+| type      | String       | The type of listing being searched for |
+| keywords  | String?      | The search text to search for          |
+| zipcode   | List[String] | The location to search in              |
+| bountyMin | Int?         | The minimum bounty applied             |
+| bountyMax | Int?         | The maximum bounty applied             |
 
 ### API Endpoints
 
@@ -183,27 +185,15 @@ Replaces the listing on the database with the listing passed in the request body
 
 ##### Search Borrow Listings
 
-`PUT /listings/borrow/filter`
+`PUT /listings/filter`
 
-Searches for borrow listings based on the filter criteria passed in the call.
-
-##### Search Lend Listings
-
-`PUT /listings/lend/filter`
-
-Searches for lend listings based on the filter criteria passed in the call.
+Searches for listings based on the filter criteria passed in the call.
 
 ##### Create Borrow Listing
 
-`POST /listings/borrow`
+`POST /listings`
 
-Creates a new borrow listing with the borrow listing object passed in the call, and returns the id of the new listing.
-
-##### Create Lend Listing
-
-`POST /listings/lend`
-
-Creates a new lend listing with the borrow listing object passed in the call, and returns the id of the new listing.
+Creates a new listing with the listing object passed in the call, and returns the id of the new listing.
 
 ##### Close Listing
 

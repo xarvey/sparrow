@@ -45,12 +45,12 @@ const App = React.createClass({
 
   render() {
     return (
-      <div>
+      <div className="app">
 
         <Header />
-
-        {this.renderChildren()}
-
+        <div className="container">
+          {this.renderChildren()}
+        </div>
         <Footer />
 
       </div>

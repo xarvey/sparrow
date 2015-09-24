@@ -1,7 +1,17 @@
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: Quicksand, Helvetica, sans-serif;
   color: $font-color--dark;
   background-color: $background--light;
   padding: 0;
   margin: 0;
+  
+  .app {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column; 
+    
+    .container {
+      flex: 1; 
+    }
+  }
 }
