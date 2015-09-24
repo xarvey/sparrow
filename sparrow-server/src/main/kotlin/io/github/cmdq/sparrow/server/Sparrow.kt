@@ -1,13 +1,12 @@
 package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
-import com.google.gson.JsonParseException
 
 public class Sparrow(
         val datastore: MockDatastore,
         val gson: Gson = Gson()
 ) {
-    public val users = object: UserEndpoint {
+    public val users = object : UserEndpoint {
         override fun getUser(id: Int): ServiceResponse {
             val user = datastore.retrieveUser(id)
             return when (user) {
@@ -26,7 +25,7 @@ public class Sparrow(
         }
     }
 
-    public val listings = object: ListingEndpoint {
+    public val listings = object : ListingEndpoint {
         override fun getListing(id: Int): ServiceResponse {
             val listing = datastore.retrieveListing(id)
             return when (listing) {

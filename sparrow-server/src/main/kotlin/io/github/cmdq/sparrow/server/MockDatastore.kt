@@ -9,7 +9,7 @@ public class MockDatastore : Datastore {
     private val lendTable = HashMap<Int, Listing>()
     private val borrowTable = HashMap<Int, Listing>()
 
-    override public fun retrieveUser(id: Int):User? {
+    override public fun retrieveUser(id: Int): User? {
         return userTable[id]
     }
 

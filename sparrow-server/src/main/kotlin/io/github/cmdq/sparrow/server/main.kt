@@ -1,6 +1,10 @@
 package io.github.cmdq.sparrow.server
 
+import com.google.gson.Gson
+import com.google.gson.JsonParseException
 import io.github.cmdq.sparrow.server.endpoints
+import spark.Request
+import spark.Response
 import spark.Spark
 
 fun main(args: Array<String>) {
@@ -19,6 +23,16 @@ fun main(args: Array<String>) {
     endpoints.frontpage(service)
     endpoints.listings(service)
     endpoints.comments(service)
+
+    Spark.exception(IllegalArgumentException::class.java, ::badRequestHandler)
+    Spark.exception(JsonParseException::class.java, ::badRequestHandler)
+}
+
+fun badRequestHandler(exception: Exception, request: Request, response: Response) {
+    println("Bad request:\n${request.body()}")
+    response.status(400)
+    val message = exception.getMessage() ?: "Bad request"
+    response.body(message.toJson(Gson()))
 }
 
 fun getPort(args: Array<String>): Int {
