@@ -19,3 +19,15 @@ Inspection Defect Log
 | 5        | When login authorization fails, the status code should be 500 not 200                  | 2        | Change the response code                           |
 | 6        | The front end should sanitize the input to prevent malicious input                     | 2        | Sanitize the input                            |
 
+### Code Inspection
+
+ - Product: Sparrow Code Inspection
+ - Date: 21 September 2015
+ - Author: Sparrow Team
+ - Moderator: Joe Bruckner
+ - Inspectors: Yao Xiao, Nathan Chang, Zilun Mai, Saranyu Phusit
+ - Recorder: Sargun Vohra
+
+| Defect # | Description                                                                            | Severity | How Corrected                                  |
+|:---------|:---------------------------------------------------------------------------------------|:---------|:-----------------------------------------------|
+|||||
