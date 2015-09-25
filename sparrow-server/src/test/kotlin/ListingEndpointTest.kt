@@ -1,6 +1,7 @@
 import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Sparrow
 import io.github.cmdq.sparrow.server.mocks.MockDatastore
+import io.github.cmdq.sparrow.server.mocks.mockListing
 import org.junit.Assert
 import org.junit.Test
 
@@ -16,7 +17,7 @@ public class ListingEndpointTest {
     @Test
     public fun testGetListingMax() {
         val response = endpoint.getListing(Int.MAX_VALUE)
-        Assert.assertEquals(404, response.status)
+        Assert.assertEquals(200, response.status)
     }
 
     @Test
@@ -25,4 +26,21 @@ public class ListingEndpointTest {
         Assert.assertEquals(200, response.status)
     }
 
+    @Test
+    public fun testCreateListingValid() {
+        try {
+            endpoint.createListing(mockListing)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @Test
+    public fun testEditListingValid() {
+        try {
+            endpoint.editListing(mockListing)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

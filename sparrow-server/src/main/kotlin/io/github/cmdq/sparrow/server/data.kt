@@ -35,8 +35,8 @@ data class Listing(
         val creationDate: Long,
         val title: String,
         val description: String,
-        val tags: List<String>,
-        val comments: List<String>,
+        val tags: List<String> = emptyList(),
+        val comments: List<String> = emptyList(),
         val bounty: Int
 ) : SparrowData()
 

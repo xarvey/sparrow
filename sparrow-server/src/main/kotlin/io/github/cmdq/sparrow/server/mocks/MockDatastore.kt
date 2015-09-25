@@ -9,8 +9,7 @@ import java.util.*
 public class MockDatastore: Datastore {
     override fun retrieveUser(id: Int): User? {
         if (id < 0) return null
-        else if (id >= Int.MAX_VALUE) return null
-        else return User(0, "joe", "joe@email.com", "46526", Date().time)
+        else return mockUser
     }
 
     override fun updateUser(user: User) {
@@ -22,14 +21,15 @@ public class MockDatastore: Datastore {
     }
 
     override fun retrieveListing(id: Int): Listing? {
-        throw UnsupportedOperationException()
+        if (id < 0) return null
+        else return mockListing
     }
 
     override fun updateListing(listing: Listing) {
-        throw UnsupportedOperationException()
+        return
     }
 
     override fun storeListing(listing: Listing): Int {
-        throw UnsupportedOperationException()
+        return 0
     }
 }

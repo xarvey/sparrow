@@ -3,6 +3,8 @@ import io.github.cmdq.sparrow.server.Sparrow
 import io.github.cmdq.sparrow.server.User
 import io.github.cmdq.sparrow.server.UserCreation
 import io.github.cmdq.sparrow.server.mocks.MockDatastore
+import io.github.cmdq.sparrow.server.mocks.mockUser
+import io.github.cmdq.sparrow.server.mocks.mockUserCreation
 import org.junit.Assert
 import org.junit.Test
 import java.util.*
@@ -19,7 +21,7 @@ public class UserEndpointTest {
     @Test
     public fun testGetUserMax() {
         val response = endpoint.getUser(Int.MAX_VALUE)
-        Assert.assertEquals(404, response.status)
+        Assert.assertEquals(200, response.status)
     }
 
     @Test
@@ -31,8 +33,7 @@ public class UserEndpointTest {
     @Test
     public fun testCreateUserValid() {
         try {
-            val info = UserCreation("joe", "joe@mail.com", "12345", "46526")
-            endpoint.createUser(info)
+            endpoint.createUser(mockUserCreation)
         } catch(e: Exception) {
             e.printStackTrace()
         }
@@ -41,8 +42,7 @@ public class UserEndpointTest {
     @Test
     public fun testEditUserValid() {
         try {
-            val user = User(0, "joe", "joe@mail.com", "46526", Date().time)
-            endpoint.editUser(user)
+            endpoint.editUser(mockUser)
         } catch (e: Exception) {
             e.printStackTrace()
         }
