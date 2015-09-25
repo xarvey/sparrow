@@ -1,6 +1,7 @@
 'use strict';
 
 import React         from 'react/addons';
+import actions       from '../actions/CurrentUserActions'
 import {Link}        from 'react-router';
 import DocumentTitle from 'react-document-title';
 
@@ -24,7 +25,7 @@ const LoginPage = React.createClass({
     return (
 	<div className = "title">
       <DocumentTitle title="Sparrow">
-	  
+
         <section className="login-page">
 
           <div className="input">
@@ -35,10 +36,10 @@ const LoginPage = React.createClass({
 
           <div className="buttons">
             <button type="button" id="login" onClick={this.login}>Login</button>
-          </div>  
+          </div>
 			<Link to="/register">Need an account? Register</Link>
             {this.errorDisplay()}
-          
+
 
         </section>
       </DocumentTitle>
@@ -52,6 +53,12 @@ const LoginPage = React.createClass({
     if(pass.length > 16 || pass.length < 1) {
       console.log(PasswordError);
       this.handleError(PasswordError);
+    }
+    else {
+        actions.login({
+          'Username':usr,
+          'Password':pass
+        });
     }
   }
 
