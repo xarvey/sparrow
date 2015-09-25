@@ -1,7 +1,7 @@
-Inspection Defect Log
+Sprint 1 Defect Log
 =======================
 
-### Design Inspection
+### Design Inspection Log
 
  - Product: Sparrow Design Inspection
  - Date: 21 September 2015
@@ -19,7 +19,7 @@ Inspection Defect Log
 | 5        | When login authorization fails, the status code should be 500 not 200                  | 2        | Change the response code                       |
 | 6        | The front end should sanitize the input to prevent malicious input                     | 2        | Sanitize the input                             |
 
-### Code Inspection
+### Code Inspection Log
 
  - Product: Sparrow Code Inspection
  - Date: 21 September 2015
@@ -35,3 +35,11 @@ Inspection Defect Log
 | 3        | Change design to avoid lend and borrow queries to avoid code duplication | 1        | Combined the methods and modified design doc                                         |
 | 4        | Create Datastore interface with mock to improve testability              | 1        | Created Datastore interface and made the temporary datastore implement the interface |
 | 5        | Max int value is a valid id, should allow it                             | 2        | Don't throw exception when seeing the max int value as ID                            |
+
+### Unit Testing Log
+
+- Product: Sparrow Unit Tests
+- Date: 21 September 2015
+- Author: Sparrow Team
+
+No defects were found by the unit tests.
