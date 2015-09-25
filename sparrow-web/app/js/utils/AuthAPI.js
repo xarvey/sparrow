@@ -14,7 +14,11 @@ const AuthAPI = {
 
   logout() {
     return APIUtils.post('auth/logout');
-  }
+  },
+
+  register(user) {
+    return APIUtils.post('auth/register', user);
+  },
 
 };
 

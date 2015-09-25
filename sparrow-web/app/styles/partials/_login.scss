@@ -3,8 +3,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	
-	#Username{
+
+	#Username, #Email, #Password, #ConfirmPassword,#Zipcode{
 		width: 200px;
 		margin-top: 2px;
 		margin-bottom: 2px;
@@ -12,25 +12,7 @@
 		padding: 10px 0 10px 0;
 		font-size: 20px;
 	}
-	
-	#Password{
-		width: 200px;
-		margin-top: 2px;
-		margin-bottom: 2px;
-		text-align: left;
-		padding: 10px 0 10px 0;
-		font-size: 20px;
-	}
-	
-	#ConfirmPassword{
-		width: 200px;
-		margin-top: 2px;
-		margin-bottom: 2px;
-		text-align: left;
-		padding: 10px 0 10px 0;
-		font-size: 20px;
-	}
-	
+
 	#login{
 		margin-top: 5px;
 		width: 204px;
@@ -39,7 +21,7 @@
 		font-size: 20px;
 		text-align: center;
 	}
-	
+
 	#register{
 		margin-top: 5px;
 		width: 204px;
@@ -49,4 +31,3 @@
 		text-align: center;
 	}
 }
-
