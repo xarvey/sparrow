@@ -5,7 +5,32 @@ import {Link} from 'react-router';
 
 const Header = React.createClass({
 
+  getInitialState() {
+    return {
+      type: 'borrow', 
+      props: {}
+    };
+  },
+  
+  componentDidMount() {
+    document.addEventListener('App.Events.SetHeader', function(e) {
+      this.setState(e.detail);
+    }.bind(this));
+  },
+  
+  conponentWillUnmount() {
+    document.removeEventListener('App.Events.SetHeader');
+  },
+  
   render() {
+    var borrowTab, lendTab;
+    if(this.state.type == 'borrow') {
+      borrowTab = "tab active";
+      lendTab = "tab";
+    } else if(this.state.type == 'lend') {
+      borrowTab = "tab";
+      lendTab = "tab active";
+    }
     return (
       <header>
         <div className="wrapper">
@@ -14,8 +39,8 @@ const Header = React.createClass({
             <p>Lend and borrow</p>
           </div>
           <div className="tabs">
-            <Link to="/" className="tab active">Borrow Requests</Link>
-            <Link to="/" className="tab">Lend Offers</Link>
+            <Link to="/borrow" className={borrowTab}>Borrow Requests</Link>
+            <Link to="/lend" className={lendTab}>Lend Offers</Link>
           </div>
           <div className="login">
             <Link to="/login" className="login-btn">Login</Link>

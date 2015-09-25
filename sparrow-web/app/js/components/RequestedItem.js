@@ -2,7 +2,7 @@
 
 import React from 'react/addons';
 
-const ListItem = React.createClass({
+const RequestedItem = React.createClass({
 
   render() {
     return (
@@ -33,4 +33,4 @@ const ListItem = React.createClass({
 
 });
 
-export default ListItem;
+export default RequestedItem;
