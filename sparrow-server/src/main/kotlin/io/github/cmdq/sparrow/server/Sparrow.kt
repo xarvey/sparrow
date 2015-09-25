@@ -3,7 +3,7 @@ package io.github.cmdq.sparrow.server
 import com.google.gson.Gson
 
 public class Sparrow(
-        val datastore: MockDatastore,
+        val datastore: Datastore,
         val gson: Gson = Gson()
 ) {
     public val users = object : UserEndpoint {

@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
         System.exit(1)
     }
 
-    val datastore = MockDatastore()
+    val datastore = SimpleDatastore()
     val service = Sparrow(datastore)
 
     endpoints.users(service)

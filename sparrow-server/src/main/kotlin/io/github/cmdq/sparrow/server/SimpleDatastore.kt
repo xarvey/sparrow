@@ -2,7 +2,7 @@ package io.github.cmdq.sparrow.server
 
 import java.util.*
 
-public class MockDatastore : Datastore {
+public class SimpleDatastore : Datastore {
     private var nextUserId = 0
     private var nextListingId = 0
     private val userTable = HashMap<Int, User>()

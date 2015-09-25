@@ -50,13 +50,13 @@ data class Comment(
 ) : SparrowData()
 
 data class FilterParams(
-        val type: String,
+        val type: ListingType,
         val keywords: String?,
         val zipCode: List<String>,
         val bountyMin: Int?,
         val bountyMax: Int?
 ) : SparrowData()
 
-public enum class ListingType() {
+public enum class ListingType {
     lend, borrow
 }
