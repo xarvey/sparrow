@@ -1,11 +1,11 @@
 {
-  "name": "react-rocket-boilerplate",
+  "name": "sparrow",
   "version": "0.2.0",
-  "author": "Jake Marsh <jakemmarsh@gmail.com>",
-  "description": "Boilerplate using React, Browserify, SASS, and Gulp.",
+  "author": "Team 7 Front-end",
+  "description": "saprrow",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jakemmarsh/react-rocket-boilerplate.git"
+    "url": "https://github.com/xarvey/sparrow.git"
   },
   "keywords": [
     "gulp",
@@ -57,7 +57,10 @@
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-tools"
+    ]
   }
   
 }
