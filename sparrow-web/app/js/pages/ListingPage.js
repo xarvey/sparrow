@@ -5,22 +5,28 @@ import DocumentTitle from 'react-document-title';
 
 var MissingFieldError = "Missing field";
 var OverflowError = "Field overflow";
+var NumberInvalidError = "Bounty must be a valid non negative number";
+var TagFormatError = "Invalid Tag Format (i.e. \"desk red wooden\")";
+
 const ListingPage = React.createClass({
 
   propTypes: {
     currentUser: React.PropTypes.object.isRequired
   },
 
+  //TODO: add your files here after errormessage, i.e "files": []. iuuno if the syntax's correct.
   getInitialState() {
-    return {value: ''};
+    return {value: {"errorMessage":''}};
   },
 
-  handleError(e) {
-    this.setState({value: e})
+  handleErrorMessage(e) {
+    var newValue = this.state.value;
+    newValue.errorMessage = e;
+    this.setState({value: newValue})
   },
 
   errorDisplay() {
-    return (<p>{this.state.value}</p>);
+    return (<p>{this.state.value.errorMessage}</p>);
   },
 
   render() {
@@ -30,9 +36,9 @@ const ListingPage = React.createClass({
         <p>List Your Item</p>
           <div>
             <form>
-              <input type="text" className="textbox" id="Title" placeholder="Title"/>
+              <input type="text" className="textbox" id="Title" placeholder="Title (140 words max)"/>
               <br></br>
-              <input type="text" className="textbox" id="Description" placeholder="Description"/>
+              <input type="text" className="textbox" id="Description" placeholder="Description (140 words max)"/>
               <br></br>
               <input type="text" className="textbox" id="Tags" placeholder="Tags (Seperate by space)"/>
               <br></br>
@@ -60,24 +66,34 @@ const ListingPage = React.createClass({
     var description = document.getElementById("Description").value;
     var bounty = document.getElementById("Bounty").value;
     var tags = document.getElementById("Tags").value;
-    if(title == null || description == null || bounty == null)
+    
+    if(title == null || title.length == 0 || description == null || description.length == 0 || bounty == null || tags == null || tags.length == 0)
     {
       console.log(MissingFieldError);
-      this.handleError(MissingFieldError);
+      this.handleErrorMessage(MissingFieldError);
     }
-    if(title.length > 140 || description > 140 || bounty > Number.MAX_VALUE)
+    
+    else if(title.length > 140 || description > 140 || bounty > Number.MAX_VALUE)
     {
       console.log(OverflowError);
-      this.handleError(OverflowError);    
+      this.handleErrorMessage(OverflowError);    
     }
-    //TODO: bounty textbox is able to enter "-1-1-1-1-1"
-    //TODO: parsing for tags.
+
+    else if(isNaN(bounty) || bounty.length == 0) {
+      console.log(NumberInvalidError);
+      this.handleErrorMessage(NumberInvalidError); 
+    }
     
+    tags = tags.split(' ');
+    if(tags.length == 0) {
+      console.log('not good');
+    }
+
     else
     {
       //TODO: Pass the value to backend
       console.log('All good');
-      console.log(bounty);
+      console.log(bounty.length);
     }
   }
 });
