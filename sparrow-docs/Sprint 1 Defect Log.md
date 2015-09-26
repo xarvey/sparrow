@@ -46,4 +46,4 @@ Sprint 1 Defect Log
 | Defect # | Description                                                              | Severity | How Corrected                                                                        |
 |:---------|:-------------------------------------------------------------------------|:---------|:-------------------------------------------------------------------------------------|
 | 1        | The Unit Test will fail when run it for the second time           | 1        | Researching...                |
-| 2        | Every file using 'react-router' cannot be tested           | 1        | Researching...                |
+| 2        | Every file using 'react-router' is hard to be tested by default          | 1        | Researching...                |
