@@ -4,10 +4,20 @@ import React         from 'react/addons';
 import {Link}        from 'react-router';
 import DocumentTitle from 'react-document-title';
 
-import ListItem from '../components/ListItem';
+import RequestedItem from '../components/RequestedItem';
+import SetHeader from '../mixins/SetHeader';
 
-const HomePage = React.createClass({
+const LendListPage = React.createClass({
 
+  mixins: [SetHeader],
+  
+  header() {
+    return {
+      type: 'lend',
+      props: {}
+    };
+  },
+  
   getInitialState() {
     return {
       mockData: [
@@ -43,11 +53,8 @@ const HomePage = React.createClass({
   mockList() {
     return (
       <div className="list-container">
-        {
-          this.state.mockData.map((item) => {
-            return <ListItem item={item}/>
-          })
-        }
+        <br/><br/><br/><br/> 
+        Coming soonerino!
       </div>
     )
   },
@@ -68,4 +75,4 @@ const HomePage = React.createClass({
 
 });
 
-export default HomePage;
+export default LendListPage;

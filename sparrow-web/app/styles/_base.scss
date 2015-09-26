@@ -1,5 +1,5 @@
 body {
-  font-family: Quicksand, Helvetica, sans-serif;
+  font-family: 'quicksandregular', Helvetica, sans-serif;
   color: $font-color--dark;
   background-color: $background--light;
   padding: 0;
@@ -14,4 +14,8 @@ body {
       flex: 1; 
     }
   }
+}
+
+h1 {
+  font-family: 'quicksandbold', Helvetica, sans-serif;
 }
