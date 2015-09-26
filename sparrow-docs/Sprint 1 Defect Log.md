@@ -35,6 +35,7 @@ Sprint 1 Defect Log
 | 3        | Change design to avoid lend and borrow queries to avoid code duplication | 1        | Combined the methods and modified design doc                                         |
 | 4        | Create Datastore interface with mock to improve testability              | 1        | Created Datastore interface and made the temporary datastore implement the interface |
 | 5        | Max int value is a valid id, should allow it                             | 2        | Don't throw exception when seeing the max int value as ID                            |
+| 6        | The Bounty could be negative                             | 2        | Give user error when entered a negative bounty                            |
 
 ### Unit Testing Log
 
@@ -42,4 +43,6 @@ Sprint 1 Defect Log
 - Date: 21 September 2015
 - Author: Sparrow Team
 
-No defects were found by the unit tests.
+| Defect # | Description                                                              | Severity | How Corrected                                                                        |
+|:---------|:-------------------------------------------------------------------------|:---------|:-------------------------------------------------------------------------------------|
+| 1        | The Unit Test will fail when run it for the second time           | 1        | Researching...                |
