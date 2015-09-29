@@ -20,7 +20,7 @@ if (process.env.BROWSER) {
 class Header extends Component {
 
   static propTypes = {
-    type: PropTypes.array.isRequired
+    type: PropTypes.object.isRequired
   }
 
   _getIntlMessage = IntlMixin.getIntlMessage

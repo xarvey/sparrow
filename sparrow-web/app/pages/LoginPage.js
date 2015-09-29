@@ -6,8 +6,8 @@ const PasswordError = 'Password length invalid';
 
 class LoginPage extends Component {
 
-  getInitialState() {
-    return { value: '' };
+  state =  {
+    value: ''
   }
 
   handleError(e) {

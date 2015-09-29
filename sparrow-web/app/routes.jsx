@@ -3,6 +3,7 @@ import { Route } from 'react-router';
 import { generateRoute } from 'utils/localized-routes';
 import LendHeader from './components/LendHeader';
 import BorrowHeader from './components/BorrowHeader';
+import Header from './components/header';
 
 export default (
   <Route component={ require('./components/app') }>
@@ -16,7 +17,7 @@ export default (
     }) }
     { generateRoute({
       paths: ['/login'],
-      component: require('./pages/LoginPage')
+      component: { header: Header, content: require('./pages/LoginPage') }
     }) }
     { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],
