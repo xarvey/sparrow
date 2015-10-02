@@ -1,37 +1,38 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link }        from 'react-router';
 import DocumentTitle from 'react-document-title';
 
 import UserActions from '../actions/UserActions';
-import userStore from '../stores/UserStore';
+
+const userStore = require('../stores/UserStore');
 // const PasswordError = 'Password length invalid';
 
-class RegisterPage extends Component {
+const RegisterPage = React.createClass({
 
   componentDidMount() {
     userStore();
-  }
+  },
 
-  state =  {
-    value: ''
-  }
+  getInitialState() {
+    return { value: '' };
+  },
 
   handleError(e) {
     this.setState({ value: e });
-  }
+  },
 
   errorDisplay() {
     return (<p>{ this.state.value }</p>);
-  }
+  },
 
   register(event) {
-    console.log('yes');
+    console.log(this.refs.name.value);
     console.log(event);
     const newUser = {
-      name: document.getElementById('name').value,
-      email: document.getElementById('email').value,
-      passcode: document.getElementById('pass').value,
-      zipCode: document.getElementById('zip').value
+      name: this.refs.name.value,
+      email: this.refs.email.value,
+      passcode: this.refs.pass.value,
+      zipCode: this.refs.zipCode.value
     };
 
     UserActions.register(newUser);
@@ -45,7 +46,7 @@ class RegisterPage extends Component {
       this.handleError(PasswordError);
     }
     */
-  }
+  },
 
   render() {
     return (
@@ -55,15 +56,15 @@ class RegisterPage extends Component {
         <section className='login-page'>
 
           <form className='input'>
-            <input ref='name' id='name' type='text' className='textbox' placeholder = 'Name'/>
+            <input ref='name' type='text' className='textbox' placeholder = 'Name'/>
             <br/>
-            <input ref='email' id='email' type='text' className='textbox' placeholder = 'Username'/>
+            <input ref='email' type='text' className='textbox' placeholder = 'Username'/>
             <br/>
-            <input ref='pass' id='pass' type='password' className='textbox' placeholder = 'Password'/>
+            <input ref='pass' type='password' className='textbox' placeholder = 'Password'/>
             <br/>
             <input ref='confirmPass' type='password' className='textbox' placeholder = 'Confirm Password'/>
             <br/>
-            <input ref='zipCode' id='zip' type='text' className='textbox' placeholder = 'Zip Code'/>
+            <input ref='zipCode' type='text' className='textbox' placeholder = 'Zip Code'/>
           </form>
 
           <div className='buttons'>
@@ -79,6 +80,6 @@ class RegisterPage extends Component {
     );
   }
 
-}
+});
 
 export default RegisterPage;

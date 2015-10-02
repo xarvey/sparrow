@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link }        from 'react-router';
 import DocumentTitle from 'react-document-title';
 
 const PasswordError = 'Password length invalid';
 
-class LoginPage extends Component {
+const LoginPage = React.createClass({
 
-  state =  {
-    value: ''
-  }
+  getInitialState() {
+    return { value: '' };
+  },
 
   handleError(e) {
     this.setState({ value: e });
-  }
+  },
 
   errorDisplay() {
     return (<p>{ this.state.value }</p>);
-  }
+  },
 
   render() {
     return (
@@ -42,7 +42,7 @@ class LoginPage extends Component {
       </DocumentTitle>
 	</div>
     );
-  }
+  },
 
   login() {
     // const usr = document.getElementById('Username').value;
@@ -58,6 +58,6 @@ class LoginPage extends Component {
     } */
   }
 
-}
+});
 
 export default LoginPage;
