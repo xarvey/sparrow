@@ -4,18 +4,18 @@
 	align-items: center;
 	justify-content: center;
 
-	#Username, #Email, #Password, #ConfirmPassword,#Zipcode{
+	.textbox{
 		width: 200px;
-		margin-top: 2px;
-		margin-bottom: 2px;
+		margin-top: 5px;
+		margin-bottom: 5px;
 		text-align: left;
-		padding: 10px 0 10px 0;
+		padding: 10px 15px;
 		font-size: 20px;
 	}
 
 	#login{
 		margin-top: 5px;
-		width: 204px;
+		width: 230px;
 		height: 50px;
 		padding: 10px 0 10px 0;
 		font-size: 20px;
@@ -24,7 +24,7 @@
 
 	#register{
 		margin-top: 5px;
-		width: 204px;
+		width: 230px;
 		height: 50px;
 		padding: 10px 0 10px 0;
 		font-size: 20px;

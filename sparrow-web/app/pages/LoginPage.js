@@ -34,7 +34,7 @@ class LoginPage extends Component {
           <div className='buttons'>
             <button type='button' id='login' onClick={ this.login }>Login</button>
           </div>
-			<Link to='/register'>Need an account? Register</Link>
+			<span>Need an account? &nbsp; <Link to='/register'>Register</Link></span>
             { this.errorDisplay() }
 
 
