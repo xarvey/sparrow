@@ -1,6 +1,6 @@
 const alt = require('../alt');
 const UserActions = require('../actions/UserActions');
-const request = require('superagent');
+const $ = require('jquery');
 
 class UserStore {
   constructor() {
@@ -9,24 +9,24 @@ class UserStore {
     this.registered = false;
 
     this.bindListeners({
-      handleRegister: UserActions.register,
-      handleRegisterFailed: UserActions.registerFailed
+      handleRegister: UserActions.REGISTER,
+      handleRegisterFailed: UserActions.REGISTER_FAILED
     });
   }
 
   handleRegister(userInfo) {
-    console.log('RECEIVED?');
-    request
-      .post(this.endPointURL + '/users')
-      .set('Content-Type', 'application/json')
-      .send(userInfo)
-      .end((err, res) => {
-        if (err) {
-          console.error('register error!');
-          return;
-        }
-        this.setState({ registered: res });
-      });
+    $.ajax({
+      url: this.endPointURL + '/users',
+      dataType: 'json',
+      type: 'POST',
+      data: userInfo,
+      success: function(data) {
+        this.setState({ registered: data });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.endPointURL, status, err.toString());
+      }.bind(this)
+    });
   }
 
   handleRegisterFailed(errorMessage) {

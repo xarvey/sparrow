@@ -29,6 +29,7 @@
     "intl": "^1.0.0",
     "ionicons": "^2.0.1",
     "iso": "^4.1.0",
+    "jquery": "^2.1.4",
     "koa": "^1.0.0",
     "koa-cash": "^1.0.1",
     "koa-compressor": "^1.0.3",
