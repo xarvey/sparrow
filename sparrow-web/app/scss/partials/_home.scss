@@ -4,65 +4,83 @@
   align-items: center;
 
   .wrapper {
-    max-width: 1024px;
+    max-width: 960px;
     display: flex;
 
     .list-container {
       display: flex;
       flex-direction: column;
-
+      margin-top: 20px;
       .list-wrapper {
-        min-width: 600px;
+        display: flex;
+        flex-direction: row;
+        min-width: 930px;
         border-radius: 5px;
-        border: 1px solid rgba(70, 171, 233, 0.35);
-        padding: 20px;
-        margin-top: 40px;
+        //border-bottom: 1px solid rgba(70, 171, 233, 0.35);
+        padding: 15px;
+        vertical-align: middle;
+        justify-content: space-between;
 
-        .user-info {
-          display: flex;
-          flex-direction: row;
-
-          .user-pic {
-            margin-right: 10px;
-            width: 37px;
-            height: 37px;
-            background: url(../images/cat.png);
-            border-radius: 50%;
-            border: 1px solid #eeeeee;
-          }
-
-          .user-text {
-            margin-bottom: 10px;
-            h3 {
-              font-size: 16px;
-              margin: 10px 0 0 0;
-            }
-
-            p {
-              font-size: 12px;
-              margin: 5px 0;
-            }
-          }
+        &:hover {
+          background-color: #f8f8f8;
+          cursor: pointer;
         }
 
-        .list-text {
-          font-size: 18px;
-          padding: 5px;
-        }
-
-        .list-details {
+        left {
           display: flex;
           flex-direction: row;
-          margin-top: 15px;
-          color: #999;
-          padding: 5px;
-          justify-content: space-between;
+          flex: 1;
           align-items: center;
 
-          left {
+          .user-info {
             display: flex;
-
             flex-direction: row;
+
+            vertical-align: middle;
+            align-items: center;
+            margin-right: 10px;
+            width: 150px;
+            .user-pic {
+              margin-right: 10px;
+              width: 37px;
+              height: 37px;
+              background: url(../images/cat.png);
+              border-radius: 50%;
+              border: 1px solid #eeeeee;
+            }
+
+            .user-text {
+              h3 {
+                font-size: 16px;
+                margin: 10px 0 0 0;
+              }
+
+              p {
+                font-size: 12px;
+                margin: 5px 0;
+              }
+            }
+          }
+
+          .list-text {
+            font-size: 18px;
+            left: 100px;
+          }
+
+
+        }
+
+        right {
+          display: flex;
+          flex-direction: row;
+          vertical-align: middle;
+          align-items: center;
+          .list-details {
+            display: flex;
+            flex-direction: row;
+            color: #999;
+            padding: 5px;
+
             .time {
               margin-right: 12px;
               padding-right: 12px;
@@ -74,18 +92,27 @@
             .price {
               color: $blue;
               font-weight: bold;
+              margin-right: 20px;
             }
+
           }
+
           .btn-lend {
             -webkit-appearance: none;
             border: 0;
             border-radius: 3px;
-            background-color: $blue;
-            color: white;
+            background-color: rgba(0,0,0,0);
+            border: 1px solid #efefef;
+            color: #999999;
             font-family: Quicksand;
             font-weight: bold;
             font-size: 14px;
             padding: 10px 15px;;
+
+            &:hover {
+              cursor: pointer;
+              background-color: white;
+            }
           }
         }
 

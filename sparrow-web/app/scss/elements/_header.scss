@@ -1,37 +1,37 @@
 header {
-  padding: 0 30px;
   height: 70px;
   background: #ffffff;
-  @media (min-width: 1200px) {
+  padding: 0 15px;
+  @media (min-width: 960px) {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   border-bottom: 1px solid #eee;
-  
+
   .wrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    
-    @media (min-width: 1200px) {
-        width: 1200px;
+
+    @media (min-width: 960px) {
+        width: 960px;
     }
-    
+
     .logo {
        flex: 1;
        h1 {
-         font-style: 'quicksandbold';
-         font-weight: bold;
-         font-size: 24px;
+         font-style: 'Proxima Nova';
+         font-weight: 600;
+         font-size: 18px;
          color: $blue;
          margin-top: 10px;
          margin-bottom: -17px;
        }
        p {
          font-size: 14px;
-       }  
+       }
     }
     .tabs {
       flex: 4;
@@ -43,10 +43,13 @@ header {
         text-decoration: none;
         padding: 10px;
         border-radius: 5px;
+        text-align: center;
+        border: 1px solid white;
+
         &.active {
           border: 1px solid $blue;
           color: $blue;
-          font-weight: bold;
+          font-weight: 600;
         }
       }
     }
@@ -58,12 +61,11 @@ header {
       a {
         margin: 0 10px;
         color: $font-color--dark;
+        font-family: 'Proxima Nova';
         text-decoration: none;
         padding: 10px;
         border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        background-color: $blue;
+        font-weight: 400;
       }
     }
   }

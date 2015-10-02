@@ -38,7 +38,7 @@ class App extends Component {
     React.cloneElement(child, { ...this.state.i18n });
 
   render() {
-    const { children } = this.props;
+    const { children } = this.props ? this.props : { header: require('components/header'), content: require('../pages/not-found') };
     return (
       <div className='app'>
         { children.header }
