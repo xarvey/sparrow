@@ -20,6 +20,10 @@ export default (
       component: { header: Header, content: require('./pages/LoginPage') }
     }) }
     { generateRoute({
+      paths: ['/register'],
+      component: { header: Header, content: require('./pages/RegisterPage') }
+    }) }
+    { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],
       component: require('./components/profile')
     }) }

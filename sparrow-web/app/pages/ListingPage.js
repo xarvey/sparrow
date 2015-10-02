@@ -1,6 +1,6 @@
 'use strict';
 
-import React         from 'react/addons';
+import React         from 'react';
 import DocumentTitle from 'react-document-title';
 
 var MissingFieldError = "Missing field";
