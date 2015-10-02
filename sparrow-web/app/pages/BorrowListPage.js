@@ -2,33 +2,14 @@ import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 
 import RequestedItem from '../components/RequestedItem';
+import ListingStore from '../stores/ListingStore';
+import Listing from '../components/Listing';
+const AltContainer = require('alt/AltContainer');
 
 class BorrowListPage extends Component {
 
-  state = {
-    mockData: [
-      {
-        name: 'birdy',
-        time: '1 min ago',
-        text: 'Can I please borrow a nest?',
-        duration: '2 hours',
-        price: '$0-$20'
-      },
-      {
-        name: 'eagle',
-        time: '3 mins ago',
-        text: 'Need a glasses',
-        duration: '1 day',
-        price: 'free'
-      },
-      {
-        name: 'albatross',
-        time: '2 days later',
-        text: 'I don\'t need you',
-        duration: '1 second',
-        price: '$30,000'
-      }
-    ]
+  componentDidMount() {
+    ListingStore.fetchListings();
   }
 
   mockList() {
@@ -49,7 +30,9 @@ class BorrowListPage extends Component {
         <section className='home-page'>
 
           <div className='wrapper'>
-            { this.mockList() }
+            <AltContainer store={ ListingStore }>
+              <Listing/>
+            </AltContainer>
           </div>
 
         </section>
