@@ -5,14 +5,12 @@ data class ServiceResponse(
         val status: Int = 200
 )
 
-abstract class SparrowData
-
 data class UserCreation(
         val name: String,
         val email: String,
         val passcode: String,
         val zipCode: String
-) : SparrowData()
+)
 
 data class User(
         val id: Int,
@@ -26,7 +24,7 @@ data class User(
         val comments: List<Int> = emptyList(),
         val upVotes: List<Int> = emptyList(),
         val downVotes: List<Int> = emptyList()
-) : SparrowData()
+)
 
 data class Listing(
         val id: Int,
@@ -38,7 +36,7 @@ data class Listing(
         val tags: List<String> = emptyList(),
         val comments: List<String> = emptyList(),
         val bounty: Int
-) : SparrowData()
+)
 
 data class Comment(
         val id: Int,
@@ -47,7 +45,7 @@ data class Comment(
         val creationDate: Long,
         val isPrivate: Boolean,
         val text: String
-) : SparrowData()
+)
 
 data class FilterParams(
         val type: ListingType,
@@ -55,7 +53,7 @@ data class FilterParams(
         val zipCode: List<String>,
         val bountyMin: Int?,
         val bountyMax: Int?
-) : SparrowData()
+)
 
 public enum class ListingType {
     lend, borrow
