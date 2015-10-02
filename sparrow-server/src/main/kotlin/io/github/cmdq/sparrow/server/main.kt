@@ -26,6 +26,7 @@ fun main(args: Array<String>) {
 
     Spark.after { request, response ->
         response.header("Content-type", "application/json")
+        response.header("Access-Control-Allow-Origin", "*")
     }
 
     Spark.exception(IllegalArgumentException::class.java, ::badRequestHandler)
