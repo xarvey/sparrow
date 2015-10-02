@@ -36,8 +36,9 @@ fun main(args: Array<String>) {
 
     Spark.before { request, response ->
         response.header("Content-type", "application/json")
-        response.header("Access-Control-Allow-Origin", "*")
     }
+
+    CorsFilter.apply()
 
     Spark.exception(IllegalArgumentException::class.java, ::badRequestHandler)
     Spark.exception(JsonParseException::class.java, ::badRequestHandler)
