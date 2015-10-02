@@ -2,7 +2,7 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import io.github.cmdq.sparrow.server.endpoints
+import io.github.cmdq.sparrow.server.endpoints.*
 import spark.Request
 import spark.Response
 import spark.Spark
@@ -19,10 +19,10 @@ fun main(args: Array<String>) {
     val datastore = SimpleDatastore()
     val service = Sparrow(datastore)
 
-    endpoints.users(service)
-    endpoints.frontpage(service)
-    endpoints.listings(service)
-    endpoints.comments(service)
+    users(service)
+    frontpage(service)
+    listings(service)
+    comments(service)
 
     Spark.after { request, response ->
         response.header("Content-type", "application/json")
