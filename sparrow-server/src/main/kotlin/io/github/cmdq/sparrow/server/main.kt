@@ -24,7 +24,17 @@ fun main(args: Array<String>) {
     listings(service)
     comments(service)
 
-    Spark.after { request, response ->
+    Spark.options("/*") { request, response ->
+        val reqHeaders = request.headers("Access-Control-Request-Headers")
+        if (reqHeaders != null) response.header("Access-Control-Allow-Headers", reqHeaders)
+
+        val reqMethod = request.headers("Access-Control-Request-Method")
+        if (reqHeaders != null) response.header("Access-Control-Allow-Methods", reqMethod)
+
+        ""
+    }
+
+    Spark.before { request, response ->
         response.header("Content-type", "application/json")
         response.header("Access-Control-Allow-Origin", "*")
     }
