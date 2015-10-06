@@ -58,7 +58,7 @@ const RegisterPage = React.createClass({
           <form className='input'>
             <input ref='name' type='text' className='textbox' placeholder = 'Name'/>
             <br/>
-            <input ref='email' type='text' className='textbox' placeholder = 'Username'/>
+            <input ref='email' type='text' className='textbox' placeholder = 'Email'/>
             <br/>
             <input ref='pass' type='password' className='textbox' placeholder = 'Password'/>
             <br/>

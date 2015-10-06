@@ -1,0 +1,78 @@
+.listing-page{
+	height: 90vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	h2 {
+		font-size: 24px;
+		margin-bottom: 40px;
+		margin-top: -10px;
+	}
+
+	form {
+		display: flex;
+		flex-direction: column;
+		.type {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			margin-bottom: 10px;
+
+			input[type=radio] {
+				display: none;
+				margin: 10px;
+			}
+
+			input[type=radio] + label {
+				display:inline-block;
+				flex: 1;
+				text-align: center;
+		    margin:-2px;
+		    padding: 9px 12px;
+				border-top-right-radius: 5px;
+				border-bottom-right-radius: 5px;
+		    background-color: #f1f1f1;
+		    border-color: #ddd;
+				cursor: pointer;
+
+				&#radio-borrow {
+					border-top-left-radius: 5px;
+					border-bottom-left-radius: 5px;
+				}
+			}
+
+			input[type=radio]:checked + label {
+				background-image: none;
+			  background-color: $blue;
+				color: white;
+			}
+
+		}
+		.textbox, .numberbox {
+			margin-top: 5px;
+			margin-bottom: 5px;
+			text-align: left;
+			padding: 10px 15px;
+			font-size: 16px;
+			border-radius: 3px;
+			border: 1px solid #eaeaea;
+		}
+	}
+	button {
+		width: 447px;
+		-webkit-appearance: none;
+		border: 0;
+		text-align: center;
+		margin-top: 10px;
+		padding: 10px 15px;
+		border-radius: 3px;
+		border-color: #ddd;
+		font-size: 16px;
+		cursor: pointer;
+		background-image: none;
+		background-color: $blue;
+		color: white;
+	}
+}
