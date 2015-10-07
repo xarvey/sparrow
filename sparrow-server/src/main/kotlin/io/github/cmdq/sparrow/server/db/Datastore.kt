@@ -1,4 +1,8 @@
-package io.github.cmdq.sparrow.server
+package io.github.cmdq.sparrow.server.db
+
+import io.github.cmdq.sparrow.server.data.Listing
+import io.github.cmdq.sparrow.server.data.User
+import io.github.cmdq.sparrow.server.data.UserCreation
 
 public interface Datastore {
     fun retrieveUser(id: Int): User?

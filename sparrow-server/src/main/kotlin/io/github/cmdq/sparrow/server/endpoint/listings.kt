@@ -1,6 +1,6 @@
-package io.github.cmdq.sparrow.server.endpoints
+package io.github.cmdq.sparrow.server.endpoint
 
-import io.github.cmdq.sparrow.server.Listing
+import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.Sparrow
 import io.github.cmdq.sparrow.server.toJson
 import io.github.cmdq.sparrow.server.toObject

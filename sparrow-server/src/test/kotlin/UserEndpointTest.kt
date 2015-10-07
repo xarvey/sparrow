@@ -1,10 +1,10 @@
 import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Sparrow
-import io.github.cmdq.sparrow.server.User
-import io.github.cmdq.sparrow.server.UserCreation
-import io.github.cmdq.sparrow.server.mocks.MockDatastore
-import io.github.cmdq.sparrow.server.mocks.mockUser
-import io.github.cmdq.sparrow.server.mocks.mockUserCreation
+import io.github.cmdq.sparrow.server.data.User
+import io.github.cmdq.sparrow.server.data.UserCreation
+import mocks.MockDatastore
+import mocks.mockUser
+import mocks.mockUserCreation
 import org.junit.Assert
 import org.junit.Test
 import java.util.*

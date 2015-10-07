@@ -1,4 +1,4 @@
-import io.github.cmdq.sparrow.server.SparrowException
+import io.github.cmdq.sparrow.server.exception.SparrowException
 import io.github.cmdq.sparrow.server.getPort
 import org.junit.Test
 import kotlin.test.fail

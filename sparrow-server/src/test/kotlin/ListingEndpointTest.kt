@@ -1,7 +1,7 @@
 import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Sparrow
-import io.github.cmdq.sparrow.server.mocks.MockDatastore
-import io.github.cmdq.sparrow.server.mocks.mockListing
+import mocks.MockDatastore
+import mocks.mockListing
 import org.junit.Assert
 import org.junit.Test
 

@@ -1,6 +1,8 @@
-package io.github.cmdq.sparrow.server.endpoints
+package io.github.cmdq.sparrow.server.endpoint
 
 import io.github.cmdq.sparrow.server.*
+import io.github.cmdq.sparrow.server.data.User
+import io.github.cmdq.sparrow.server.data.UserCreation
 import spark.Spark
 
 fun users(service: Sparrow) {

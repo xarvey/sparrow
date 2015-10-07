@@ -1,4 +1,4 @@
-package io.github.cmdq.sparrow.server.endpoints
+package io.github.cmdq.sparrow.server.endpoint
 
 import io.github.cmdq.sparrow.server.Sparrow
 import spark.Spark

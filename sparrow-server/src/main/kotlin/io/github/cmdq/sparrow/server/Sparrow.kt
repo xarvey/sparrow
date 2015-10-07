@@ -1,11 +1,28 @@
 package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
+import io.github.cmdq.sparrow.server.data.Listing
+import io.github.cmdq.sparrow.server.data.ServiceResponse
+import io.github.cmdq.sparrow.server.data.User
+import io.github.cmdq.sparrow.server.data.UserCreation
+import io.github.cmdq.sparrow.server.db.Datastore
 
 public class Sparrow(
         val datastore: Datastore,
         val gson: Gson = Gson()
 ) {
+    public interface UserEndpoint {
+        fun getUser(id: Int): ServiceResponse
+        fun createUser(info: UserCreation): ServiceResponse
+        fun editUser(user: User): ServiceResponse
+    }
+
+    public interface ListingEndpoint {
+        fun getListing(id: Int): ServiceResponse
+        fun createListing(listing: Listing): ServiceResponse
+        fun editListing(listing: Listing): ServiceResponse
+    }
+
     public val users = object : UserEndpoint {
         override fun getUser(id: Int): ServiceResponse {
             val user = datastore.retrieveUser(id)
@@ -43,16 +60,4 @@ public class Sparrow(
             return ServiceResponse()
         }
     }
-}
-
-public interface UserEndpoint {
-    fun getUser(id: Int): ServiceResponse
-    fun createUser(info: UserCreation): ServiceResponse
-    fun editUser(user: User): ServiceResponse
-}
-
-public interface ListingEndpoint {
-    fun getListing(id: Int): ServiceResponse
-    fun createListing(listing: Listing): ServiceResponse
-    fun editListing(listing: Listing): ServiceResponse
 }
