@@ -7,7 +7,7 @@ import io.github.cmdq.sparrow.server.data.User
 import io.github.cmdq.sparrow.server.data.UserCreation
 import io.github.cmdq.sparrow.server.db.Datastore
 
-public class Sparrow(
+class Sparrow(
         val datastore: Datastore,
         val gson: Gson = Gson()
 ) {
