@@ -2,26 +2,79 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.db.SimpleDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
-import org.sql2o.Sql2o
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.HelpFormatter
+import org.apache.commons.cli.Options
 import spark.Request
 import spark.Response
 import spark.Spark
 
-fun main(args: Array<String>) {
+data class Args(
+        val port: Int = 9000,
+        val dbUrl: String = "postgresql://localhost:5432/sparrow",
+        val dbUser: String = "sparrow",
+        val dbPass: String = ""
+)
+
+fun parseArgs(args: Array<String>): Args {
+    // define options
+    val options = Options()
+            .addOption("p", "port", true, "The public port for the server [9000]")
+            .addOption("d", "database", true, "The database url [postgresql://localhost:5432/sparrow]")
+            .addOption("u", "username", true, "The username to connect to the database [sparrow]")
+            .addOption("a", "auth", true, "The password to connect to the database")
+
     try {
-        val port = getPort(args)
-        Spark.port(port)
-    } catch (e: SparrowException) {
-        System.err.println("Initialization failed: ${e.getMessage()}")
+        // parse options
+        val cmd = DefaultParser().parse(options, args)
+
+        // get options
+        var result = Args()
+
+        if (cmd.hasOption("p"))
+            result = result.copy(port = cmd["p"]!!.toInt())
+
+        if (cmd.hasOption("d"))
+            result = result.copy(dbUrl = cmd["d"]!!)
+
+        if (cmd.hasOption("u"))
+            result = result.copy(dbUser = cmd["u"]!!)
+
+        if (cmd.hasOption("a"))
+            result = result.copy(dbPass = cmd["a"]!!)
+
+        // validate options
+        if (result.port !in 1025..65535)
+            throw IllegalArgumentException()
+
+        if (result.dbUrl.isBlank())
+            throw IllegalArgumentException()
+
+        if (cmd.argList.isNotEmpty())
+            throw IllegalArgumentException()
+
+        return result
+    } catch(e: Exception) {
+        HelpFormatter().printHelp("sparrow", options)
+        throw SparrowException("Invalid command line arguments")
+    }
+}
+
+fun main(args: Array<String>) {
+    val options: Args = try {
+        parseArgs(args)
+    } catch (e: Exception) {
         System.exit(1)
+        return;
     }
 
-    val sql2o = Sql2o("jdbc:postgresql://localhost:5432/sparrow", "sparrow", ";qG.4%>fAKZL");
-    sql2o.open()
+    println(options)
+
+    // val sql2o = Sql2o("jdbc:postgresql://localhost:5432/sparrow", "sparrow", "pass");
+    // sql2o.open()
 
     val datastore = SimpleDatastore()
     val service = Sparrow(datastore)
@@ -56,21 +109,4 @@ fun badRequestHandler(exception: Exception, request: Request, response: Response
     response.status(400)
     val message = exception.getMessage() ?: "Bad request"
     response.body(message.toJson(Gson()))
-}
-
-fun getPort(args: Array<String>): Int {
-    if (args.count() != 1)
-        throw SparrowException("You must provide one argument for the port, found ${args.count()} arguments")
-
-    val port: Int
-    try {
-        port = args[0].toInt()
-    } catch (e: NumberFormatException) {
-        throw SparrowException("Port must be an integer, found ${args[0]}");
-    }
-
-    if (port !in 1025..65535)
-        throw SparrowException("Port must be within range [1025-65535], found $port")
-
-    return port
 }
