@@ -5,7 +5,7 @@ import io.github.cmdq.sparrow.server.data.User
 import io.github.cmdq.sparrow.server.data.UserCreation
 import spark.Spark
 
-fun users(service: Sparrow) {
+fun setupUsers(service: Sparrow) {
     val dir = "users"
 
     Spark.get("/$dir/:id") { request, response ->

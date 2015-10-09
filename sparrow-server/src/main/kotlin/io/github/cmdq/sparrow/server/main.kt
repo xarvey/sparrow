@@ -21,10 +21,10 @@ fun main(args: Array<String>) {
     val datastore = SimpleDatastore()
     val service = Sparrow(datastore)
 
-    users(service)
-    frontpage(service)
-    listings(service)
-    comments(service)
+    setupUsers(service)
+    setupFrontpage(service)
+    setupListings(service)
+    setupComments(service)
 
     Spark.options("/*") { request, response ->
         val reqHeaders = request.headers("Access-Control-Request-Headers")

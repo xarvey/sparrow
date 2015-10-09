@@ -6,7 +6,7 @@ import io.github.cmdq.sparrow.server.toJson
 import io.github.cmdq.sparrow.server.toObject
 import spark.Spark
 
-fun listings(service: Sparrow) {
+fun setupListings(service: Sparrow) {
     val dir = "listings"
 
     Spark.get("/$dir/:id") { request, response ->

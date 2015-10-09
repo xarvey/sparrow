@@ -3,7 +3,7 @@ package io.github.cmdq.sparrow.server.endpoint
 import io.github.cmdq.sparrow.server.Sparrow
 import spark.Spark
 
-fun comments(service: Sparrow) {
+fun setupComments(service: Sparrow) {
     val dir = "comments"
 
     Spark.get("/$dir/:id") { request, response ->

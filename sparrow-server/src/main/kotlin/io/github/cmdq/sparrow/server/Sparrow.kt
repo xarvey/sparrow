@@ -11,19 +11,19 @@ public class Sparrow(
         val datastore: Datastore,
         val gson: Gson = Gson()
 ) {
-    public interface UserEndpoint {
+    public interface UserService {
         fun getUser(id: Int): ServiceResponse
         fun createUser(info: UserCreation): ServiceResponse
         fun editUser(user: User): ServiceResponse
     }
 
-    public interface ListingEndpoint {
+    public interface ListingService {
         fun getListing(id: Int): ServiceResponse
         fun createListing(listing: Listing): ServiceResponse
         fun editListing(listing: Listing): ServiceResponse
     }
 
-    public val users = object : UserEndpoint {
+    public val users = object : UserService {
         override fun getUser(id: Int): ServiceResponse {
             val user = datastore.retrieveUser(id)
             return when (user) {
@@ -42,7 +42,7 @@ public class Sparrow(
         }
     }
 
-    public val listings = object : ListingEndpoint {
+    public val listings = object : ListingService {
         override fun getListing(id: Int): ServiceResponse {
             val listing = datastore.retrieveListing(id)
             return when (listing) {
