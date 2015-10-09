@@ -5,7 +5,7 @@ import io.github.cmdq.sparrow.server.data.User
 import io.github.cmdq.sparrow.server.data.UserCreation
 import java.util.*
 
-public class SimpleDatastore : Datastore {
+class SimpleDatastore : Datastore {
     private var nextUserId = 0
     private var nextListingId = 0
     private val userTable = HashMap<Int, User>()

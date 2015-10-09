@@ -2,9 +2,11 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
+import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.db.SimpleDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
+import org.sql2o.Sql2o
 import spark.Request
 import spark.Response
 import spark.Spark
@@ -17,6 +19,9 @@ fun main(args: Array<String>) {
         System.err.println("Initialization failed: ${e.getMessage()}")
         System.exit(1)
     }
+
+    val sql2o = Sql2o("jdbc:postgresql://localhost:5432/sparrow", "sparrow", ";qG.4%>fAKZL");
+    sql2o.open()
 
     val datastore = SimpleDatastore()
     val service = Sparrow(datastore)

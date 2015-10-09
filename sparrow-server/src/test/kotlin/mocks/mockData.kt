@@ -25,7 +25,7 @@ val mockListing = Listing(
         0,
         0,
         ListingType.lend,
-        Date().time,
+        Date(),
         "stuff",
         "lots of stuff",
         bounty = 2

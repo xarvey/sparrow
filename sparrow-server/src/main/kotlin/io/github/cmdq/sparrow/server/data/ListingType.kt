@@ -1,5 +1,5 @@
 package io.github.cmdq.sparrow.server.data
 
-public enum class ListingType {
+enum class ListingType {
     lend, borrow
 }
