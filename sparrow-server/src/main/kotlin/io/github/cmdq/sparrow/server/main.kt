@@ -2,7 +2,7 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import io.github.cmdq.sparrow.server.db.SimpleDatastore
+import io.github.cmdq.sparrow.server.db.SqlDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
 import org.apache.commons.cli.DefaultParser
@@ -64,6 +64,7 @@ fun parseArgs(args: Array<String>): Args {
 }
 
 fun main(args: Array<String>) {
+    // get cli args
     val options: Args = try {
         parseArgs(args)
     } catch (e: Exception) {
@@ -72,42 +73,37 @@ fun main(args: Array<String>) {
         return;
     }
 
-    println(options)
-
-    // val sql2o = Sql2o("jdbc:postgresql://localhost:5432/sparrow", "sparrow", "pass");
-    // sql2o.open()
-
-    val datastore = SimpleDatastore()
+    // init service
+    val datastore = SqlDatastore(options.dbUrl, options.dbUser, options.dbPass)
     val service = Sparrow(datastore)
 
+    // set service port
+    Spark.port(options.port)
+
+    // setup service endpoints
     setupUsers(service)
     setupFrontpage(service)
     setupListings(service)
     setupComments(service)
 
-    Spark.options("/*") { request, response ->
-        val reqHeaders = request.headers("Access-Control-Request-Headers")
-        if (reqHeaders != null) response.header("Access-Control-Allow-Headers", reqHeaders)
-
-        val reqMethod = request.headers("Access-Control-Request-Method")
-        if (reqHeaders != null) response.header("Access-Control-Allow-Methods", reqMethod)
-
-        ""
-    }
-
+    // set global content type
     Spark.before { request, response ->
         response.header("Content-type", "application/json")
     }
 
+    // apply CORS filter
     CorsFilter.apply()
 
-    Spark.exception(IllegalArgumentException::class.java, ::badRequestHandler)
-    Spark.exception(JsonParseException::class.java, ::badRequestHandler)
-}
-
-fun badRequestHandler(exception: Exception, request: Request, response: Response) {
-    println("Bad request:\n${request.body()}")
-    response.status(400)
-    val message = exception.getMessage() ?: "Bad request"
-    response.body(message.toJson(Gson()))
+    // set bad request exception handlers
+    listOf(
+            IllegalArgumentException::class.java,
+            JsonParseException::class.java
+    ).forEach {
+        Spark.exception(it) { exception: Exception, request: Request, response: Response ->
+            println("Bad request:\n${request.body()}")
+            response.status(400)
+            val message = exception.getMessage() ?: "Bad request"
+            response.body(message.toJson(Gson()))
+        }
+    }
 }
