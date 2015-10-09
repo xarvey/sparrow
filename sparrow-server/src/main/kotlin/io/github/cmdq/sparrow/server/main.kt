@@ -19,20 +19,21 @@ data class Args(
         val dbPass: String = ""
 )
 
-fun parseArgs(args: Array<String>): Args {
-    // define options
-    val options = Options()
-            .addOption("p", "port", true, "The public port for the server [9000]")
-            .addOption("d", "database", true, "The database url [postgresql://localhost:5432/sparrow]")
-            .addOption("u", "username", true, "The username to connect to the database [sparrow]")
-            .addOption("a", "auth", true, "The password to connect to the database")
+val defaultArgs = Args()
 
+val options = Options()
+        .addOption("p", "port", true, "The public port for the server [${defaultArgs.port}]")
+        .addOption("d", "database", true, "The database url [${defaultArgs.dbUrl}]")
+        .addOption("u", "username", true, "The username to connect to the database [${defaultArgs.dbUser}]")
+        .addOption("a", "auth", true, "The password to connect to the database [${defaultArgs.dbPass}]")
+
+fun parseArgs(args: Array<String>): Args {
     try {
         // parse options
         val cmd = DefaultParser().parse(options, args)
 
         // get options
-        var result = Args()
+        var result = defaultArgs
 
         if (cmd.hasOption("p"))
             result = result.copy(port = cmd["p"]!!.toInt())
@@ -58,7 +59,6 @@ fun parseArgs(args: Array<String>): Args {
 
         return result
     } catch(e: Exception) {
-        HelpFormatter().printHelp("sparrow", options)
         throw SparrowException("Invalid command line arguments")
     }
 }
@@ -67,6 +67,7 @@ fun main(args: Array<String>) {
     val options: Args = try {
         parseArgs(args)
     } catch (e: Exception) {
+        HelpFormatter().printHelp("sparrow", options)
         System.exit(1)
         return;
     }
