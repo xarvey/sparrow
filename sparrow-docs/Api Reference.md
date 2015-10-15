@@ -75,7 +75,7 @@ Creates a new listing with the listing object passed in the call, and returns th
 
 ##### Close Listing
 
-`DELETE /listings/[id]`  *In Progress*
+`DELETE /listings/[id]`  *Complete*
 
 Closes the listing associated with the id passed in the call.
 
