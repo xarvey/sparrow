@@ -2,6 +2,7 @@ package io.github.cmdq.sparrow.server.endpoint
 
 import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.Sparrow
+import io.github.cmdq.sparrow.server.data.FilterParams
 import io.github.cmdq.sparrow.server.toJson
 import io.github.cmdq.sparrow.server.toObject
 import spark.Spark
@@ -24,7 +25,10 @@ fun setupListings(service: Sparrow) {
     }
 
     Spark.put("/$dir/filter") { request, response ->
-
+        val filter: FilterParams = request.body().toObject(service.gson)
+        val result = service.listings.getFilteredListings(filter)
+        response.status(result.status)
+        result.body.toJson(service.gson)
     }
 
     Spark.post("/$dir") { request, response ->

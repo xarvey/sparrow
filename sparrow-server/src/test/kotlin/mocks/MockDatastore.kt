@@ -1,5 +1,6 @@
 package mocks
 
+import io.github.cmdq.sparrow.server.data.FilterParams
 import io.github.cmdq.sparrow.server.db.Datastore
 import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.data.User
@@ -36,5 +37,9 @@ public class MockDatastore: Datastore {
 
     override fun deleteListing(id: Int) {
         return
+    }
+
+    override fun queryListings(filter: FilterParams): List<Listing> {
+        return ArrayList()
     }
 }

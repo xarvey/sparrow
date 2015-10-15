@@ -1,5 +1,6 @@
 package io.github.cmdq.sparrow.server.db
 
+import io.github.cmdq.sparrow.server.data.FilterParams
 import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.data.User
 import io.github.cmdq.sparrow.server.data.UserCreation
@@ -38,6 +39,10 @@ class SqlDatastore(
     }
 
     override fun deleteListing(id: Int) {
+        throw UnsupportedOperationException()
+    }
+
+    override fun queryListings(filter: FilterParams): List<Listing> {
         throw UnsupportedOperationException()
     }
 

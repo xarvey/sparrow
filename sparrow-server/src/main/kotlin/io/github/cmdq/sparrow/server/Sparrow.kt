@@ -1,10 +1,7 @@
 package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
-import io.github.cmdq.sparrow.server.data.Listing
-import io.github.cmdq.sparrow.server.data.ServiceResponse
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
+import io.github.cmdq.sparrow.server.data.*
 import io.github.cmdq.sparrow.server.db.Datastore
 
 class Sparrow(
@@ -19,6 +16,7 @@ class Sparrow(
 
     public interface ListingService {
         fun getListing(id: Int): ServiceResponse
+        fun getFilteredListings(filter: FilterParams): ServiceResponse
         fun createListing(listing: Listing): ServiceResponse
         fun editListing(listing: Listing): ServiceResponse
         fun removeListing(id: Int): ServiceResponse
@@ -50,6 +48,18 @@ class Sparrow(
                 null -> ServiceResponse("Listing not found", 404)
                 else -> ServiceResponse(listing)
             }
+        }
+
+        override fun getFilteredListings(filter: FilterParams): ServiceResponse {
+            if (filter.keywords?.length() ?: 0 > 140)
+                return ServiceResponse("Search is too long", 404)
+            if (filter.keywords.isNullOrEmpty())
+                return ServiceResponse("Search is empty", 404)
+            if (filter.bountyMin ?: 0 < 0)
+                return ServiceResponse("Negative bounty min", 404)
+            if (filter.bountyMax ?: 0 > 20)
+                return ServiceResponse("Bounty too high", 404)
+            return ServiceResponse(datastore.queryListings(filter))
         }
 
         override fun createListing(listing: Listing): ServiceResponse {
