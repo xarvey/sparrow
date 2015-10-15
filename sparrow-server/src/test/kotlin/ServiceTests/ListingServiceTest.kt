@@ -1,35 +1,37 @@
 import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Sparrow
+import io.github.cmdq.sparrow.server.toJson
 import mocks.MockDatastore
 import mocks.mockListing
 import org.junit.Assert
 import org.junit.Test
 
-public class ListingEndpointTest {
-    val endpoint = Sparrow(MockDatastore(), Gson()).listings
+public class ListingServiceTest {
+    val service = Sparrow(MockDatastore(), Gson())
+    val listings = service.listings
 
     @Test
     public fun testGetListingNegative() {
-        val response = endpoint.getListing(-1)
+        val response = listings.getListing(-1)
         Assert.assertEquals(404, response.status)
     }
 
     @Test
     public fun testGetListingMax() {
-        val response = endpoint.getListing(Int.MAX_VALUE)
+        val response = listings.getListing(Int.MAX_VALUE)
         Assert.assertEquals(200, response.status)
     }
 
     @Test
     public fun testGetListingValid() {
-        val response = endpoint.getListing(5)
+        val response = listings.getListing(5)
         Assert.assertEquals(200, response.status)
     }
 
     @Test
     public fun testCreateListingValid() {
         try {
-            endpoint.createListing(mockListing)
+            listings.createListing(mockListing)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -38,9 +40,18 @@ public class ListingEndpointTest {
     @Test
     public fun testEditListingValid() {
         try {
-            endpoint.editListing(mockListing)
+            listings.editListing(mockListing)
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    @Test
+    public fun testDeleteListingValid() {
+        val response = listings.createListing(mockListing)
+        Assert.assertEquals(200, response.status)
+        val id = response.body as Int
+        val delete = listings.removeListing(id)
+        Assert.assertEquals(200, delete.status)
     }
 }

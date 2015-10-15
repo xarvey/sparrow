@@ -9,7 +9,7 @@ import org.junit.Assert
 import org.junit.Test
 import java.util.*
 
-public class UserEndpointTest {
+public class UserServiceTest {
     val endpoint = Sparrow(MockDatastore(), Gson()).users
 
     @Test

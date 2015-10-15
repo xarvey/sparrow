@@ -37,4 +37,8 @@ class SqlDatastore(
         throw UnsupportedOperationException()
     }
 
+    override fun deleteListing(id: Int) {
+        throw UnsupportedOperationException()
+    }
+
 }

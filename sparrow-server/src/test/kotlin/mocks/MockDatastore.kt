@@ -7,6 +7,7 @@ import io.github.cmdq.sparrow.server.data.UserCreation
 import java.util.*
 
 public class MockDatastore: Datastore {
+
     override fun retrieveUser(id: Int): User? {
         if (id < 0) return null
         else return mockUser
@@ -31,5 +32,9 @@ public class MockDatastore: Datastore {
 
     override fun storeListing(listing: Listing): Int {
         return 0
+    }
+
+    override fun deleteListing(id: Int) {
+        return
     }
 }

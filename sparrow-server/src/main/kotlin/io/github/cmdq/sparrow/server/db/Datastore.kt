@@ -12,4 +12,5 @@ interface Datastore {
     fun retrieveListing(id: Int): Listing?
     fun updateListing(listing: Listing)
     fun storeListing(listing: Listing): Int
+    fun deleteListing(id: Int)
 }

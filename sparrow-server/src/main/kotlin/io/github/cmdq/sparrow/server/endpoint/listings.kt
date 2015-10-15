@@ -34,7 +34,9 @@ fun setupListings(service: Sparrow) {
         result.body.toJson(service.gson)
     }
 
-    Spark.delete("/$dir/id") { request, response ->
-
+    Spark.delete("/$dir/:id") { request, response ->
+        val id = request.params("id").toInt()
+        val result = service.listings.removeListing(id)
+        " "
     }
 }

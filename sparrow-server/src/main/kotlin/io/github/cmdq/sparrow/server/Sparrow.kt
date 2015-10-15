@@ -9,7 +9,7 @@ import io.github.cmdq.sparrow.server.db.Datastore
 
 class Sparrow(
         val datastore: Datastore,
-        val gson: Gson = Gson()
+        public val gson: Gson = Gson()
 ) {
     public interface UserService {
         fun getUser(id: Int): ServiceResponse
@@ -21,6 +21,7 @@ class Sparrow(
         fun getListing(id: Int): ServiceResponse
         fun createListing(listing: Listing): ServiceResponse
         fun editListing(listing: Listing): ServiceResponse
+        fun removeListing(id: Int): ServiceResponse
     }
 
     public val users = object : UserService {
@@ -57,6 +58,11 @@ class Sparrow(
 
         override fun editListing(listing: Listing): ServiceResponse {
             datastore.updateListing(listing)
+            return ServiceResponse()
+        }
+
+        override fun removeListing(id: Int): ServiceResponse {
+            datastore.deleteListing(id)
             return ServiceResponse()
         }
     }
