@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import DocumentTitle from 'react-document-title';
 
+import ListingStore from '../stores/ListingStore';
+import Listing from '../components/Listing';
+const AltContainer = require('alt/AltContainer');
 
-class LendListPage extends Component {
+class BorrowListPage extends Component {
 
-  static propTypes = {
-    // currentUser: React.PropTypes.object.isRequired
-  }
-
-  mockList() {
-    return (
-      <div className='list-container'>
-        <br/>
-        Coming Soon!
-      </div>
-    );
+  componentDidMount() {
+    ListingStore.fetchListings();
   }
 
   render() {
@@ -23,7 +17,9 @@ class LendListPage extends Component {
         <section className='home-page'>
 
           <div className='wrapper'>
-            { this.mockList() }
+            <AltContainer store={ ListingStore }>
+              <Listing/>
+            </AltContainer>
           </div>
 
         </section>
@@ -33,4 +29,4 @@ class LendListPage extends Component {
 
 }
 
-export default LendListPage;
+export default BorrowListPage;

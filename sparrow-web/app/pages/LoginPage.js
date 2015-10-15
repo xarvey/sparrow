@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link }        from 'react-router';
 import DocumentTitle from 'react-document-title';
+import UserActions from '../actions/UserActions';
 
 const PasswordError = 'Password length invalid';
 
@@ -45,17 +46,18 @@ const LoginPage = React.createClass({
   },
 
   login() {
-    // const usr = document.getElementById('Username').value;
+    const usr = document.getElementById('Username').value;
     const pass = document.getElementById('Password').value;
     if (pass.length > 16 || pass.length < 1) {
       console.log(PasswordError);
       this.handleError(PasswordError);
-    } /* else {
-      actions.login({
-        'Username': usr,
-        'Password': pass
-      });
-    } */
+    } else {
+      const loginAttempt = {
+        'user': usr,
+        'password': pass
+      };
+      UserActions.login(loginAttempt);
+    }
   }
 
 });

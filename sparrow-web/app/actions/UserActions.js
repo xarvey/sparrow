@@ -2,8 +2,9 @@ const alt = require('../alt');
 
 class UserActions {
 
-  // TODO: Login
-
+  login(userInfo) {
+    this.dispatch(userInfo);
+  }
   register(userInfo) {
     this.dispatch(userInfo);
   }
