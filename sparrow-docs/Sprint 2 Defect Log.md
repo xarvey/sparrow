@@ -27,6 +27,7 @@ Sprint 2 Defect Log
 
 | Defect # | Description                                                              | Severity | How Corrected                                                                        |
 |:---------|:-------------------------------------------------------------------------|:---------|:-------------------------------------------------------------------------------------|
+|     1    | When user close the browser, the cookie shall not disappear                          |     2    | Add expiraion date for the cookies  |
 
 ### Unit Testing Log
 
