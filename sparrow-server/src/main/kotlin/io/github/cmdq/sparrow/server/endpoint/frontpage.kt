@@ -1,8 +1,6 @@
 package io.github.cmdq.sparrow.server.endpoint
 
 import io.github.cmdq.sparrow.server.Sparrow
-import io.github.cmdq.sparrow.server.model.FilterParams
-import io.github.cmdq.sparrow.server.model.ListingType
 import io.github.cmdq.sparrow.server.toJson
 import spark.Spark
 

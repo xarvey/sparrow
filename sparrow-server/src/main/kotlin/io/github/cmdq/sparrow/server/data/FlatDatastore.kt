@@ -7,15 +7,15 @@ class FlatDatastore(
         val start: FlatDatastore.Data,
         val save: (FlatDatastore.Data) -> Unit
 ) : Datastore {
-    open class Data (
-        open val nextId: Int = 0,
-        open val users: Map<Int, User> = emptyMap(),
-        open val auth: Map<Int, UserAuth> = emptyMap(),
-        open val listings: Map<Int, Listing> = emptyMap(),
-        open val comments: Map<Int, Comment> = emptyMap()
+    open class Data(
+            open val nextId: Int = 0,
+            open val users: Map<Int, User> = emptyMap(),
+            open val auth: Map<Int, UserAuth> = emptyMap(),
+            open val listings: Map<Int, Listing> = emptyMap(),
+            open val comments: Map<Int, Comment> = emptyMap()
     )
 
-    object persistence: Data() {
+    object persistence : Data() {
         override var nextId = 0
         override val users = HashMap<Int, User>()
         override val auth = HashMap<Int, UserAuth>()

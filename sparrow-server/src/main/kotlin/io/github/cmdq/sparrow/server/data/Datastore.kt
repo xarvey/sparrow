@@ -1,7 +1,6 @@
 package io.github.cmdq.sparrow.server.data
 
 import io.github.cmdq.sparrow.server.model.*
-import java.util.*
 
 interface Datastore {
 

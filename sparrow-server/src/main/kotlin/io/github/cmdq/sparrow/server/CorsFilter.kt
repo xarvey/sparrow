@@ -3,8 +3,8 @@ package io.github.cmdq.sparrow.server
 import spark.Filter
 import spark.Request
 import spark.Response
-import java.util.HashMap
 import spark.Spark
+import java.util.*
 
 /**
  * Really simple helper for enabling CORS in a spark application;
@@ -21,7 +21,7 @@ object CorsFilter {
     }
 
     fun apply() {
-        val filter = object: Filter {
+        val filter = object : Filter {
             override fun handle(request: Request, response: Response) {
                 corsHeaders.forEach { key, value ->
                     response.header(key, value)

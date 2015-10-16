@@ -3,8 +3,11 @@ package io.github.cmdq.sparrow.server
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
 import io.github.cmdq.sparrow.server.data.FlatDatastore
-import io.github.cmdq.sparrow.server.endpoint.*
-import io.github.cmdq.sparrow.server.exception.*
+import io.github.cmdq.sparrow.server.endpoint.setupComments
+import io.github.cmdq.sparrow.server.endpoint.setupFrontpage
+import io.github.cmdq.sparrow.server.endpoint.setupListings
+import io.github.cmdq.sparrow.server.endpoint.setupUsers
+import io.github.cmdq.sparrow.server.exception.SparrowException
 import org.apache.commons.cli.DefaultParser
 import org.apache.commons.cli.HelpFormatter
 import org.apache.commons.cli.Options
