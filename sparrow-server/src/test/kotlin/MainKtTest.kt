@@ -44,7 +44,8 @@ public class MainKtTest {
         )) { it == Args(
                 port = 10000,
                 fileName = "test"
-        ) }.test()
+        )
+        }.test()
 
         TestCase(listOf(
                 "-port", "10000",
@@ -52,7 +53,8 @@ public class MainKtTest {
         )) { it == Args(
                 port = 10000,
                 fileName = "test"
-        ) }.test()
+        )
+        }.test()
     }
 
     @Test

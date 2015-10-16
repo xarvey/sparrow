@@ -26,7 +26,7 @@ public class UserServiceTest {
 
                 val result = sparrow.users.createUser(userCreation)
                 assert(status == result.status)
-                assert(status != 200 || result.body == id.toJson(sparrow.gson))
+                if (status == 200) assert(result.body == id)
             }
         }
     }
@@ -100,7 +100,7 @@ public class UserServiceTest {
                         assert(status == 404)
                     else {
                         assert(status == 200)
-                        assert(body == testUser.toJson(sparrow.gson))
+                        assert(body == testUser)
                     }
                 }
             }

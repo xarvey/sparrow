@@ -3,6 +3,7 @@ import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.FilterParams
 import io.github.cmdq.sparrow.server.model.Listing
 import io.github.cmdq.sparrow.server.model.ListingType
+import io.github.cmdq.sparrow.server.model.User
 import io.github.cmdq.sparrow.server.toJson
 import io.github.cmdq.sparrow.server.toObject
 import mocks.MockDatastore
@@ -11,24 +12,36 @@ import org.junit.Test
 import java.util.*
 
 public class ListingServiceTest {
-    val mockListing = Listing(1, 1, ListingType.borrow, Date(), "Listing", "stuff", bounty = 0, closed = false)
+    val mockListing = Listing(1, 1, ListingType.borrow, title="Listing", description="stuff")
     val mockFilter = FilterParams(ListingType.borrow)
 
-    @Test fun testGetListing() {
-        var called = false
+    fun testGetListing(listing: Listing?, status: Int) {
+        for (testId in listOf(0, 500, Int.MAX_VALUE)) {
+            var called = false
 
-        val service = Sparrow(object: MockDatastore() {
-            override fun retrieveListing(id: Int): Listing? {
-                assert(id == 1)
-                called = true
-                return mockListing
+            val service = Sparrow(object: MockDatastore() {
+                override fun retrieveListing(id: Int): Listing? {
+                    assert(id == testId)
+                    called = true
+                    return listing
+                }
+            })
+
+            val response = service.listings.getListing(testId)
+            assert(response.status == status)
+            if (listing != null) {
+                assert(called == true)
+                assert(response.body == listing)
             }
-        })
+        }
+    }
 
-        val response = service.listings.getListing(1)
-        assert(response.status == 200)
-        assert(called == true)
-        assert(response.body.toJson(service.gson) == mockListing.toJson(service.gson))
+    @Test fun testGetListingValid() {
+        testGetListing(mockListing, 200)
+    }
+
+    @Test fun testGetListingDoesNotExist() {
+        testGetListing(null, 404)
     }
 
     @Test fun testGetFilteredListings() {
@@ -56,6 +69,9 @@ public class ListingServiceTest {
                 assert(newListing == mockListing)
                 called = true
                 return 1
+            }
+            override fun retrieveUser(id: Int): User? {
+                return super.retrieveUser(id)
             }
         })
 
