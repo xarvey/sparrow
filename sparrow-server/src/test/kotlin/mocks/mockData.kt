@@ -18,6 +18,11 @@ val mockUser = User(
         Date().time
 )
 
+val mockUserAuth = UserAuth(
+        ("passcode" + "joe".hashCode().toString()).hashCode().toString(),
+        "joe".hashCode().toString()
+)
+
 val mockListing = Listing(
         0,
         0,

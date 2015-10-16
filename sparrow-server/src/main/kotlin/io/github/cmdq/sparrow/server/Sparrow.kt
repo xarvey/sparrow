@@ -185,4 +185,19 @@ class Sparrow(
             return ServiceResponse()
         }
     }
+
+    fun checkAuth(auth: String): Boolean {
+        if (!auth.contains(':'))
+            return false
+
+        val index = auth.indexOf(':')
+
+        val email = auth.substring(0, index)
+        val pass = auth.substring(index + 1)
+
+        val user = datastore.retrieveUser(email)
+        val userAuth = datastore.retrieveUserAuth(email)
+
+        return user != null && userAuth != null && userAuth.passcode == (pass + userAuth.salt).hashCode().toString()
+    }
 }

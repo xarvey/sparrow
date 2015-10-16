@@ -18,6 +18,7 @@ class FlatDatastore(
     object persistence : Data() {
         override var nextId = 0
         override val users = HashMap<Int, User>()
+        val usersByEmail = HashMap<String, Int>()
         override val auth = HashMap<Int, UserAuth>()
         override val listings = HashMap<Int, Listing>()
         override val comments = HashMap<Int, Comment>()
@@ -31,14 +32,23 @@ class FlatDatastore(
             auth.putAll(start.auth)
             listings.putAll(start.listings)
             comments.putAll(start.comments)
+            start.users.mapKeys { it.value.email }.mapValuesTo(usersByEmail) { it.value.id }
             save(this)
         }
     }
 
     override fun retrieveUser(id: Int): User? = persistence.users[id]
 
+    override fun retrieveUser(email: String): User? = persistence.users[persistence.usersByEmail[email]]
+
+    override fun retrieveUserAuth(email: String): UserAuth? = persistence.auth[persistence.usersByEmail[email]]
+
     override fun updateUser(user: User) {
-        persistence.users[user.id] = user
+        with (persistence) {
+            usersByEmail.remove(users[user.id]?.email)
+            users[user.id] = user
+            usersByEmail[user.email] = user.id
+        }
         save(persistence)
     }
 
@@ -51,6 +61,7 @@ class FlatDatastore(
                 zipCode = newUser.zipCode,
                 creationDate = Date().date.toLong()
         )
+        persistence.usersByEmail[newUser.email] = newId
         persistence.auth[newId] = userAuth
 
         save(persistence)

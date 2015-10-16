@@ -95,6 +95,10 @@ fun main(args: Array<String>) {
     // set global content type
     Spark.before { request, response ->
         response.header("Content-type", "application/json")
+
+        if (!service.checkAuth(request.headers("Authentication"))) {
+            Spark.halt(401, "Authentication failed");
+        }
     }
 
     // apply CORS filter
