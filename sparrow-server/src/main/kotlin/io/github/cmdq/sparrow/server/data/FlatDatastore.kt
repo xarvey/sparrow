@@ -16,17 +16,14 @@ class FlatDatastore(
     )
 
     object persistence: Data() {
-
         override var nextId = 0
-
         override val users = HashMap<Int, User>()
-
         override val auth = HashMap<Int, UserAuth>()
-
         override val listings = HashMap<Int, Listing>()
         override val comments = HashMap<Int, Comment>()
         fun genNextId(): Int = nextId++
     }
+
     init {
         persistence.apply {
             nextId = start.nextId
@@ -37,11 +34,14 @@ class FlatDatastore(
             save(this)
         }
     }
+
     override fun retrieveUser(id: Int): User? = persistence.users[id]
+
     override fun updateUser(user: User) {
         persistence.users[user.id] = user
         save(persistence)
     }
+
     override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int {
         val newId = persistence.genNextId()
         persistence.users[newId] = User(
