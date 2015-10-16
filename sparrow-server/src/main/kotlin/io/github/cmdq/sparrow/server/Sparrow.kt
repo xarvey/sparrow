@@ -51,7 +51,7 @@ class Sparrow(
                     comments = listing.comments + id
             )
             datastore.updateListing(newListing)
-            return ServiceResponse()
+            return ServiceResponse(id)
         }
 
         override fun createUserComment(userId: Int, comment: Comment): ServiceResponse {
@@ -62,7 +62,7 @@ class Sparrow(
                     comments = user.comments + id
             )
             datastore.updateUser(newUser)
-            return ServiceResponse()
+            return ServiceResponse(id)
         }
 
         override fun deleteComment(id: Int): ServiceResponse {
