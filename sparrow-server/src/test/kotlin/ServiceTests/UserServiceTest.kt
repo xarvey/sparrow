@@ -7,32 +7,87 @@ import org.junit.Test
 
 public class UserServiceTest {
 
-    @Test
-    fun userCreationTest() {
-        for (id in listOf(0, 500, Int.MAX_VALUE)) {
+    //region Create user test cases
 
-            val userCreation = UserCreation("name", "email@email", "pass", "12345")
+    class CreateUserTestCase(
+            val userCreation: UserCreation,
+            val status: Int = 200
+    ) {
+        fun test() {
+            for (id in listOf(0, 500, Int.MAX_VALUE)) {
 
-            val sparrow = Sparrow(object : MockDatastore() {
-                override fun storeNewUser(newUser: UserCreation): Int {
-                    assert(newUser == userCreation)
-                    return id
-                }
-            })
+                val sparrow = Sparrow(object : MockDatastore() {
+                    override fun storeNewUser(newUser: UserCreation): Int {
+                        assert(status == 200)
+                        assert(newUser == userCreation)
+                        return id
+                    }
+                })
 
-            with(sparrow.users.createUser(userCreation)) {
-                assert(status == 200)
-                assert(body == id.toJson(sparrow.gson))
+                val result = sparrow.users.createUser(userCreation)
+                assert(status == result.status)
+                assert(status != 200 || result.body == id.toJson(sparrow.gson))
             }
         }
     }
 
     @Test
-    fun getUserTest() {
-        val baseUser = User(0, "name", "email@email.com", "12345", 100000)
+    fun createUserSuccess() {
+        CreateUserTestCase(
+                UserCreation("name", "email@email", "pass", "12345")
+        ).test()
+    }
 
-        for (testId in listOf(0, 500, Int.MAX_VALUE)) {
-            for (testUser in listOf(null, baseUser.copy(id = testId))) {
+    @Test
+    fun createUserMissingName() {
+        CreateUserTestCase(
+                UserCreation("", "email@email", "pass", "12345"),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun createUserMissingEmail() {
+        CreateUserTestCase(
+                UserCreation("name", "", "pass", "12345"),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun createUserMissingPass() {
+        CreateUserTestCase(
+                UserCreation("name", "email@email", "", "12345"),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun createUserMissingZipCode() {
+        CreateUserTestCase(
+                UserCreation("name", "email@email", "pass", ""),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun createUserInvalidZipCode() {
+        CreateUserTestCase(
+                UserCreation("name", "email@email", "pass", "12E45"),
+                status = 400
+        ).test()
+    }
+
+    //endregion
+
+    //region Get user test cases
+
+    class GetUserTestCase(
+            val resultUser: User?
+    ) {
+        fun test() {
+            for (testId in listOf(0, 500, Int.MAX_VALUE)) {
+                val testUser = resultUser?.copy(id = testId)
                 val sparrow = Sparrow(object : MockDatastore() {
                     override fun retrieveUser(id: Int): User? {
                         assert(testId == id)
@@ -41,7 +96,6 @@ public class UserServiceTest {
                 })
 
                 with(sparrow.users.getUser(testId)) {
-                    assert(status == 200)
                     if (testUser == null)
                         assert(status == 404)
                     else {
@@ -52,4 +106,70 @@ public class UserServiceTest {
             }
         }
     }
+
+    @Test
+    fun getUserSuccess() {
+        GetUserTestCase(
+                User(0, "name", "email@email.com", "12345", 100000)
+        ).test()
+    }
+
+    @Test
+    fun getUserNotFound() {
+        GetUserTestCase(
+                null
+        ).test()
+    }
+
+    //endregion
+
+    //region Edit user test cases
+
+    class EditUserTestCase(
+            val oldUser: User?,
+            val newUser: User
+    ) {
+        fun test() {
+            for (testId in listOf(0, 500, Int.MAX_VALUE)) {
+                val testOldUser = oldUser?.copy(id = testId)
+                val testNewUser = newUser.copy(id = testId)
+                val sparrow = Sparrow(object : MockDatastore() {
+                    override fun updateUser(user: User) {
+                        assert(testOldUser != null)
+                        assert(user == testNewUser)
+                    }
+
+                    override fun retrieveUser(id: Int): User? {
+                        assert(id == testId)
+                        return testOldUser
+                    }
+                })
+
+                with(sparrow.users.getUser(testId)) {
+                    if (testOldUser == null)
+                        assert(status == 404)
+                    else
+                        assert(status == 200)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun editUserSuccess() {
+        EditUserTestCase(
+                User(0, "name", "email@email.com", "12345", 100000),
+                User(0, "abc", "emaill@email.com", "12346", 100000)
+        ).test()
+    }
+
+    @Test
+    fun editUserNotFound() {
+        EditUserTestCase(
+                null,
+                User(0, "name", "email@email.com", "12345", 100000)
+        ).test()
+    }
+
+    //endregion
 }
