@@ -30,7 +30,7 @@ class Sparrow(
     public val frontpage = object : FrontpageService {
 
         private fun getListingsPage(type: ListingType, page: Int): List<Listing> {
-            val filter = FilterParams(type = type)
+            val filter = FilterParams(type = type, closed = false)
             val listings = datastore.queryListings(filter)
             val first = page * 25
             return listings.subList(first, first + 25)
