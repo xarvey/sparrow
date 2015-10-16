@@ -3,13 +3,14 @@ import io.github.cmdq.sparrow.server.model.FilterParams
 import io.github.cmdq.sparrow.server.model.Listing
 import io.github.cmdq.sparrow.server.model.ListingType
 import io.github.cmdq.sparrow.server.model.User
-import io.github.cmdq.sparrow.server.toJson
 import mocks.MockDatastore
 import org.junit.Test
+import java.util.*
 
 public class ListingServiceTest {
     val mockListing = Listing(1, 1, ListingType.borrow, title="Listing", description="stuff")
     val mockFilter = FilterParams()
+    val mockUser = User(1, "", "", "", Date().time)
 
     fun testGetListing(listing: Listing?, status: Int) {
         for (testId in listOf(0, 500, Int.MAX_VALUE)) {
@@ -109,38 +110,113 @@ public class ListingServiceTest {
         testGetFilteredListings(mockFilter.copy(bountyMin = -1), 400)
     }
 
-    @Test fun testCreateListing() {
+    fun testCreateListing(listing: Listing, status: Int) {
         var called = false
 
         val service = Sparrow(object: MockDatastore() {
             override fun storeListing(newListing: Listing): Int {
-                assert(newListing == mockListing)
+                assert(newListing == listing)
                 called = true
-                return 1
+                return listing.id
             }
             override fun retrieveUser(id: Int): User? {
-                return super.retrieveUser(id)
+                return mockUser
+            }
+
+            override fun updateUser(user: User) {
             }
         })
 
-        val response = service.listings.createListing(mockListing)
-        assert(response.status == 200)
-        assert(called == true)
-        assert(response.body == 1)
+        val response = service.listings.createListing(listing)
+        assert(response.status == status)
+        if (status == 200) {
+            assert(called == true)
+            assert(response.body == listing.id)
+        }
     }
 
-    @Test fun testEditListing() {
+    @Test fun testCreateListingValid() {
+        testCreateListing(mockListing, 200)
+    }
+
+    @Test fun testCreateListingBountyHigh() {
+        testCreateListing(mockListing.copy(bounty = 21), 400)
+    }
+
+    @Test fun testCreateListingTitleLong() {
+        testCreateListing(mockListing.copy(title = "a".repeat(141)), 400)
+    }
+
+    @Test fun testCreateListingTitleEmpty() {
+        testCreateListing(mockListing.copy(title = ""), 400)
+    }
+
+    @Test fun testCreateListingDescriptionEmpty() {
+        testCreateListing(mockListing.copy(description = ""), 400)
+    }
+
+    @Test fun testCreateListingDescriptionLOng() {
+        testCreateListing(mockListing.copy(description = "a".repeat(501)), 400)
+    }
+
+    fun testEditListing(oldListing: Listing?, newListing: Listing, status: Int) {
         var called = false
 
         val service = Sparrow(object: MockDatastore() {
             override fun updateListing(listing: Listing) {
-                assert(listing == mockListing.copy(id = 4))
+                assert(listing == newListing)
+                called = true
+            }
+            override fun retrieveListing(id: Int): Listing? {
+                return oldListing
+            }
+        })
+
+        val response = service.listings.editListing(newListing)
+        assert(response.status == status)
+        if (status == 200) assert(called == true)
+    }
+
+    @Test fun testEditListingValid() {
+        testEditListing(mockListing, mockListing.copy(title="blue cheese", closed=true), 200)
+    }
+
+    @Test fun testEditListingTitleEmpty() {
+        testEditListing(mockListing, mockListing.copy(title=""), 400)
+    }
+
+    @Test fun testEditListingDescriptionEmpty() {
+        testEditListing(mockListing, mockListing.copy(description = ""), 400)
+    }
+
+    @Test fun testEditListingTitleLong() {
+        testEditListing(mockListing, mockListing.copy(description = "a".repeat(141)), 400)
+    }
+
+    @Test fun testEditListingDescriptionLong() {
+        testEditListing(mockListing, mockListing.copy(description = "a".repeat(501)), 400)
+    }
+
+    @Test fun testEditListingNotFound() {
+        testEditListing(null, mockListing, 200)
+    }
+
+    fun testRemoveListing(testId: Int, status: Int) {
+        var called = false
+
+        val service = Sparrow(object: MockDatastore() {
+            override fun deleteListing(id: Int) {
+                assert(id == testId)
                 called = true
             }
         })
 
-        val response = service.listings.editListing(mockListing.copy(id = 4))
-        assert(response.status == 200)
+        val result = service.listings.removeListing(testId)
+        assert(result.status == status)
         assert(called == true)
+    }
+
+    @Test fun testRemoveListingValid() {
+        testRemoveListing(2, 200)
     }
 }
