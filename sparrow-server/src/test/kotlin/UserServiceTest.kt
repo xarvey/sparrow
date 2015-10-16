@@ -127,7 +127,8 @@ public class UserServiceTest {
 
     class EditUserTestCase(
             val oldUser: User?,
-            val newUser: User
+            val newUser: User,
+            val status: Int = 200
     ) {
         fun test() {
             for (testId in listOf(0, 500, Int.MAX_VALUE)) {
@@ -135,6 +136,7 @@ public class UserServiceTest {
                 val testNewUser = newUser.copy(id = testId)
                 val sparrow = Sparrow(object : MockDatastore() {
                     override fun updateUser(user: User) {
+                        assert(status != 200)
                         assert(testOldUser != null)
                         assert(user == testNewUser)
                     }
@@ -145,12 +147,8 @@ public class UserServiceTest {
                     }
                 })
 
-                with(sparrow.users.getUser(testId)) {
-                    if (testOldUser == null)
-                        assert(status == 404)
-                    else
-                        assert(status == 200)
-                }
+                val result = sparrow.users.getUser(testId)
+                assert(status == result.status)
             }
         }
     }
@@ -167,7 +165,44 @@ public class UserServiceTest {
     fun editUserNotFound() {
         EditUserTestCase(
                 null,
-                User(0, "name", "email@email.com", "12345", 100000)
+                User(0, "name", "email@email.com", "12345", 100000),
+                status = 404
+        ).test()
+    }
+
+    @Test
+    fun editUserEmptyName() {
+        EditUserTestCase(
+                User(0, "name", "email@email.com", "12345", 100000),
+                User(0, "", "email@email.com", "12345", 100000),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun editUserEmptyEmail() {
+        EditUserTestCase(
+                User(0, "name", "email@email.com", "12345", 100000),
+                User(0, "name", "", "12345", 100000),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun editUserEmptyZipCode() {
+        EditUserTestCase(
+                User(0, "name", "email@email.com", "12345", 100000),
+                User(0, "name", "email@email.com", "", 100000),
+                status = 400
+        ).test()
+    }
+
+    @Test
+    fun editUserInvalidZipCode() {
+        EditUserTestCase(
+                User(0, "name", "email@email.com", "12345", 100000),
+                User(0, "name", "email@email.com", "12E45", 100000),
+                status = 400
         ).test()
     }
 
