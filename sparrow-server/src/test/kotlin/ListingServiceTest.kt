@@ -1,15 +1,11 @@
 import io.github.cmdq.sparrow.server.Sparrow
-import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.FilterParams
 import io.github.cmdq.sparrow.server.model.Listing
 import io.github.cmdq.sparrow.server.model.ListingType
 import io.github.cmdq.sparrow.server.model.User
 import io.github.cmdq.sparrow.server.toJson
-import io.github.cmdq.sparrow.server.toObject
 import mocks.MockDatastore
-import org.junit.Assert
 import org.junit.Test
-import java.util.*
 
 public class ListingServiceTest {
     val mockListing = Listing(1, 1, ListingType.borrow, title="Listing", description="stuff")
@@ -44,21 +40,43 @@ public class ListingServiceTest {
         testGetListing(null, 404)
     }
 
-    @Test fun testGetFilteredListings() {
+    fun testGetFilteredListings(testFilter: FilterParams, status: Int) {
         var called = false
 
         val service = Sparrow(object: MockDatastore() {
             override fun queryListings(filter: FilterParams): List<Listing> {
-                assert(filter == mockFilter)
+                assert(filter == testFilter)
                 called = true
                 return listOf(mockListing)
             }
         })
 
-        val response = service.listings.getFilteredListings(mockFilter)
-        assert(response.status == 200)
-        assert(called == true)
-        assert(response.body.toJson(service.gson) == listOf(mockListing).toJson(service.gson))
+        val response = service.listings.getFilteredListings(testFilter)
+        assert(response.status == status)
+        if (status == 200) {
+            assert(called == true)
+            assert(response.body == listOf(mockListing))
+        }
+    }
+
+    @Test fun testGetFilteredListingsValid() {
+        testGetFilteredListings(mockFilter, 200)
+    }
+
+    @Test fun testGetFilteredKeywordsEmpty() {
+        testGetFilteredListings(mockFilter.copy(keywords = ""), 400)
+    }
+
+    @Test fun testGetFilteredKeywordsLong() {
+        testGetFilteredListings(mockFilter.copy(keywords = "a".repeat(141)), 400)
+    }
+
+    @Test fun testGetFilteredBountyHigh() {
+        testGetFilteredListings(mockFilter.copy(bountyMax = 21), 400)
+    }
+
+    @Test fun testGetFilteredBountyLow() {
+        testGetFilteredListings(mockFilter.copy(bountyMin = -1), 400)
     }
 
     @Test fun testCreateListing() {
