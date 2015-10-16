@@ -29,6 +29,7 @@ Sprint 2 Defect Log
 |:---------|:-------------------------------------------------------------------------|:---------|:-------------------------------------------------------------------------------------|
 |     1    | When user close the browser, the cookie shall not disappear                          |     2    | Add expiraion date for the cookies  |
 
+
 ### Unit Testing Log
 
 - Product: Sparrow Unit Tests
@@ -37,3 +38,9 @@ Sprint 2 Defect Log
 
 | Defect # | Description                                                              | Severity | How Corrected                                                                        |
 |:---------|:-------------------------------------------------------------------------|:---------|:-------------------------------------------------------------------------------------|
+|     1    | When parameter is missing, the program should return a default value instead of crashing with undefined errpr                          |     1    | Add default value to avoid undefined problem. Example: user=document.getCookie("username") \|\| 'default user'  |
+|     2    | When passing funtion pointer into inside function, the main function is self-dependent                        |     1    | Add "that" to save reference of its own object. 
+|     3    | When show all listing, the order is arbitary                        |     3    | Use for (var 1=0; i < list.length; i++) instead of for (var list_details in list) 
+
+
+
