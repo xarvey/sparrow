@@ -3,7 +3,6 @@ import io.github.cmdq.sparrow.server.parseArgs
 import org.junit.Test
 
 public class MainKtTest {
-
     class TestCase(
             val args: List<String>,
             val fail: Boolean = false,
