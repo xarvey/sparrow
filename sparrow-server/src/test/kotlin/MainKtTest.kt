@@ -20,24 +20,24 @@ public class MainKtTest {
     }
 
     @Test
-    public fun testEmpty() {
+    fun testEmpty() {
         TestCase(emptyList()) { it == Args() }.test()
     }
 
     @Test
-    public fun testShort() {
+    fun testShort() {
         TestCase(listOf("-p", "10000")) { it == Args(port = 10000) }.test()
         TestCase(listOf("-f", "test")) { it == Args(fileName = "test") }.test()
     }
 
     @Test
-    public fun testLong() {
+    fun testLong() {
         TestCase(listOf("--port", "10000")) { it == Args(port = 10000) }.test()
         TestCase(listOf("--file", "test")) { it == Args(fileName = "test") }.test()
     }
 
     @Test
-    public fun testFull() {
+    fun testFull() {
         TestCase(listOf(
                 "-p", "10000",
                 "-f", "test"
@@ -56,7 +56,7 @@ public class MainKtTest {
     }
 
     @Test
-    public fun testUsage() {
+    fun testUsage() {
         TestCase(listOf("-p", "9001", "fail"), fail = true).test()
         TestCase(listOf("-x", "abc"), fail = true).test()
         TestCase(listOf("-x"), fail = true).test()
@@ -68,7 +68,7 @@ public class MainKtTest {
     }
 
     @Test
-    public fun testChecks() {
+    fun testChecks() {
         TestCase(listOf("-p", "1024"), fail = true).test()
         TestCase(listOf("-p", "65536"), fail = true).test()
         TestCase(listOf("-p", "abc"), fail = true).test()
