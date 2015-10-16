@@ -2,7 +2,7 @@ import io.github.cmdq.sparrow.server.Args
 import io.github.cmdq.sparrow.server.parseArgs
 import org.junit.Test
 
-public class MainKtTest {
+public class MainTest {
     class TestCase(
             val args: List<String>,
             val fail: Boolean = false,
