@@ -8,6 +8,11 @@ class Sparrow(
         val datastore: Datastore,
         public val gson: Gson = Gson()
 ) {
+    public interface FrontpageService {
+        fun getBorrowPage(page: Int): ServiceResponse
+        fun getLendingPage(page: Int): ServiceResponse
+    }
+
     public interface UserService {
         fun getUser(id: Int): ServiceResponse
         fun createUser(info: UserCreation): ServiceResponse
@@ -22,7 +27,28 @@ class Sparrow(
         fun removeListing(id: Int): ServiceResponse
     }
 
+    public val frontpage = object : FrontpageService {
+
+        override fun getBorrowPage(page: Int): ServiceResponse {
+            val filter = FilterParams(ListingType.borrow, null, emptyList(), null, null)
+            val listings = datastore.queryListings(filter)
+            val first = page * 25
+            val listingPage = listings.subList(first, first + 25)
+            return ServiceResponse(listingPage)
+        }
+
+        override fun getLendingPage(page: Int): ServiceResponse {
+            val filter = FilterParams(ListingType.lend, null, emptyList(), null, null)
+            val listings = datastore.queryListings(filter)
+            val first = page * 25
+            val listingPage = listings.subList(first, first + 25)
+            return ServiceResponse(listingPage)
+        }
+
+    }
+
     public val users = object : UserService {
+
         override fun getUser(id: Int): ServiceResponse {
             val user = datastore.retrieveUser(id)
             return when (user) {
@@ -32,6 +58,9 @@ class Sparrow(
         }
 
         override fun createUser(info: UserCreation): ServiceResponse {
+            if (!info.email.isEmail())
+                return ServiceResponse("Not a valid email", 400)
+
             val salt = info.name.hashCode().toString()
             return ServiceResponse(datastore.storeNewUser(info,
                     UserAuth(
@@ -58,13 +87,13 @@ class Sparrow(
 
         override fun getFilteredListings(filter: FilterParams): ServiceResponse {
             if (filter.keywords?.length() ?: 0 > 140)
-                return ServiceResponse("Search is too long", 404)
-            if (filter.keywords.isNullOrEmpty())
-                return ServiceResponse("Search is empty", 404)
+                return ServiceResponse("Search is too long", 400)
+            if (filter.keywords?.isEmpty() ?: false)
+                return ServiceResponse("Search field is empty", 400)
             if (filter.bountyMin ?: 0 < 0)
-                return ServiceResponse("Negative bounty min", 404)
+                return ServiceResponse("Negative bounty min", 400)
             if (filter.bountyMax ?: 0 > 20)
-                return ServiceResponse("Bounty too high", 404)
+                return ServiceResponse("Bounty too high", 400)
             return ServiceResponse(datastore.queryListings(filter))
         }
 
