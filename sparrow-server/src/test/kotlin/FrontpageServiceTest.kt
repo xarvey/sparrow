@@ -28,6 +28,16 @@ class FrontpageServiceTest {
     }
 
     @Test
+    fun invalid() {
+        types forEach { type ->
+            val sparrow = Sparrow(MockDatastore())
+            assert(sparrow.frontpage.getPage(type, -1, 10).status == 400)
+            assert(sparrow.frontpage.getPage(type, 0, -1).status == 400)
+            assert(sparrow.frontpage.getPage(type, 0, 0).status == 400)
+        }
+    }
+
+    @Test
     fun empty() {
         types forEach { type ->
             val sparrow = Sparrow(MockData(type, 0))
