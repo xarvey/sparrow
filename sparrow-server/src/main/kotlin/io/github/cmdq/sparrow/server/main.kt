@@ -2,22 +2,10 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-<<<<<<< HEAD
 import io.github.cmdq.sparrow.server.db.SimpleDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
 import org.sql2o.Sql2o
-=======
-import io.github.cmdq.sparrow.server.data.FlatDatastore
-import io.github.cmdq.sparrow.server.endpoint.setupComments
-import io.github.cmdq.sparrow.server.endpoint.setupFrontpage
-import io.github.cmdq.sparrow.server.endpoint.setupListings
-import io.github.cmdq.sparrow.server.endpoint.setupUsers
-import io.github.cmdq.sparrow.server.exception.SparrowException
-import org.apache.commons.cli.DefaultParser
-import org.apache.commons.cli.HelpFormatter
-import org.apache.commons.cli.Options
->>>>>>> 693517d849f15ee1d8715a8a02e7266f8ece770c
 import spark.Request
 import spark.Response
 import spark.Spark
