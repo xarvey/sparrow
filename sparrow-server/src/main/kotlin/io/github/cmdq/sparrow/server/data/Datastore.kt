@@ -12,7 +12,7 @@ interface Datastore {
     fun retrieveUser(email: String): User?
     fun updateUser(user: User)
 
-    fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int
+    fun storeNewUser(newUser: UserCreation): Int
     fun retrieveListing(id: Int): Listing?
     fun updateListing(listing: Listing)
     fun storeListing(newListing: Listing): Int

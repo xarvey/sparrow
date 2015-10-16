@@ -1,50 +1,28 @@
-import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Sparrow
-import io.github.cmdq.sparrow.server.model.User
 import io.github.cmdq.sparrow.server.model.UserCreation
+import io.github.cmdq.sparrow.server.toJson
 import mocks.MockDatastore
-import mocks.mockUser
-import mocks.mockUserCreation
-import org.junit.Assert
 import org.junit.Test
-import java.util.*
 
 public class UserServiceTest {
-    val endpoint = Sparrow(MockDatastore(), Gson()).users
 
     @Test
-    public fun testGetUserNegative() {
-        val response = endpoint.getUser(-1)
-        Assert.assertEquals(404, response.status)
-    }
+    fun userCreationTest() {
+        val userCreation = UserCreation("name", "email@email", "pass", "12345")
 
-    @Test
-    public fun testGetUserMax() {
-        val response = endpoint.getUser(Int.MAX_VALUE)
-        Assert.assertEquals(200, response.status)
-    }
+        var called = false
+        val sparrow = Sparrow(object: MockDatastore() {
+            override fun storeNewUser(newUser: UserCreation): Int {
+                assert(newUser == userCreation)
+                called = true
+                return 10
+            }
+        })
 
-    @Test
-    public fun testGetUserValid() {
-        val response = endpoint.getUser(5)
-        Assert.assertEquals(200, response.status)
-    }
-
-    @Test
-    public fun testCreateUserValid() {
-        try {
-            endpoint.createUser(mockUserCreation)
-        } catch(e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    @Test
-    public fun testEditUserValid() {
-        try {
-            endpoint.editUser(mockUser)
-        } catch (e: Exception) {
-            e.printStackTrace()
+        with(sparrow.users.createUser(userCreation)) {
+            assert(called)
+            assert(status == 200)
+            assert(body == 10.toJson(sparrow.gson))
         }
     }
 }

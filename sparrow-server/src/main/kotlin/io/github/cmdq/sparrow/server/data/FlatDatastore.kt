@@ -52,7 +52,7 @@ class FlatDatastore(
         save(persistence)
     }
 
-    override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int {
+    override fun storeNewUser(newUser: UserCreation): Int {
         val newId = persistence.genNextId()
         persistence.users[newId] = User(
                 id = newId,
@@ -62,7 +62,7 @@ class FlatDatastore(
                 creationDate = Date().date.toLong()
         )
         persistence.usersByEmail[newUser.email] = newId
-        persistence.auth[newId] = userAuth
+        persistence.auth[newId] = UserAuth(newUser)
 
         save(persistence)
         return newId

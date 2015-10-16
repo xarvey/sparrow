@@ -17,3 +17,6 @@ val String.length: Int
 
 
 fun String.isEmail(): Boolean = with(indexOf('@')) { this > 0 || this < end }
+
+val String.hashString: String
+    get() = this.hashCode().toString()
