@@ -120,8 +120,6 @@ class Sparrow(
         override fun createUser(info: UserCreation): ServiceResponse {
             if (!info.email.isEmail())
                 return ServiceResponse("Not a valid email", 400)
-
-            val salt = info.name.hashCode().toString()
             return ServiceResponse(datastore.storeNewUser(info))
         }
 
