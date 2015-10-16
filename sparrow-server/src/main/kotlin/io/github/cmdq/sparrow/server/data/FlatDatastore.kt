@@ -7,10 +7,6 @@ class FlatDatastore(
         val start: FlatDatastore.Data,
         val save: (FlatDatastore.Data) -> Unit
 ) : Datastore {
-    override fun queryListings(filter: FilterParams): List<Listing> {
-        throw UnsupportedOperationException()
-    }
-
     open class Data (
         open val nextId: Int = 0,
         open val users: Map<Int, User> = emptyMap(),
@@ -20,6 +16,7 @@ class FlatDatastore(
     )
 
     object persistence: Data() {
+
         override var nextId = 0
         override val users = HashMap<Int, User>()
         override val auth = HashMap<Int, UserAuth>()
@@ -27,7 +24,6 @@ class FlatDatastore(
         override val comments = HashMap<Int, Comment>()
         fun genNextId(): Int = nextId++
     }
-
     init {
         persistence.apply {
             nextId = start.nextId
@@ -80,5 +76,23 @@ class FlatDatastore(
     override fun deleteListing(id: Int) {
         persistence.listings.remove(id)
         save(persistence)
+    }
+
+    override fun queryListings(filter: FilterParams): List<Listing> {
+        return persistence.listings.values().filter {
+            filter.type == null || filter.type == it.type
+        }.filter {
+            filter.keywords == null || it.tags.fold(false) { r, tag -> r || filter.keywords.contains(tag) }
+        }.filter {
+            filter.zipCode == null || filter.zipCode.contains(persistence.users[it.owner]?.zipCode)
+        }.filter {
+            filter.users == null || filter.users.contains(it.owner)
+        }.filter {
+            filter.closed == null || filter.closed == it.closed
+        }.filter {
+            filter.bountyMax == null || it.bounty <= filter.bountyMax
+        }.filter {
+            filter.bountyMin == null || it.bounty >= filter.bountyMin
+        }
     }
 }
