@@ -2,7 +2,6 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.db.SimpleDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
