@@ -1,7 +1,7 @@
 import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.Sparrow
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
+import io.github.cmdq.sparrow.server.model.User
+import io.github.cmdq.sparrow.server.model.UserCreation
 import mocks.MockDatastore
 import mocks.mockUser
 import mocks.mockUserCreation

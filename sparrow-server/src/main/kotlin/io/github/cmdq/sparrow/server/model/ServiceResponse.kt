@@ -1,4 +1,4 @@
-package io.github.cmdq.sparrow.server.data
+package io.github.cmdq.sparrow.server.model
 
 data class ServiceResponse(
         val body: Any = "",

@@ -1,13 +1,11 @@
 package mocks
-
-import io.github.cmdq.sparrow.server.data.FilterParams
-import io.github.cmdq.sparrow.server.db.Datastore
-import io.github.cmdq.sparrow.server.data.Listing
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
-import java.util.*
+import io.github.cmdq.sparrow.server.data.Datastore
+import io.github.cmdq.sparrow.server.model.*
 
 public class MockDatastore: Datastore {
+    override fun queryListings(filter: FilterParams): List<Listing> {
+        return emptyList()
+    }
 
     override fun retrieveUser(id: Int): User? {
         if (id < 0) return null
@@ -18,7 +16,7 @@ public class MockDatastore: Datastore {
         return
     }
 
-    override fun storeNewUser(newUser: UserCreation): Int {
+    override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int {
         return 0
     }
 
@@ -31,7 +29,7 @@ public class MockDatastore: Datastore {
         return
     }
 
-    override fun storeListing(listing: Listing): Int {
+    override fun storeListing(newListing: Listing): Int {
         return 0
     }
 
@@ -39,7 +37,5 @@ public class MockDatastore: Datastore {
         return
     }
 
-    override fun queryListings(filter: FilterParams): List<Listing> {
-        return ArrayList()
-    }
+
 }

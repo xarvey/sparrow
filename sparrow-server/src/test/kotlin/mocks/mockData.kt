@@ -1,9 +1,9 @@
 package mocks
 
-import io.github.cmdq.sparrow.server.data.Listing
-import io.github.cmdq.sparrow.server.data.ListingType
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
+import io.github.cmdq.sparrow.server.model.Listing
+import io.github.cmdq.sparrow.server.model.ListingType
+import io.github.cmdq.sparrow.server.model.User
+import io.github.cmdq.sparrow.server.model.UserCreation
 import java.util.*
 
 val mockUserCreation = UserCreation(
