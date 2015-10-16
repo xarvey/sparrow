@@ -1,9 +1,9 @@
 package mocks
 
-import io.github.cmdq.sparrow.server.db.Datastore
-import io.github.cmdq.sparrow.server.data.Listing
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
+import io.github.cmdq.sparrow.server.data.Datastore
+import io.github.cmdq.sparrow.server.model.Listing
+import io.github.cmdq.sparrow.server.model.User
+import io.github.cmdq.sparrow.server.model.UserCreation
 import java.util.*
 
 public class MockDatastore: Datastore {

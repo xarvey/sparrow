@@ -2,7 +2,7 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
-import io.github.cmdq.sparrow.server.db.SqlDatastore
+import io.github.cmdq.sparrow.server.data.FlatDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
 import org.apache.commons.cli.DefaultParser
@@ -11,21 +11,18 @@ import org.apache.commons.cli.Options
 import spark.Request
 import spark.Response
 import spark.Spark
+import java.io.File
 
 data class Args(
         val port: Int = 9000,
-        val dbUrl: String = "postgresql://localhost:5432/sparrow",
-        val dbUser: String = "sparrow",
-        val dbPass: String = ""
+        val fileName: String = "~/.sparrow.json"
 )
 
 val defaultArgs = Args()
 
 val options = Options()
-        .addOption("p", "port", true, "The public port for the server [${defaultArgs.port}]")
-        .addOption("d", "database", true, "The database url [${defaultArgs.dbUrl}]")
-        .addOption("u", "username", true, "The username to connect to the database [${defaultArgs.dbUser}]")
-        .addOption("a", "auth", true, "The password to connect to the database [${defaultArgs.dbPass}]")
+        .addOption("p", "port", true, "The port for operation [${defaultArgs.port}]")
+        .addOption("f", "file", true, "The persistence file [${defaultArgs.fileName}]")
 
 fun parseArgs(args: Array<String>): Args {
     try {
@@ -38,20 +35,14 @@ fun parseArgs(args: Array<String>): Args {
         if (cmd.hasOption("p"))
             result = result.copy(port = cmd["p"]!!.toInt())
 
-        if (cmd.hasOption("d"))
-            result = result.copy(dbUrl = cmd["d"]!!)
-
-        if (cmd.hasOption("u"))
-            result = result.copy(dbUser = cmd["u"]!!)
-
-        if (cmd.hasOption("a"))
-            result = result.copy(dbPass = cmd["a"]!!)
+        if (cmd.hasOption("f"))
+            result = result.copy(fileName = cmd["f"]!!)
 
         // validate options
         if (result.port !in 1025..65535)
             throw IllegalArgumentException()
 
-        if (result.dbUrl.isBlank())
+        if (result.fileName.isBlank())
             throw IllegalArgumentException()
 
         if (cmd.argList.isNotEmpty())
@@ -74,8 +65,19 @@ fun main(args: Array<String>) {
     }
 
     // init service
-    val datastore = SqlDatastore(options.dbUrl, options.dbUser, options.dbPass)
-    val service = Sparrow(datastore)
+    val gson = Gson()
+    val file = File(options.fileName)
+    val datastore = FlatDatastore(
+            try {
+                gson.fromJson(file.bufferedReader(), FlatDatastore.Data::class.java)
+            } catch(e: Exception) {
+                e.printStackTrace()
+                FlatDatastore.Data()
+            }
+    ) {
+        file.writeText(it.toJson(gson))
+    }
+    val service = Sparrow(datastore, gson)
 
     // set service port
     Spark.port(options.port)

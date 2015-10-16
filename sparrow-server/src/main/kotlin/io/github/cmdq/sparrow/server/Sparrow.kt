@@ -1,11 +1,8 @@
 package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
-import io.github.cmdq.sparrow.server.data.Listing
-import io.github.cmdq.sparrow.server.data.ServiceResponse
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
-import io.github.cmdq.sparrow.server.db.Datastore
+import io.github.cmdq.sparrow.server.data.Datastore
+import io.github.cmdq.sparrow.server.model.*
 
 class Sparrow(
         val datastore: Datastore,
@@ -34,7 +31,13 @@ class Sparrow(
         }
 
         override fun createUser(info: UserCreation): ServiceResponse {
-            return ServiceResponse(datastore.storeNewUser(info))
+            val salt = info.name.hashCode().toString()
+            return ServiceResponse(datastore.storeNewUser(info,
+                    UserAuth(
+                            passcode = (info.password + salt).hashCode().toString(),
+                            salt = salt
+                    )
+            ))
         }
 
         override fun editUser(user: User): ServiceResponse {
