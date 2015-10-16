@@ -1,6 +1,7 @@
 package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
+import io.github.cmdq.sparrow.server.model.FilterParams
 import org.apache.commons.cli.CommandLine
 
 inline fun <reified T : Any> String.toObject(gson: Gson): T = gson.fromJson(this, T::class.java)
@@ -16,7 +17,4 @@ val String.length: Int
     get() = this.length()
 
 
-fun String.isEmail():Boolean {
-    val index = this.indexOf('@')
-    return index > 0 && index < this.end
-}
+fun String.isEmail(): Boolean = with(indexOf('@')) { this > 0 || this < end }
