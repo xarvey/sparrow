@@ -32,6 +32,7 @@ class FlatDatastore(
             auth.putAll(start.auth)
             listings.putAll(start.listings)
             comments.putAll(start.comments)
+            save(this)
         }
     }
 

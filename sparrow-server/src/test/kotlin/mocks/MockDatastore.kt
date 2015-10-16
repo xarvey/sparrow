@@ -3,6 +3,7 @@ package mocks
 import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.Listing
 import io.github.cmdq.sparrow.server.model.User
+import io.github.cmdq.sparrow.server.model.UserAuth
 import io.github.cmdq.sparrow.server.model.UserCreation
 import java.util.*
 
@@ -17,7 +18,7 @@ public class MockDatastore: Datastore {
         return
     }
 
-    override fun storeNewUser(newUser: UserCreation): Int {
+    override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int {
         return 0
     }
 

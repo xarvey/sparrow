@@ -15,7 +15,7 @@ import java.io.File
 
 data class Args(
         val port: Int = 9000,
-        val fileName: String = "~/.sparrow.json"
+        val fileName: String = "${System.getProperty("user.home")}/.sparrow.json"
 )
 
 val defaultArgs = Args()
@@ -68,13 +68,14 @@ fun main(args: Array<String>) {
     val gson = Gson()
     val file = File(options.fileName)
     val datastore = FlatDatastore(
-            try {
+            if (file.exists())
                 gson.fromJson(file.bufferedReader(), FlatDatastore.Data::class.java)
-            } catch(e: Exception) {
-                e.printStackTrace()
+            else
                 FlatDatastore.Data()
-            }
     ) {
+        if (!file.exists())
+            if (!file.createNewFile())
+                throw RuntimeException("What the fuck...")
         file.writeText(it.toJson(gson))
     }
     val service = Sparrow(datastore, gson)
