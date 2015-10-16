@@ -1,12 +1,13 @@
 package io.github.cmdq.sparrow.server.endpoint
 
-import io.github.cmdq.sparrow.server.data.Listing
 import io.github.cmdq.sparrow.server.Sparrow
+import io.github.cmdq.sparrow.server.model.FilterParams
+import io.github.cmdq.sparrow.server.model.Listing
 import io.github.cmdq.sparrow.server.toJson
 import io.github.cmdq.sparrow.server.toObject
 import spark.Spark
 
-fun listings(service: Sparrow) {
+fun setupListings(service: Sparrow) {
     val dir = "listings"
 
     Spark.get("/$dir/:id") { request, response ->
@@ -24,7 +25,10 @@ fun listings(service: Sparrow) {
     }
 
     Spark.put("/$dir/filter") { request, response ->
-
+        val filter: FilterParams = request.body().toObject(service.gson)
+        val result = service.listings.getFilteredListings(filter)
+        response.status(result.status)
+        result.body.toJson(service.gson)
     }
 
     Spark.post("/$dir") { request, response ->
@@ -34,7 +38,10 @@ fun listings(service: Sparrow) {
         result.body.toJson(service.gson)
     }
 
-    Spark.delete("/$dir/id") { request, response ->
-
+    Spark.delete("/$dir/:id") { request, response ->
+        val id = request.params("id").toInt()
+        val result = service.listings.removeListing(id)
+        response.status(result.status)
+        result.body.toJson(service.gson)
     }
 }

@@ -2,74 +2,125 @@ package io.github.cmdq.sparrow.server
 
 import com.google.gson.Gson
 import com.google.gson.JsonParseException
+<<<<<<< HEAD
 import io.github.cmdq.sparrow.server.db.SimpleDatastore
 import io.github.cmdq.sparrow.server.endpoint.*
 import io.github.cmdq.sparrow.server.exception.*
 import org.sql2o.Sql2o
+=======
+import io.github.cmdq.sparrow.server.data.FlatDatastore
+import io.github.cmdq.sparrow.server.endpoint.setupComments
+import io.github.cmdq.sparrow.server.endpoint.setupFrontpage
+import io.github.cmdq.sparrow.server.endpoint.setupListings
+import io.github.cmdq.sparrow.server.endpoint.setupUsers
+import io.github.cmdq.sparrow.server.exception.SparrowException
+import org.apache.commons.cli.DefaultParser
+import org.apache.commons.cli.HelpFormatter
+import org.apache.commons.cli.Options
+>>>>>>> 693517d849f15ee1d8715a8a02e7266f8ece770c
 import spark.Request
 import spark.Response
 import spark.Spark
+import java.io.File
+
+data class Args(
+        val port: Int = 9000,
+        val fileName: String = "${System.getProperty("user.home")}/.sparrow.json"
+)
+
+val defaultArgs = Args()
+
+val options = Options()
+        .addOption("p", "port", true, "The port for operation [${defaultArgs.port}]")
+        .addOption("f", "file", true, "The persistence file [${defaultArgs.fileName}]")
+
+fun parseArgs(args: Array<String>): Args {
+    try {
+        // parse options
+        val cmd = DefaultParser().parse(options, args)
+
+        // get options
+        var result = defaultArgs
+
+        if (cmd.hasOption("p"))
+            result = result.copy(port = cmd["p"]!!.toInt())
+
+        if (cmd.hasOption("f"))
+            result = result.copy(fileName = cmd["f"]!!)
+
+        // validate options
+        if (result.port !in 1025..65535)
+            throw IllegalArgumentException()
+
+        if (result.fileName.isBlank())
+            throw IllegalArgumentException()
+
+        if (cmd.argList.isNotEmpty())
+            throw IllegalArgumentException()
+
+        return result
+    } catch(e: Exception) {
+        throw SparrowException("Invalid command line arguments")
+    }
+}
 
 fun main(args: Array<String>) {
-    try {
-        val port = getPort(args)
-        Spark.port(port)
-    } catch (e: SparrowException) {
-        System.err.println("Initialization failed: ${e.getMessage()}")
+    // get cli args
+    val options: Args = try {
+        parseArgs(args)
+    } catch (e: Exception) {
+        HelpFormatter().printHelp("sparrow", options)
         System.exit(1)
+        return;
     }
 
-    val sql2o = Sql2o("jdbc:postgresql://localhost:5432/sparrow", "sparrow", ";qG.4%>fAKZL");
-    sql2o.open()
-
-    val datastore = SimpleDatastore()
-    val service = Sparrow(datastore)
-
-    users(service)
-    frontpage(service)
-    listings(service)
-    comments(service)
-
-    Spark.options("/*") { request, response ->
-        val reqHeaders = request.headers("Access-Control-Request-Headers")
-        if (reqHeaders != null) response.header("Access-Control-Allow-Headers", reqHeaders)
-
-        val reqMethod = request.headers("Access-Control-Request-Method")
-        if (reqHeaders != null) response.header("Access-Control-Allow-Methods", reqMethod)
-
-        ""
+    // init service
+    val gson = Gson()
+    val file = File(options.fileName)
+    val datastore = FlatDatastore(
+            if (file.exists())
+                gson.fromJson(file.bufferedReader(), FlatDatastore.Data::class.java)
+            else
+                FlatDatastore.Data()
+    ) {
+        if (!file.exists())
+            if (!file.createNewFile())
+                throw RuntimeException("What the fuck...")
+        file.writeText(it.toJson(gson))
     }
+    val service = Sparrow(datastore, gson)
 
+    // set service port
+    Spark.port(options.port)
+
+    // setup service endpoints
+    setupUsers(service)
+    setupFrontpage(service)
+    setupListings(service)
+    setupComments(service)
+
+    // set global content type
     Spark.before { request, response ->
         response.header("Content-type", "application/json")
+
+        if (!service.checkAuth(request.headers("Authentication"))) {
+            Spark.halt(401, "Authentication failed");
+        }
     }
 
+    // apply CORS filter
     CorsFilter.apply()
 
-    Spark.exception(IllegalArgumentException::class.java, ::badRequestHandler)
-    Spark.exception(JsonParseException::class.java, ::badRequestHandler)
-}
-
-fun badRequestHandler(exception: Exception, request: Request, response: Response) {
-    println("Bad request:\n${request.body()}")
-    response.status(400)
-    val message = exception.getMessage() ?: "Bad request"
-    response.body(message.toJson(Gson()))
-}
-
-fun getPort(args: Array<String>): Int {
-    if (args.count() != 1)
-        throw SparrowException("You must provide one argument for the port, found ${args.count()} arguments")
-
-    val port: Int
-    try {
-        port = args[0].toInt()
-    } catch (e: NumberFormatException) {
-        throw SparrowException("Port must be an integer, found ${args[0]}");
+    // set bad request exception handlers
+    listOf(
+            IllegalArgumentException::class.java,
+            JsonParseException::class.java
+    ).forEach {
+        Spark.exception(it) { exception: Exception, request: Request, response: Response ->
+            println("Bad request:\n${request.body()}")
+            response.status(400)
+            val message = exception.getMessage() ?: "Bad request"
+            response.body(message.toJson(Gson()))
+        }
     }
-
-    if (port !in 1025..65535)
-        throw SparrowException("Port must be within range [1025-65535], found $port")
-
-    return port
 }

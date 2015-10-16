@@ -37,13 +37,13 @@ Removes the user with the id passed in the call from the authenticated user's fr
 
 ##### Get Frontpage Borrow Listings
 
-`GET /frontpage/borrow/[page]` *In Progress*
+`GET /frontpage/borrow/[page]` *Complete*
 
 Returns a collection of borrow listing ids.
 
 ##### Get Frontpage Lend Listings
 
-`GET /frontpage/lend/[page]` *In Progress*
+`GET /frontpage/lend/[page]` *Complete*
 
 Returns a collection of lend listing ids.
 
@@ -63,7 +63,7 @@ Replaces the listing on the database with the listing passed in the request body
 
 ##### Search Borrow Listings
 
-`PUT /listings/filter` *In Progress*
+`PUT /listings/filter` *Complete*
 
 Searches for listings based on the filter criteria passed in the call.
 
@@ -75,7 +75,7 @@ Creates a new listing with the listing object passed in the call, and returns th
 
 ##### Close Listing
 
-`DELETE /listings/[id]`  *In Progress*
+`DELETE /listings/[id]`  *Complete*
 
 Closes the listing associated with the id passed in the call.
 
@@ -83,15 +83,15 @@ Closes the listing associated with the id passed in the call.
 
 ##### Get Comment
 
-`GET /comments/[id]` *In Progress*
+`GET /comments/[id]` *Complete*
 
 Returns the comment object associated with the id passed in the call.
 
 ##### Create Comment
 
-`POST /comments/listing/[id]` *In Progress*
+`POST /comments/listing/[id]` *Complete*
 
-`POST /comments/user/[id]` *In Progress*
+`POST /comments/user/[id]` *Complete*
 
 Posts a comment to the user or listing associated with the id passed in the call, and returns the id of the new comment.
 

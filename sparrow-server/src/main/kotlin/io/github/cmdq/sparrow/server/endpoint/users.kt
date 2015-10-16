@@ -1,11 +1,13 @@
 package io.github.cmdq.sparrow.server.endpoint
 
-import io.github.cmdq.sparrow.server.*
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
+import io.github.cmdq.sparrow.server.Sparrow
+import io.github.cmdq.sparrow.server.model.User
+import io.github.cmdq.sparrow.server.model.UserCreation
+import io.github.cmdq.sparrow.server.toJson
+import io.github.cmdq.sparrow.server.toObject
 import spark.Spark
 
-fun users(service: Sparrow) {
+fun setupUsers(service: Sparrow) {
     val dir = "users"
 
     Spark.get("/$dir/:id") { request, response ->

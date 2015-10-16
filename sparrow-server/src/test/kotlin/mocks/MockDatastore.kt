@@ -1,35 +1,58 @@
 package mocks
 
-import io.github.cmdq.sparrow.server.db.Datastore
-import io.github.cmdq.sparrow.server.data.Listing
-import io.github.cmdq.sparrow.server.data.User
-import io.github.cmdq.sparrow.server.data.UserCreation
-import java.util.*
+import io.github.cmdq.sparrow.server.data.Datastore
+import io.github.cmdq.sparrow.server.model.*
 
-public class MockDatastore: Datastore {
+public open class MockDatastore : Datastore {
+    override fun retrieveComment(id: Int): Comment? {
+        throw UnsupportedOperationException()
+    }
+
+    override fun storeComment(comment: Comment): Int {
+        throw UnsupportedOperationException()
+    }
+
+    override fun deleteComment(id: Int) {
+        throw UnsupportedOperationException()
+    }
+
     override fun retrieveUser(id: Int): User? {
-        if (id < 0) return null
-        else return mockUser
+        throw UnsupportedOperationException()
+    }
+
+    override fun retrieveUser(email: String): User? {
+        throw UnsupportedOperationException()
     }
 
     override fun updateUser(user: User) {
-        return
+        throw UnsupportedOperationException()
     }
 
     override fun storeNewUser(newUser: UserCreation): Int {
-        return 0
+        throw UnsupportedOperationException()
     }
 
     override fun retrieveListing(id: Int): Listing? {
-        if (id < 0) return null
-        else return mockListing
+        throw UnsupportedOperationException()
     }
 
     override fun updateListing(listing: Listing) {
-        return
+        throw UnsupportedOperationException()
     }
 
-    override fun storeListing(listing: Listing): Int {
-        return 0
+    override fun storeListing(newListing: Listing): Int {
+        throw UnsupportedOperationException()
+    }
+
+    override fun deleteListing(id: Int) {
+        throw UnsupportedOperationException()
+    }
+
+    override fun queryListings(filter: FilterParams): List<Listing> {
+        throw UnsupportedOperationException()
+    }
+
+    override fun retrieveUserAuth(email: String): UserAuth? {
+        throw UnsupportedOperationException()
     }
 }
