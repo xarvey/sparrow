@@ -110,6 +110,7 @@ class FlatDatastore(
     }
 
     override fun deleteComment(id: Int) {
-        throw UnsupportedOperationException()
+        persistence.comments.remove(id)
+        save(persistence)
     }
 }
