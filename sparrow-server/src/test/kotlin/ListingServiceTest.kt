@@ -9,7 +9,7 @@ import org.junit.Test
 
 public class ListingServiceTest {
     val mockListing = Listing(1, 1, ListingType.borrow, title="Listing", description="stuff")
-    val mockFilter = FilterParams(ListingType.borrow)
+    val mockFilter = FilterParams()
 
     fun testGetListing(listing: Listing?, status: Int) {
         for (testId in listOf(0, 500, Int.MAX_VALUE)) {
@@ -63,6 +63,36 @@ public class ListingServiceTest {
         testGetFilteredListings(mockFilter, 200)
     }
 
+    @Test fun testGetFilteredListingsType() {
+        testGetFilteredListings(mockFilter.copy(type = ListingType.borrow), 200)
+    }
+
+    @Test fun testGetFilteredListingsKeywords() {
+        testGetFilteredListings(mockFilter.copy(keywords = "hello"), 200)
+    }
+
+    @Test fun testGetFilteredListingsZipCode() {
+        testGetFilteredListings(mockFilter.copy(zipCode = listOf("47906")), 200)
+    }
+
+    @Test fun testGetFilteredListingsClosed() {
+        testGetFilteredListings(mockFilter.copy(closed = true), 200)
+    }
+
+    @Test fun testGetFilteredListingsBounty() {
+        testGetFilteredListings(mockFilter.copy(bountyMin = 4, bountyMax = 10), 200)
+    }
+
+    @Test fun testGetFilteredListingsAll() {
+        testGetFilteredListings(mockFilter.copy(
+                ListingType.borrow,
+                "hello",listOf("47906"),
+                closed = true,
+                bountyMax = 14,
+                bountyMin = 2
+        ), 200)
+    }
+
     @Test fun testGetFilteredKeywordsEmpty() {
         testGetFilteredListings(mockFilter.copy(keywords = ""), 400)
     }
@@ -96,7 +126,7 @@ public class ListingServiceTest {
         val response = service.listings.createListing(mockListing)
         assert(response.status == 200)
         assert(called == true)
-        assert(response.body.toJson(service.gson) == 1.toJson(service.gson))
+        assert(response.body == 1)
     }
 
     @Test fun testEditListing() {
