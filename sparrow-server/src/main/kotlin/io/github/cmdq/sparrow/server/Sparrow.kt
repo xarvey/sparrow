@@ -16,8 +16,7 @@ class Sparrow(
     }
 
     public interface FrontpageService {
-        fun getBorrowPage(page: Int): ServiceResponse
-        fun getLendingPage(page: Int): ServiceResponse
+        fun getPage(type: ListingType, page: Int, pageSize: Int): ServiceResponse
     }
 
     public interface UserService {
@@ -90,19 +89,11 @@ class Sparrow(
 
     public val frontpage = object : FrontpageService {
 
-        private fun getListingsPage(type: ListingType, page: Int): List<Listing> {
+        override fun getPage(type: ListingType, page: Int, pageSize: Int): ServiceResponse {
             val filter = FilterParams(type = type, closed = false)
-            val listings = datastore.queryListings(filter)
-            val first = page * 25
-            return listings.subList(first, first + 25)
-        }
-
-        override fun getBorrowPage(page: Int): ServiceResponse {
-            return ServiceResponse(getListingsPage(ListingType.borrow, page))
-        }
-
-        override fun getLendingPage(page: Int): ServiceResponse {
-            return ServiceResponse(getListingsPage(ListingType.lend, page))
+            val listings = datastore.queryListings(filter).sortedByDescending { it.creationDate }
+            val first = page * pageSize
+            return ServiceResponse(listings.subList(first, first + pageSize))
         }
 
     }
