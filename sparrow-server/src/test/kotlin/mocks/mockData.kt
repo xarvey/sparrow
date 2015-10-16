@@ -1,9 +1,6 @@
 package mocks
 
-import io.github.cmdq.sparrow.server.model.Listing
-import io.github.cmdq.sparrow.server.model.ListingType
-import io.github.cmdq.sparrow.server.model.User
-import io.github.cmdq.sparrow.server.model.UserCreation
+import io.github.cmdq.sparrow.server.model.*
 import java.util.*
 
 val mockUserCreation = UserCreation(
@@ -28,5 +25,15 @@ val mockListing = Listing(
         Date(),
         "stuff",
         "lots of stuff",
-        bounty = 2
+        bounty = 2,
+        closed = false
+)
+
+val mockComment = Comment(
+        0,
+        0,
+        0,
+        Date().time,
+        false,
+        "comment"
 )

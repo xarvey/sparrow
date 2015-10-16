@@ -3,6 +3,10 @@ import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.*
 
 public class MockDatastore: Datastore {
+    override fun retrieveComment(id: Int): Comment? {
+        return mockComment
+    }
+
     override fun queryListings(filter: FilterParams): List<Listing> {
         return emptyList()
     }

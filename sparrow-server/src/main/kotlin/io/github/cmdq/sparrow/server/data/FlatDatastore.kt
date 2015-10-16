@@ -7,6 +7,12 @@ class FlatDatastore(
         val start: FlatDatastore.Data,
         val save: (FlatDatastore.Data) -> Unit
 ) : Datastore {
+
+
+    override fun retrieveComment(id: Int): Comment? {
+        throw UnsupportedOperationException()
+    }
+
     override fun queryListings(filter: FilterParams): List<Listing> {
         throw UnsupportedOperationException()
     }

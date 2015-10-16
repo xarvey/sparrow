@@ -5,6 +5,9 @@ import java.util.*
 
 interface Datastore {
 
+    fun retrieveComment(id: Int): Comment?
+    fun storeComment(comment: Comment): Int
+
     fun retrieveUser(id: Int): User?
     fun updateUser(user: User)
     fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int

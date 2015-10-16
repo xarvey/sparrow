@@ -8,6 +8,12 @@ class Sparrow(
         val datastore: Datastore,
         public val gson: Gson = Gson()
 ) {
+    public interface CommentService {
+        fun getComment(id: Int): ServiceResponse
+        fun createListingComment(listingId: Int, comment: Comment): ServiceResponse
+        fun createUserComment(userId: Int, comment: Comment): ServiceResponse
+    }
+
     public interface FrontpageService {
         fun getBorrowPage(page: Int): ServiceResponse
         fun getLendingPage(page: Int): ServiceResponse
@@ -27,10 +33,44 @@ class Sparrow(
         fun removeListing(id: Int): ServiceResponse
     }
 
+    public val comments = object : CommentService {
+
+        override fun getComment(id: Int): ServiceResponse {
+            val comment = datastore.retrieveComment(id)
+            return when (comment) {
+                null -> ServiceResponse("Comment not found", 404)
+                else -> ServiceResponse(comment)
+            }
+        }
+
+        override fun createListingComment(listingId: Int, comment: Comment): ServiceResponse {
+            val id = datastore.storeComment(comment)
+            val listing = datastore.retrieveListing(listingId)
+                    ?: return ServiceResponse("Listing not found", 404)
+            val newListing = listing.copy(
+                    comments = listing.comments + id
+            )
+            datastore.updateListing(newListing)
+            return ServiceResponse()
+        }
+
+        override fun createUserComment(userId: Int, comment: Comment): ServiceResponse {
+            val id = datastore.storeComment(comment)
+            val user = datastore.retrieveUser(userId)
+                    ?: return ServiceResponse("User not found", 404)
+            val newUser = user.copy(
+                    comments = user.comments + id
+            )
+            datastore.updateUser(newUser)
+            return ServiceResponse()
+        }
+
+    }
+
     public val frontpage = object : FrontpageService {
 
         override fun getBorrowPage(page: Int): ServiceResponse {
-            val filter = FilterParams(ListingType.borrow, null, emptyList(), null, null)
+            val filter = FilterParams(ListingType.borrow, null, null, null, false, null, null)
             val listings = datastore.queryListings(filter)
             val first = page * 25
             val listingPage = listings.subList(first, first + 25)
@@ -38,7 +78,7 @@ class Sparrow(
         }
 
         override fun getLendingPage(page: Int): ServiceResponse {
-            val filter = FilterParams(ListingType.lend, null, emptyList(), null, null)
+            val filter = FilterParams(ListingType.lend, null, null, null, false, null, null)
             val listings = datastore.queryListings(filter)
             val first = page * 25
             val listingPage = listings.subList(first, first + 25)
@@ -98,7 +138,21 @@ class Sparrow(
         }
 
         override fun createListing(listing: Listing): ServiceResponse {
-            return ServiceResponse(datastore.storeListing(listing))
+            val user = datastore.retrieveUser(listing.owner)
+                    ?: return ServiceResponse("shit")
+            val id = datastore.storeListing(listing)
+            if (listing.type == ListingType.borrow) {
+                val user2 = user.copy(
+                        borrowListings = user.borrowListings + listing.id
+                )
+                datastore.updateUser(user2)
+            } else {
+                val user2 = user.copy(
+                        lendListings = user.lendListings + listing.id
+                )
+                datastore.updateUser(user2)
+            }
+            return ServiceResponse(id)
         }
 
         override fun editListing(listing: Listing): ServiceResponse {

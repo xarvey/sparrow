@@ -10,7 +10,7 @@ data class Listing(
         val title: String,
         val description: String,
         val tags: List<String> = emptyList(),
-        val comments: List<String> = emptyList(),
+        val comments: List<Int> = emptyList(),
         val bounty: Int,
         val closed: Boolean
 )
