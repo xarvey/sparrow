@@ -191,6 +191,6 @@ class Sparrow(
         val user = datastore.retrieveUser(email)
         val userAuth = datastore.retrieveUserAuth(email)
 
-        return user != null && userAuth != null && userAuth.passcode == (pass + userAuth.salt).hashCode().toString()
+        return user != null && userAuth != null && userAuth.passcode == (pass + userAuth.salt).hashString
     }
 }
