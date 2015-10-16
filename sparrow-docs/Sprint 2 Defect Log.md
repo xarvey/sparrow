@@ -38,7 +38,7 @@ Sprint 2 Defect Log
 
 | Defect # | Description                                                              | Severity | How Corrected                                                                        |
 |:---------|:-------------------------------------------------------------------------|:---------|:-------------------------------------------------------------------------------------|
-|     1    | When parameter is missing, the program should return a default value instead of crashing with undefined errpr                          |     1    | Add default value to avoid undefined problem. Example: user=document.getCookie("username") \|\| 'default user'  |
+|     1    | When parameter is missing, the program should return a default value instead of crashing with undefined error                          |     1    | Add default value to avoid undefined problem. Example: user=document.getCookie("username") \|\| 'default user'  |
 |     2    | When passing funtion pointer into inside function, the main function is self-dependent                        |     1    | Add "that" to save reference of its own object. 
 |     3    | When show all listing, the order is arbitary                        |     3    | Use for (var 1=0; i < list.length; i++) instead of for (var list_details in list) 
 
