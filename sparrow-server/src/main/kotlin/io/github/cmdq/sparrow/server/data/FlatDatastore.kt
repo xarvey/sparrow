@@ -97,10 +97,15 @@ class FlatDatastore(
     }
 
     override fun retrieveComment(id: Int): Comment? {
-        throw UnsupportedOperationException()
+        return persistence.comments[id]
     }
 
     override fun storeComment(comment: Comment): Int {
-        throw UnsupportedOperationException()
+        val newId = persistence.genNextId()
+        persistence.comments[newId] = comment.copy(
+                id = newId
+        )
+        save(persistence)
+        return newId
     }
 }

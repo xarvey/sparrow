@@ -3,43 +3,25 @@ import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.*
 
 public class MockDatastore: Datastore {
-    override fun retrieveComment(id: Int): Comment? {
-        return mockComment
-    }
+    
+    override fun storeComment(comment: Comment): Int = 0
 
-    override fun queryListings(filter: FilterParams): List<Listing> {
-        return emptyList()
-    }
+    override fun retrieveComment(id: Int): Comment? = mockComment
 
-    override fun retrieveUser(id: Int): User? {
-        if (id < 0) return null
-        else return mockUser
-    }
+    override fun queryListings(filter: FilterParams): List<Listing> = emptyList()
 
-    override fun updateUser(user: User) {
-        return
-    }
+    override fun retrieveUser(id: Int): User? = if (id < 0) null else mockUser
 
-    override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int {
-        return 0
-    }
+    override fun updateUser(user: User) {}
 
-    override fun retrieveListing(id: Int): Listing? {
-        if (id < 0) return null
-        else return mockListing
-    }
+    override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int = 0
 
-    override fun updateListing(listing: Listing) {
-        return
-    }
+    override fun retrieveListing(id: Int): Listing? = if (id < 0) null else mockListing
 
-    override fun storeListing(newListing: Listing): Int {
-        return 0
-    }
+    override fun updateListing(listing: Listing) { }
 
-    override fun deleteListing(id: Int) {
-        return
-    }
+    override fun storeListing(newListing: Listing): Int = 0
 
+    override fun deleteListing(id: Int) { }
 
 }
