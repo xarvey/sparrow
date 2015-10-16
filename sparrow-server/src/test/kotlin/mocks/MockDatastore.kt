@@ -1,8 +1,9 @@
 package mocks
+
 import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.*
 
-public open class MockDatastore: Datastore {
+public open class MockDatastore : Datastore {
     override fun retrieveComment(id: Int): Comment? {
         throw UnsupportedOperationException()
     }

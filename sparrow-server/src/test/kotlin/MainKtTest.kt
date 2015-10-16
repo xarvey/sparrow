@@ -41,19 +41,21 @@ public class MainKtTest {
         TestCase(listOf(
                 "-p", "10000",
                 "-f", "test"
-        )) { it == Args(
-                port = 10000,
-                fileName = "test"
-        )
+        )) {
+            it == Args(
+                    port = 10000,
+                    fileName = "test"
+            )
         }.test()
 
         TestCase(listOf(
                 "-port", "10000",
                 "-file", "test"
-        )) { it == Args(
-                port = 10000,
-                fileName = "test"
-        )
+        )) {
+            it == Args(
+                    port = 10000,
+                    fileName = "test"
+            )
         }.test()
     }
 

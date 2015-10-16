@@ -1,7 +1,6 @@
 import io.github.cmdq.sparrow.server.Sparrow
 import io.github.cmdq.sparrow.server.model.User
 import io.github.cmdq.sparrow.server.model.UserCreation
-import io.github.cmdq.sparrow.server.toJson
 import mocks.MockDatastore
 import org.junit.Test
 
