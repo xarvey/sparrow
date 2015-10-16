@@ -7,6 +7,7 @@ interface Datastore {
 
     fun retrieveComment(id: Int): Comment?
     fun storeComment(comment: Comment): Int
+    fun deleteComment(id: Int)
 
     fun retrieveUser(id: Int): User?
     fun updateUser(user: User)

@@ -22,6 +22,7 @@ class FlatDatastore(
         override val users = HashMap<Int, User>()
 
         override val auth = HashMap<Int, UserAuth>()
+
         override val listings = HashMap<Int, Listing>()
         override val comments = HashMap<Int, Comment>()
         fun genNextId(): Int = nextId++
@@ -41,7 +42,6 @@ class FlatDatastore(
         persistence.users[user.id] = user
         save(persistence)
     }
-
     override fun storeNewUser(newUser: UserCreation, userAuth: UserAuth): Int {
         val newId = persistence.genNextId()
         persistence.users[newId] = User(
@@ -107,5 +107,9 @@ class FlatDatastore(
         )
         save(persistence)
         return newId
+    }
+
+    override fun deleteComment(id: Int) {
+        throw UnsupportedOperationException()
     }
 }

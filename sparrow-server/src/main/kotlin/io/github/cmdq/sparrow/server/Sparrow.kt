@@ -12,6 +12,7 @@ class Sparrow(
         fun getComment(id: Int): ServiceResponse
         fun createListingComment(listingId: Int, comment: Comment): ServiceResponse
         fun createUserComment(userId: Int, comment: Comment): ServiceResponse
+        fun deleteComment(id: Int): ServiceResponse
     }
 
     public interface FrontpageService {
@@ -34,7 +35,6 @@ class Sparrow(
     }
 
     public val comments = object : CommentService {
-
         override fun getComment(id: Int): ServiceResponse {
             val comment = datastore.retrieveComment(id)
             return when (comment) {
@@ -62,6 +62,27 @@ class Sparrow(
                     comments = user.comments + id
             )
             datastore.updateUser(newUser)
+            return ServiceResponse()
+        }
+
+        override fun deleteComment(id: Int): ServiceResponse {
+            val comment = datastore.retrieveComment(id)
+                    ?: return ServiceResponse("Comment not found", 404)
+            val listing = datastore.retrieveListing(comment.owner)
+            if (listing != null) {
+                val newListing = listing.copy(
+                        comments = listing.comments - comment.id
+                )
+                datastore.updateListing(newListing)
+            } else {
+                val user = datastore.retrieveUser(comment.owner)
+                        ?: return ServiceResponse("Owner not found", 404)
+                val newUser = user.copy(
+                        comments = user.comments - comment.id
+                )
+                datastore.updateUser(newUser)
+            }
+            datastore.deleteComment(id)
             return ServiceResponse()
         }
 

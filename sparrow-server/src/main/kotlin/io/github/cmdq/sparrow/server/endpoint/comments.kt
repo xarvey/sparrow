@@ -33,6 +33,9 @@ fun setupComments(service: Sparrow) {
     }
 
     Spark.delete("/$dir/:id") { request, response ->
-
+        val id = request.params("id").toInt()
+        val result = service.comments.deleteComment(id)
+        response.status(result.status)
+        result.body.toJson(service.gson)
     }
 }
