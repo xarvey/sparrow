@@ -35,7 +35,6 @@ class Sparrow(
 
     public val comments = object : CommentService {
         override fun getComment(id: Int): ServiceResponse {
-            if (id < 0) return ServiceResponse("Invalid id", 400)
             val comment = datastore.retrieveComment(id)
             return when (comment) {
                 null -> ServiceResponse("Comment not found", 404)
@@ -138,7 +137,7 @@ class Sparrow(
             if (user.name.isEmpty())
                 return ServiceResponse("Not a valid name", 400)
             if (datastore.retrieveUser(user.id) == null)
-                return ServiceResponse("Not a valid user id", 400)
+                return ServiceResponse("Not a valid user id", 404)
             datastore.updateUser(user)
             return ServiceResponse()
         }
