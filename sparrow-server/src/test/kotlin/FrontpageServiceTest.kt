@@ -10,7 +10,7 @@ import kotlin.test.fail
 class FrontpageServiceTest {
 
     companion object {
-        fun generateListings(type: ListingType, n: Int) = 1 until n map { i ->
+        fun generateListings(type: ListingType, n: Int) = (1..n) map { i ->
             Listing(n + i, i, type, Date(i.toLong()), "Listing $i", "A $type listing")
         }
     }
@@ -21,8 +21,8 @@ class FrontpageServiceTest {
         override fun queryListings(filter: FilterParams): List<Listing> {
             assert(filter.closed == false)
             assert(filter.type == type)
-            var result = generateListings(type, n).toArrayList()
-            Collections.shuffle(result)
+            var result = generateListings(type, n)
+            Collections.shuffle(result.toArrayList())
             return result
         }
     }

@@ -135,7 +135,7 @@ public class UserServiceTest {
                 val testNewUser = newUser.copy(id = testId)
                 val sparrow = Sparrow(object : MockDatastore() {
                     override fun updateUser(user: User) {
-                        assert(status != 200)
+                        assert(status == 200)
                         assert(testOldUser != null)
                         assert(user == testNewUser)
                     }
@@ -146,7 +146,7 @@ public class UserServiceTest {
                     }
                 })
 
-                val result = sparrow.users.getUser(testId)
+                val result = sparrow.users.editUser(testNewUser)
                 assert(status == result.status)
             }
         }

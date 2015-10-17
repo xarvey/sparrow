@@ -90,10 +90,19 @@ class Sparrow(
     public val frontpage = object : FrontpageService {
 
         override fun getPage(type: ListingType, page: Int, pageSize: Int): ServiceResponse {
+            if (page < 0 || pageSize <= 0)
+                return ServiceResponse("Bad request", 400)
+
             val filter = FilterParams(type = type, closed = false)
             val listings = datastore.queryListings(filter).sortedByDescending { it.creationDate }
-            val first = page * pageSize
-            return ServiceResponse(listings.subList(first, first + pageSize))
+
+            val count = listings.count()
+            val start = page * pageSize
+            val end = Math.min(start + pageSize, count)
+
+            if (start >= count) return ServiceResponse(emptyList<Listing>())
+
+            return ServiceResponse(listings.subList(start, end))
         }
 
     }
@@ -111,10 +120,24 @@ class Sparrow(
         override fun createUser(info: UserCreation): ServiceResponse {
             if (!info.email.isEmail())
                 return ServiceResponse("Not a valid email", 400)
+            if (!info.zipCode.isZipCode())
+                return ServiceResponse("Not a valid zip code", 400)
+            if (info.password.isEmpty())
+                return ServiceResponse("Not a valid password", 400)
+            if (info.name.isEmpty())
+                return ServiceResponse("Not a valid name", 400)
             return ServiceResponse(datastore.storeNewUser(info))
         }
 
         override fun editUser(user: User): ServiceResponse {
+            if (!user.email.isEmail())
+                return ServiceResponse("Not a valid email", 400)
+            if (!user.zipCode.isZipCode())
+                return ServiceResponse("Not a valid zip code", 400)
+            if (user.name.isEmpty())
+                return ServiceResponse("Not a valid name", 400)
+            if (datastore.retrieveUser(user.id) == null)
+                return ServiceResponse("Not a valid user id", 400)
             datastore.updateUser(user)
             return ServiceResponse()
         }

@@ -17,6 +17,7 @@ val String.length: Int
 
 
 fun String.isEmail(): Boolean = with(indexOf('@')) { this > 0 || this < end }
+fun String.isZipCode(): Boolean = this.count() == 5 && this.fold(true) {r, c -> r && c.isDigit()}
 
 val String.hashString: String
     get() = this.hashCode().toString()
