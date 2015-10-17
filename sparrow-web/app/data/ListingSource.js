@@ -1,24 +1,27 @@
 const mockData = [
   {
-    name: 'birdy',
+    id: 1,
+    owner: 'birdy',
     time: '1 min ago',
-    text: 'Can I please borrow a nest?',
+    title: 'Can I please borrow a nest?',
     duration: '2 hours',
-    price: '$0-$20'
+    bounty: '$0-$20'
   },
   {
-    name: 'eagle',
+    id: 2,
+    owner: 'eagle',
     time: '3 mins ago',
-    text: 'Need a glasses',
+    title: 'Need a glasses',
     duration: '1 day',
-    price: 'free'
+    bounty: 'free'
   },
   {
-    name: 'albatross',
+    id: 3,
+    owner: 'albatross',
     time: '2 days later',
-    text: 'I don\'t need you',
+    title: 'I don\'t need you',
     duration: '1 second',
-    price: '$30,000'
+    bounty: '$30,000'
   }
 ];
 

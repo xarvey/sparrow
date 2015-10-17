@@ -17,7 +17,7 @@ export default (
     }) }
     { generateRoute({
       paths: ['/create'],
-      component: { header: LendHeader, content: require('./pages/ListingPage') }
+      component: { header: Header, content: require('./pages/ListingPage') }
     }) }
     { generateRoute({
       paths: ['/login'],

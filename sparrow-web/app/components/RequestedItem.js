@@ -21,21 +21,17 @@ class RequestedItem extends Component {
         <div className='user-info'>
           <img src={ displayPic } alt='display picture' className='user-pic' />
           <div className='user-text'>
-            <h3>{ this.props.item.name }</h3>
+            <h3>{ this.props.item.owner }</h3>
             <p>{ this.props.item.time }</p>
           </div>
         </div>
-        <div className='list-text'>{ this.props.item.text }</div>
+        <div className='list-text'>{ this.props.item.title }</div>
 
         </left>
         <right>
           <div className='list-details'>
-            <div className='time'>
-              <i className='ion ion-android-alarm-clock'></i>
-              <span>{ this.props.item.duration }</span>
-            </div>
             <div className='price'>
-              { this.props.item.price }
+              { this.props.item.bounty }
             </div>
           </div>
           <button className='btn-lend'>LEND</button>

@@ -3,9 +3,8 @@ import DocumentTitle from 'react-document-title';
 
 import ListingStore from '../stores/ListingStore';
 import Listing from '../components/Listing';
-const AltContainer = require('alt/AltContainer');
 
-class BorrowListPage extends Component {
+class LendListPage extends Component {
 
   componentDidMount() {
     ListingStore.fetchListings();
@@ -17,9 +16,7 @@ class BorrowListPage extends Component {
         <section className='home-page'>
 
           <div className='wrapper'>
-            <AltContainer store={ ListingStore }>
-              <Listing/>
-            </AltContainer>
+            Coming soon!
           </div>
 
         </section>
@@ -29,4 +26,4 @@ class BorrowListPage extends Component {
 
 }
 
-export default BorrowListPage;
+export default LendListPage;
