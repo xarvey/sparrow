@@ -8,6 +8,6 @@ data class UserAuth(
 ) {
     constructor(newUser: UserCreation) : this(
             salt = newUser.name.hashString,
-            passcode = (newUser.name.hashString + newUser.password).hashString
+            passcode = (newUser.password + newUser.name.hashString).hashString
     )
 }
