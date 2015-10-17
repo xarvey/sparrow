@@ -161,12 +161,18 @@ class Sparrow(
                 return ServiceResponse("Search field is empty", 400)
             if (filter.bountyMin ?: 0 < 0)
                 return ServiceResponse("Negative bounty min", 400)
-            if (filter.bountyMax ?: 0 > 20)
+            if (filter.bountyMax ?: 0 > 2000)
                 return ServiceResponse("Bounty too high", 400)
             return ServiceResponse(datastore.queryListings(filter))
         }
 
         override fun createListing(listing: Listing): ServiceResponse {
+            if (listing.bounty !in 0..2000)
+                return ServiceResponse(status = 400)
+            if (listing.title.count() !in 1..140)
+                return ServiceResponse(status = 400)
+            if (listing.description.isEmpty())
+                return ServiceResponse(status = 400)
             val user = datastore.retrieveUser(listing.owner)
                     ?: return ServiceResponse("shit")
             val id = datastore.storeListing(listing)
@@ -185,6 +191,12 @@ class Sparrow(
         }
 
         override fun editListing(listing: Listing): ServiceResponse {
+            if (listing.bounty !in 0..2000)
+                return ServiceResponse(status = 400)
+            if (listing.title.count() !in 1..140)
+                return ServiceResponse(status = 400)
+            if (listing.description.isEmpty())
+                return ServiceResponse(status = 400)
             datastore.updateListing(listing)
             return ServiceResponse()
         }

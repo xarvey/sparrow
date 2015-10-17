@@ -103,7 +103,7 @@ public class ListingServiceTest {
     }
 
     @Test fun testGetFilteredBountyHigh() {
-        testGetFilteredListings(mockFilter.copy(bountyMax = 21), 400)
+        testGetFilteredListings(mockFilter.copy(bountyMax = 2001), 400)
     }
 
     @Test fun testGetFilteredBountyLow() {
@@ -137,10 +137,17 @@ public class ListingServiceTest {
 
     @Test fun testCreateListingValid() {
         testCreateListing(mockListing, 200)
+        testCreateListing(mockListing.copy(bounty = 0), 200)
+        testCreateListing(mockListing.copy(bounty = 1000), 200)
+        testCreateListing(mockListing.copy(bounty = 2000), 200)
     }
 
     @Test fun testCreateListingBountyHigh() {
-        testCreateListing(mockListing.copy(bounty = 21), 400)
+        testCreateListing(mockListing.copy(bounty = 2001), 400)
+    }
+
+    @Test fun testCreateListingBountyLow() {
+        testCreateListing(mockListing.copy(bounty = -1), 400)
     }
 
     @Test fun testCreateListingTitleLong() {
@@ -153,10 +160,6 @@ public class ListingServiceTest {
 
     @Test fun testCreateListingDescriptionEmpty() {
         testCreateListing(mockListing.copy(description = ""), 400)
-    }
-
-    @Test fun testCreateListingDescriptionLOng() {
-        testCreateListing(mockListing.copy(description = "a".repeat(501)), 400)
     }
 
     fun testEditListing(oldListing: Listing?, newListing: Listing, status: Int) {
@@ -190,11 +193,7 @@ public class ListingServiceTest {
     }
 
     @Test fun testEditListingTitleLong() {
-        testEditListing(mockListing, mockListing.copy(description = "a".repeat(141)), 400)
-    }
-
-    @Test fun testEditListingDescriptionLong() {
-        testEditListing(mockListing, mockListing.copy(description = "a".repeat(501)), 400)
+        testEditListing(mockListing, mockListing.copy(title = "a".repeat(141)), 400)
     }
 
     @Test fun testEditListingNotFound() {
