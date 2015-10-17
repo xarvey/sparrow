@@ -10,11 +10,14 @@
     .list-container {
       display: flex;
       flex-direction: column;
+      align-items: center;
+      justify-content: center;
       margin-top: 20px;
+      min-width: 900px;
       .list-wrapper {
         display: flex;
         flex-direction: row;
-        min-width: 930px;
+        width: 95%;
         border-radius: 5px;
         //border-bottom: 1px solid rgba(70, 171, 233, 0.35);
         padding: 15px;

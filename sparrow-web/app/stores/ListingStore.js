@@ -6,11 +6,12 @@ class ListingStore {
   constructor() {
     this.listings = [];
     this.errorMessage = null;
+    this.clicked = null;
 
     this.bindListeners({
       handleUpdateListings: ListingActions.UPDATE_LISTINGS,
       handleFetchListings: ListingActions.FETCH_LISTINGS,
-      handleListingsFailed: ListingActions.LISTINGS_FAILED
+      handleListingsFailed: ListingActions.LISTINGS_FAILED,
     });
 
     this.exportPublicMethods({
@@ -33,10 +34,10 @@ class ListingStore {
     this.errorMessage = errorMessage;
   }
 
-  getListing(name) {
+  getListing(id) {
     const { listings } = this.getState();
     for (let i = 0; i < listings.length; i += 1) {
-      if (listings[i].name === name) {
+      if (listings[i].id === id) {
         return listings[i];
       }
     }

@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import imageResolver from 'utils/image-resolver';
+import ListingActions from '../actions/ListingActions';
+import ResponseForm from '../components/ResponseForm';
 
 let displayPic;
 if (process.env.BROWSER) {
@@ -14,9 +16,19 @@ class RequestedItem extends Component {
     item: PropTypes.object.isRequired
   }
 
+  state = {
+    showModal: false
+  }
+
   render() {
+    let modal;
+    if (this.state.showModal) {
+      modal = <ResponseForm item={ this.props.item } hideFunc={ this.hideModal.bind(this) }/>
+    }
+
     return (
       <div className='list-wrapper'>
+      { modal }
       <left>
         <div className='user-info'>
           <img src={ displayPic } alt='display picture' className='user-pic' />
@@ -34,10 +46,18 @@ class RequestedItem extends Component {
               { this.props.item.bounty }
             </div>
           </div>
-          <button className='btn-lend'>LEND</button>
+          <button className='btn-lend' onClick={ this.clickItem.bind(this) }>LEND</button>
         </right>
       </div>
     );
+  }
+
+  clickItem() {
+    this.setState({showModal: true})
+  }
+
+  hideModal() {
+    this.setState({showModal: false})
   }
 
 }

@@ -12,6 +12,7 @@ class ListingActions {
   listingsFailed(errorMessage) {
     this.dispatch(errorMessage);
   }
+
 }
 
 module.exports = alt.createActions(ListingActions);
