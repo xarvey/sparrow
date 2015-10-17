@@ -43,9 +43,10 @@ class Sparrow(
         }
 
         override fun createListingComment(listingId: Int, comment: Comment): ServiceResponse {
+            if (comment.text.isEmpty())
+                return ServiceResponse("Empty comment", 400)
             val id = datastore.storeComment(comment)
-            val listing = datastore.retrieveListing(listingId)
-                    ?: return ServiceResponse("Listing not found", 404)
+            val listing = datastore.retrieveListing(listingId) ?: return ServiceResponse("Listing not found", 404)
             val newListing = listing.copy(
                     comments = listing.comments + id
             )
@@ -54,9 +55,10 @@ class Sparrow(
         }
 
         override fun createUserComment(userId: Int, comment: Comment): ServiceResponse {
+            if (comment.text.isEmpty())
+                return ServiceResponse("Empty comment", 400)
             val id = datastore.storeComment(comment)
-            val user = datastore.retrieveUser(userId)
-                    ?: return ServiceResponse("User not found", 404)
+            val user = datastore.retrieveUser(userId) ?: return ServiceResponse("User not found", 404)
             val newUser = user.copy(
                     comments = user.comments + id
             )

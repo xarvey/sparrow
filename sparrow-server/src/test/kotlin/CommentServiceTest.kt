@@ -38,7 +38,7 @@ class CommentServiceTest {
     }
 
     @Test fun testGetCommentNotFound() {
-        testGetComment(null, 200)
+        testGetComment(null, 404)
     }
 
     fun testCreateListingComment(testListing: Listing?, testComment: Comment, status: Int) {
@@ -71,7 +71,7 @@ class CommentServiceTest {
     }
 
     @Test fun testCreateListingCommentNotFound() {
-        testCreateListingComment(null, Comment(1, 1, 1, Date().time, false, "Stuff"), 400)
+        testCreateListingComment(null, Comment(1, 1, 1, Date().time, false, "Stuff"), 404)
     }
 
     @Test fun testCreateListingCommentEmpty() {
@@ -108,7 +108,7 @@ class CommentServiceTest {
     }
 
     @Test fun testCreateUserCommentNotFound() {
-        testCreateUserComment(null, Comment(1, 1, 1, Date().time, false, "Stuff"), 400)
+        testCreateUserComment(null, Comment(1, 1, 1, Date().time, false, "Stuff"), 404)
     }
 
     @Test fun testCreateUserCommentEmpty() {
