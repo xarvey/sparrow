@@ -36,7 +36,8 @@ const ListingActions = require('../actions/ListingActions');
 const ListingSource = {
   fetchListings() {
     return {
-      remote() {
+      remote(state, id) {
+        console.log('before return', id);
         return new Promise(function(resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
@@ -44,7 +45,7 @@ const ListingSource = {
             // change this to `false` to see the error action being handled.
             if (mockData.length) {
               // resolve with some mock data
-              resolve(mockData);
+              resolve({ listings: mockData, id: id } );
             } else {
               reject('Things have broken');
             }

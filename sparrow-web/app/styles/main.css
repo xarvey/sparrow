@@ -2347,84 +2347,46 @@ footer {
   background: #fefefe;
   padding: 20px; }
 
-.res-wrapper {
+.modal-res {
   display: flex;
-  align-items: center;
   justify-content: center;
-  position: absolute;
+  align-items: center;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: rgba(255, 255, 255, 0.9);
-  cursor: default; }
-  .res-wrapper h2 {
-    margin-top: -80px;
+  background: #FFFFFF;
+  border-radius: 5px;
+  padding: 10px;
+  padding-bottom: 30px; }
+  .modal-res .list-wrapper .price {
+    margin-right: 0 !important; }
+  .modal-res .list-wrapper .btn-lend {
+    display: none !important; }
+  .modal-res .list-wrapper:hover {
+    cursor: default !important;
+    background: none !important; }
+  .modal-res .textbox {
+    width: 88%;
+    margin-top: 5px;
+    margin-bottom: 5px;
     text-align: left;
-    font-family: 'Proxima Nova';
-    font-size: 20px;
-    font-weight: 500; }
-  .res-wrapper .modal {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background: #FFFFFF;
-    border-radius: 5px;
-    border: 1px solid #eaeaea;
-    padding: 10px;
-    padding-bottom: 30px; }
-    .res-wrapper .modal .list-wrapper .price {
-      margin-right: 0 !important; }
-    .res-wrapper .modal .list-wrapper .btn-lend {
-      display: none !important; }
-    .res-wrapper .modal .list-wrapper:hover {
-      cursor: default !important;
-      background: none !important; }
-    .res-wrapper .modal .textbox {
-      width: 88%;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      text-align: left;
-      padding: 15px 15px;
-      font-size: 16px;
-      border-radius: 3px;
-      border: 1px solid #eaeaea; }
-    .res-wrapper .modal .row {
-      display: flex;
-      width: 95%; }
-      .res-wrapper .modal .row .offer {
-        margin-right: 5px;
-        flex: 1;
-        width: 45%;
-        -webkit-appearance: none;
-        border: 0;
-        text-align: center;
-        margin-top: 10px;
-        padding: 15px 0px;
-        border-radius: 3px;
-        border-color: #ddd;
-        font-size: 16px;
-        cursor: pointer !important;
-        background-image: none;
-        background-color: #46abe9;
-        color: white; }
-      .res-wrapper .modal .row .cancel-offer {
-        flex: 1;
-        width: 45%;
-        -webkit-appearance: none;
-        border: 0;
-        text-align: center;
-        margin-top: 10px;
-        padding: 15px 0px;
-        border-radius: 3px;
-        border-color: #ddd;
-        font-size: 16px;
-        cursor: pointer !important;
-        background-image: none;
-        color: white;
-        background-color: #FB6A6A; }
+    padding: 15px 15px;
+    font-size: 16px;
+    border-radius: 3px;
+    border: 1px solid #eaeaea; }
+  .modal-res .offer {
+    width: 95%;
+    flex: 1;
+    -webkit-appearance: none;
+    border: 0;
+    text-align: center;
+    margin-top: 10px;
+    padding: 15px 0px;
+    border-radius: 3px;
+    border-color: #ddd;
+    font-size: 16px;
+    cursor: pointer !important;
+    background-image: none;
+    background-color: #46abe9;
+    color: white; }
 
 .comments-wrapper {
   display: flex;
@@ -2452,12 +2414,65 @@ footer {
     background: #FFFFFF;
     border-radius: 5px;
     border: 1px solid #eaeaea;
-    padding: 10px;
-    padding-bottom: 30px; }
-    .comments-wrapper .modal .list-wrapper .price {
-      margin-right: 0 !important; }
-    .comments-wrapper .modal .list-wrapper .btn-lend {
-      display: none !important; }
+    padding: 5px 10px; }
+    .comments-wrapper .modal .list-wrapper {
+      display: flex;
+      flex-direction: row;
+      width: 95%;
+      border-radius: 5px;
+      padding: 15px;
+      vertical-align: middle;
+      justify-content: space-between;
+      text-decoration: none;
+      color: #333333; }
+      .comments-wrapper .modal .list-wrapper:hover {
+        background-color: #f8f8f8;
+        cursor: pointer; }
+      .comments-wrapper .modal .list-wrapper left {
+        display: flex;
+        flex-direction: row;
+        flex: 1;
+        align-items: center; }
+        .comments-wrapper .modal .list-wrapper left .user-info {
+          display: flex;
+          flex-direction: row;
+          vertical-align: middle;
+          align-items: center;
+          width: 150px; }
+          .comments-wrapper .modal .list-wrapper left .user-info .user-pic {
+            margin-right: 10px;
+            width: 37px;
+            height: 37px;
+            background: url(../images/cat.png);
+            border-radius: 50%;
+            border: 1px solid #eeeeee; }
+          .comments-wrapper .modal .list-wrapper left .user-info .user-text h3 {
+            font-size: 16px;
+            margin: 10px 0 0 0; }
+          .comments-wrapper .modal .list-wrapper left .user-info .user-text p {
+            font-size: 12px;
+            margin: 5px 0; }
+        .comments-wrapper .modal .list-wrapper left .list-text {
+          font-size: 18px;
+          left: 100px; }
+      .comments-wrapper .modal .list-wrapper right {
+        display: flex;
+        flex-direction: row;
+        vertical-align: middle;
+        align-items: center; }
+        .comments-wrapper .modal .list-wrapper right .list-details {
+          display: flex;
+          flex-direction: row;
+          color: #999;
+          padding: 5px;
+          justify-content: flex-end;
+          width: 100px; }
+          .comments-wrapper .modal .list-wrapper right .list-details .price {
+            color: #46abe9;
+            font-weight: bold;
+            margin-right: 0px; }
+        .comments-wrapper .modal .list-wrapper right .btn-lend {
+          display: none !important; }
     .comments-wrapper .modal .list-wrapper:hover {
       cursor: default !important;
       background: none !important; }

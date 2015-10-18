@@ -18,9 +18,13 @@ class ListingStore {
     this.exportAsync(ListingSource);
   }
 
-  handleUpdateListings(listings) {
-    this.listings = listings;
+  handleUpdateListings(listingsObj) {
+    this.listings = listingsObj.listings;
+    console.log(listingsObj);
     this.errorMessage = null;
+    if (listingsObj.id) {
+      this.handleGetListingById(listingsObj.id);
+    }
   }
 
   handleFetchListings() {
@@ -32,7 +36,6 @@ class ListingStore {
   }
 
   handleGetListingById(id) {
-    //console.log(this.listings);
     for(let li of this.listings) {
       if(li.id == id) {
         console.log('yes ', li);

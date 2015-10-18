@@ -1,8 +1,8 @@
 const alt = require('../alt');
 
 class ListingActions {
-  updateListings(listings) {
-    this.dispatch(listings);
+  updateListings(listingsObj) {
+    this.dispatch(listingsObj);
   }
 
   fetchListings() {
