@@ -11,7 +11,8 @@ const mockData = [
         comment: 'come to Minar Forest!',
         bounty: '$10'
       }
-    ]
+    ],
+    description: 'I just lost my house due to the recent wildfire. Please halp.'
   },
   {
     id: 2,
@@ -19,7 +20,8 @@ const mockData = [
     time: '3 mins ago',
     title: 'Need a glasses',
     duration: '1 day',
-    bounty: 'free'
+    bounty: 'free',
+    description: 'I just lost my house due to the recent wildfire. Please halp.'
   },
   {
     id: 3,
@@ -27,7 +29,8 @@ const mockData = [
     time: '2 days later',
     title: 'I don\'t need you',
     duration: '1 second',
-    bounty: '$30,000'
+    bounty: '$30,000',
+    description: 'I just lost my house due to the recent wildfire. Please halp.'
   }
 ];
 

@@ -14,25 +14,28 @@ if (process.env.BROWSER) {
 class RequestedItem extends Component {
 
   static propTypes = {
-    item: PropTypes.object.isRequired
+    item: PropTypes.object.isRequired,
+    showDescription: PropTypes.object
   }
 
   state = {
     showModal: false,
-    showComments: false
   }
 
   render() {
-    let modal;
+    let modal, des;
     if (this.state.showModal) {
       modal = <ResponseForm item={ this.props.item } hideFunc={ this.hideModal.bind(this) }/>
     }
 
+    if (this.props.showDescription) {
+      des = <span className='des'>{ this.props.item.description }</span>
+    }
     const detailsLink = '/listing/'+this.props.item.id;
 
     return (
-      <Link to={ detailsLink } className='list-wrapper' onClick={this.clickItem.bind(this)}>
-        { modal }
+      <div className='outer-list-wrapper'>
+      <Link to={ detailsLink } className='list-wrapper'>
         <left>
           <div className='user-info'>
             <img src={ displayPic } alt='display picture' className='user-pic' />
@@ -43,26 +46,19 @@ class RequestedItem extends Component {
           </div>
           <div className='list-text'>{ this.props.item.title }</div>
 
-          </left>
-          <right>
-            <div className='list-details'>
-              <div className='price'>
-                { this.props.item.bounty }
-              </div>
+        </left>
+        <right>
+          <div className='list-details'>
+            <div className='price'>
+              { this.props.item.bounty }
             </div>
-            <button className='btn-lend' onClick={ this.clickLend.bind(this) }>LEND</button>
-          </right>
+          </div>
+          <button className='btn-lend'>LEND</button>
+        </right>
       </Link>
+      { des }
+      </div>
     );
-  }
-
-  clickItem(e) {
-
-  }
-
-  clickLend(event) {
-    event.stopPropagation();
-    this.setState({showModal: true})
   }
 
   hideModal() {

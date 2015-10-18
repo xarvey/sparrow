@@ -37,7 +37,7 @@ class ListingDetails extends Component {
     console.log("here", this.state);
     let item, form;
     if(this.state.clicked) {
-      item = <RequestedItem item={this.state.clicked} />
+      item = <RequestedItem item={this.state.clicked} showDescription={true} />
       form = <ResponseForm item={ this.state.clicked }/>
     }
     return (

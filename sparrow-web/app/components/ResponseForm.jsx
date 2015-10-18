@@ -11,7 +11,7 @@ class ResponseForm extends Component {
       <div className='modal-res'>
         <textarea cols='50' rows='4' className='textbox' id='message' placeholder='Message'/>
         <input type='text' className='textbox' id = 'bounty' placeholder = 'Bounty'/>
-        <button type='button' className='offer'>Post</button>
+        <button type='button' className='offer'>Offer to Lend</button>
       </div>
     );
   }

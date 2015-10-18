@@ -4,8 +4,14 @@
   align-items: center;
 
   .wrapper {
-    max-width: 960px;
     display: flex;
+    min-width: 90%;
+    justify-content: center;
+
+    @media (min-width: 960px) {
+      max-width: 960px;
+    }
+
 
     .list-container {
       display: flex;
@@ -13,7 +19,12 @@
       align-items: center;
       justify-content: center;
       margin-top: 20px;
-      min-width: 900px;
+      min-width: 80%;
+
+      @media (min-width: 960px) {
+        min-width: 900px;
+      }
+
       .list-wrapper {
         display: flex;
         flex-direction: row;

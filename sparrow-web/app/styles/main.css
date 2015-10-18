@@ -2355,7 +2355,8 @@ footer {
   background: #FFFFFF;
   border-radius: 5px;
   padding: 10px;
-  padding-bottom: 30px; }
+  padding-bottom: 30px;
+  width: 100%; }
   .modal-res .list-wrapper .price {
     margin-right: 0 !important; }
   .modal-res .list-wrapper .btn-lend {
@@ -2392,16 +2393,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
   background: rgba(255, 255, 255, 0.9);
-  cursor: default; }
+  cursor: default;
+  flex: 1; }
   .comments-wrapper h2 {
-    margin-top: -80px;
     text-align: left;
     font-family: 'Proxima Nova';
     font-size: 20px;
@@ -2415,64 +2411,72 @@ footer {
     border-radius: 5px;
     border: 1px solid #eaeaea;
     padding: 5px 10px; }
-    .comments-wrapper .modal .list-wrapper {
-      display: flex;
-      flex-direction: row;
-      width: 95%;
-      border-radius: 5px;
-      padding: 15px;
-      vertical-align: middle;
-      justify-content: space-between;
-      text-decoration: none;
-      color: #333333; }
-      .comments-wrapper .modal .list-wrapper:hover {
-        background-color: #f8f8f8;
-        cursor: pointer; }
-      .comments-wrapper .modal .list-wrapper left {
+    .comments-wrapper .modal .outer-list-wrapper {
+      max-width: 600px; }
+      .comments-wrapper .modal .outer-list-wrapper .des {
+        padding-left: 15px;
+        font-size: 14px;
+        color: #999999;
+        word-wrap: break-word;
+        width: 100%; }
+      .comments-wrapper .modal .outer-list-wrapper .list-wrapper {
         display: flex;
         flex-direction: row;
-        flex: 1;
-        align-items: center; }
-        .comments-wrapper .modal .list-wrapper left .user-info {
+        width: 95%;
+        border-radius: 5px;
+        padding: 15px;
+        vertical-align: middle;
+        justify-content: space-between;
+        text-decoration: none;
+        color: #333333; }
+        .comments-wrapper .modal .outer-list-wrapper .list-wrapper:hover {
+          background-color: #f8f8f8;
+          cursor: pointer; }
+        .comments-wrapper .modal .outer-list-wrapper .list-wrapper left {
+          display: flex;
+          flex-direction: row;
+          flex: 1;
+          align-items: center; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info {
+            display: flex;
+            flex-direction: row;
+            vertical-align: middle;
+            align-items: center;
+            width: 150px; }
+            .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info .user-pic {
+              margin-right: 10px;
+              width: 37px;
+              height: 37px;
+              background: url(../images/cat.png);
+              border-radius: 50%;
+              border: 1px solid #eeeeee; }
+            .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info .user-text h3 {
+              font-size: 16px;
+              margin: 10px 0 0 0; }
+            .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info .user-text p {
+              font-size: 12px;
+              margin: 5px 0; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .list-text {
+            font-size: 18px;
+            left: 100px; }
+        .comments-wrapper .modal .outer-list-wrapper .list-wrapper right {
           display: flex;
           flex-direction: row;
           vertical-align: middle;
-          align-items: center;
-          width: 150px; }
-          .comments-wrapper .modal .list-wrapper left .user-info .user-pic {
-            margin-right: 10px;
-            width: 37px;
-            height: 37px;
-            background: url(../images/cat.png);
-            border-radius: 50%;
-            border: 1px solid #eeeeee; }
-          .comments-wrapper .modal .list-wrapper left .user-info .user-text h3 {
-            font-size: 16px;
-            margin: 10px 0 0 0; }
-          .comments-wrapper .modal .list-wrapper left .user-info .user-text p {
-            font-size: 12px;
-            margin: 5px 0; }
-        .comments-wrapper .modal .list-wrapper left .list-text {
-          font-size: 18px;
-          left: 100px; }
-      .comments-wrapper .modal .list-wrapper right {
-        display: flex;
-        flex-direction: row;
-        vertical-align: middle;
-        align-items: center; }
-        .comments-wrapper .modal .list-wrapper right .list-details {
-          display: flex;
-          flex-direction: row;
-          color: #999;
-          padding: 5px;
-          justify-content: flex-end;
-          width: 100px; }
-          .comments-wrapper .modal .list-wrapper right .list-details .price {
-            color: #46abe9;
-            font-weight: bold;
-            margin-right: 0px; }
-        .comments-wrapper .modal .list-wrapper right .btn-lend {
-          display: none !important; }
+          align-items: center; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details {
+            display: flex;
+            flex-direction: row;
+            color: #999;
+            padding: 5px;
+            justify-content: flex-end;
+            width: 100px; }
+            .comments-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details .price {
+              color: #46abe9;
+              font-weight: bold;
+              margin-right: 0px; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper right .btn-lend {
+            display: none !important; }
     .comments-wrapper .modal .list-wrapper:hover {
       cursor: default !important;
       background: none !important; }
@@ -2525,15 +2529,22 @@ footer {
   justify-content: center;
   align-items: center; }
   .home-page .wrapper {
-    max-width: 960px;
-    display: flex; }
+    display: flex;
+    min-width: 90%;
+    justify-content: center; }
+    @media (min-width: 960px) {
+      .home-page .wrapper {
+        max-width: 960px; } }
     .home-page .wrapper .list-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       margin-top: 20px;
-      min-width: 900px; }
+      min-width: 80%; }
+      @media (min-width: 960px) {
+        .home-page .wrapper .list-container {
+          min-width: 900px; } }
       .home-page .wrapper .list-container .list-wrapper {
         display: flex;
         flex-direction: row;
