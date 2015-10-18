@@ -4,6 +4,7 @@ import { generateRoute } from 'utils/localized-routes';
 import LendHeader from './components/LendHeader';
 import BorrowHeader from './components/BorrowHeader';
 import Header from './components/header';
+import ListingDetails from './pages/ListingDetails'
 
 export default (
   <Route component={ require('./components/app') }>
@@ -26,6 +27,10 @@ export default (
     { generateRoute({
       paths: ['/register'],
       component: { header: Header, content: require('./pages/RegisterPage') }
+    }) }
+    { generateRoute({
+      paths: ['/listing/:id', '/listing/:id'],
+      component: { header: Header, content: require('./pages/ListingDetails') }
     }) }
     { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],

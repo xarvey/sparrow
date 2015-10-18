@@ -12,10 +12,7 @@ class ListingStore {
       handleUpdateListings: ListingActions.UPDATE_LISTINGS,
       handleFetchListings: ListingActions.FETCH_LISTINGS,
       handleListingsFailed: ListingActions.LISTINGS_FAILED,
-    });
-
-    this.exportPublicMethods({
-      getListing: this.getListing
+      handleGetListingById: ListingActions.GET_LISTING_BY_ID
     });
 
     this.exportAsync(ListingSource);
@@ -34,14 +31,15 @@ class ListingStore {
     this.errorMessage = errorMessage;
   }
 
-  getListing(id) {
-    const { listings } = this.getState();
-    for (let i = 0; i < listings.length; i += 1) {
-      if (listings[i].id === id) {
-        return listings[i];
+  handleGetListingById(id) {
+    //console.log(this.listings);
+    for(let li of this.listings) {
+      if(li.id == id) {
+        console.log('yes ', li);
+        this.clicked = li;
+        break;
       }
     }
-    return null;
   }
 }
 

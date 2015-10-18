@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { Link }        from 'react-router';
 import imageResolver from 'utils/image-resolver';
 import ListingActions from '../actions/ListingActions';
 import ResponseForm from '../components/ResponseForm';
@@ -17,7 +18,8 @@ class RequestedItem extends Component {
   }
 
   state = {
-    showModal: false
+    showModal: false,
+    showComments: false
   }
 
   render() {
@@ -26,38 +28,45 @@ class RequestedItem extends Component {
       modal = <ResponseForm item={ this.props.item } hideFunc={ this.hideModal.bind(this) }/>
     }
 
-    return (
-      <div className='list-wrapper'>
-      { modal }
-      <left>
-        <div className='user-info'>
-          <img src={ displayPic } alt='display picture' className='user-pic' />
-          <div className='user-text'>
-            <h3>{ this.props.item.owner }</h3>
-            <p>{ this.props.item.time }</p>
-          </div>
-        </div>
-        <div className='list-text'>{ this.props.item.title }</div>
+    const detailsLink = '/listing/'+this.props.item.id;
 
-        </left>
-        <right>
-          <div className='list-details'>
-            <div className='price'>
-              { this.props.item.bounty }
+    return (
+      <Link to={ detailsLink } className='list-wrapper' onClick={this.clickItem.bind(this)}>
+        { modal }
+        <left>
+          <div className='user-info'>
+            <img src={ displayPic } alt='display picture' className='user-pic' />
+            <div className='user-text'>
+              <h3>{ this.props.item.owner }</h3>
+              <p>{ this.props.item.time }</p>
             </div>
           </div>
-          <button className='btn-lend' onClick={ this.clickItem.bind(this) }>LEND</button>
-        </right>
-      </div>
+          <div className='list-text'>{ this.props.item.title }</div>
+
+          </left>
+          <right>
+            <div className='list-details'>
+              <div className='price'>
+                { this.props.item.bounty }
+              </div>
+            </div>
+            <button className='btn-lend' onClick={ this.clickLend.bind(this) }>LEND</button>
+          </right>
+      </Link>
     );
   }
 
-  clickItem() {
+  clickItem(e) {
+
+  }
+
+  clickLend(event) {
+    event.stopPropagation();
     this.setState({showModal: true})
   }
 
   hideModal() {
-    this.setState({showModal: false})
+    this.setState({showModal: false, showComments: false})
   }
 
 }

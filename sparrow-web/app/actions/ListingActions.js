@@ -13,6 +13,10 @@ class ListingActions {
     this.dispatch(errorMessage);
   }
 
+  getListingById(id) {
+    this.dispatch(id);
+  }
+
 }
 
 module.exports = alt.createActions(ListingActions);

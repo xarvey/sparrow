@@ -5,7 +5,13 @@ const mockData = [
     time: '1 min ago',
     title: 'Can I please borrow a nest?',
     duration: '2 hours',
-    bounty: '$0-$20'
+    bounty: '$0-$20',
+    comments: [
+      {
+        comment: 'come to Minar Forest!',
+        bounty: '$10'
+      }
+    ]
   },
   {
     id: 2,
