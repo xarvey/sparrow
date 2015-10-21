@@ -3,6 +3,7 @@ import DocumentTitle from 'react-document-title';
 
 import ListingStore from '../stores/ListingStore';
 import Listing from '../components/Listing';
+import ResponseForm from '../components/ResponseForm';
 const AltContainer = require('alt/AltContainer');
 
 class BorrowListPage extends Component {

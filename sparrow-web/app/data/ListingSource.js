@@ -1,24 +1,36 @@
 const mockData = [
   {
-    name: 'birdy',
+    id: 1,
+    owner: 'birdy',
     time: '1 min ago',
-    text: 'Can I please borrow a nest?',
+    title: 'Can I please borrow a nest?',
     duration: '2 hours',
-    price: '$0-$20'
+    bounty: '$0-$20',
+    comments: [
+      {
+        comment: 'come to Minar Forest!',
+        bounty: '$10'
+      }
+    ],
+    description: 'I just lost my house due to the recent wildfire. Please halp.'
   },
   {
-    name: 'eagle',
+    id: 2,
+    owner: 'eagle',
     time: '3 mins ago',
-    text: 'Need a glasses',
+    title: 'Need a glasses',
     duration: '1 day',
-    price: 'free'
+    bounty: 'free',
+    description: 'I just lost my house due to the recent wildfire. Please halp.'
   },
   {
-    name: 'albatross',
+    id: 3,
+    owner: 'albatross',
     time: '2 days later',
-    text: 'I don\'t need you',
+    title: 'I don\'t need you',
     duration: '1 second',
-    price: '$30,000'
+    bounty: '$30,000',
+    description: 'I just lost my house due to the recent wildfire. Please halp.'
   }
 ];
 
@@ -27,7 +39,8 @@ const ListingActions = require('../actions/ListingActions');
 const ListingSource = {
   fetchListings() {
     return {
-      remote() {
+      remote(state, id) {
+        console.log('before return', id);
         return new Promise(function(resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
@@ -35,7 +48,7 @@ const ListingSource = {
             // change this to `false` to see the error action being handled.
             if (mockData.length) {
               // resolve with some mock data
-              resolve(mockData);
+              resolve({ listings: mockData, id: id } );
             } else {
               reject('Things have broken');
             }

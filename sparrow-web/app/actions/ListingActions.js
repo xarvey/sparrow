@@ -1,8 +1,8 @@
 const alt = require('../alt');
 
 class ListingActions {
-  updateListings(listings) {
-    this.dispatch(listings);
+  updateListings(listingsObj) {
+    this.dispatch(listingsObj);
   }
 
   fetchListings() {
@@ -12,6 +12,11 @@ class ListingActions {
   listingsFailed(errorMessage) {
     this.dispatch(errorMessage);
   }
+
+  getListingById(id) {
+    this.dispatch(id);
+  }
+
 }
 
 module.exports = alt.createActions(ListingActions);
