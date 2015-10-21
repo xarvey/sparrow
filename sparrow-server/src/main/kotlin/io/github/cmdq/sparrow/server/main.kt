@@ -95,10 +95,6 @@ fun main(args: Array<String>) {
     // set global content type
     Spark.before { request, response ->
         response.header("Content-type", "application/json")
-
-        if (!service.checkAuth(request.headers("Authentication"))) {
-            Spark.halt(401, "Authentication failed");
-        }
     }
 
     // apply CORS filter
@@ -107,13 +103,19 @@ fun main(args: Array<String>) {
     // set bad request exception handlers
     listOf(
             IllegalArgumentException::class.java,
+            IllegalStateException::class.java,
             JsonParseException::class.java
     ).forEach {
         Spark.exception(it) { exception: Exception, request: Request, response: Response ->
-            println("Bad request:\n${request.body()}")
             response.status(400)
             val message = exception.getMessage() ?: "Bad request"
             response.body(message.toJson(Gson()))
         }
+    }
+}
+
+fun Sparrow.requireAuth(request: Request) {
+    if (!checkAuth(request.headers("Authentication"))) {
+        Spark.halt(401, "Authentication failed".toJson(gson));
     }
 }

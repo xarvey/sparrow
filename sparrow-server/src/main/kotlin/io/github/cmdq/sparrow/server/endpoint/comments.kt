@@ -2,6 +2,7 @@ package io.github.cmdq.sparrow.server.endpoint
 
 import io.github.cmdq.sparrow.server.Sparrow
 import io.github.cmdq.sparrow.server.model.Comment
+import io.github.cmdq.sparrow.server.requireAuth
 import io.github.cmdq.sparrow.server.toJson
 import io.github.cmdq.sparrow.server.toObject
 import spark.Spark
@@ -17,6 +18,7 @@ fun setupComments(service: Sparrow) {
     }
 
     Spark.post("/$dir/listing/:id") { request, response ->
+        service.requireAuth(request)
         val id = request.params("id").toInt()
         val comment: Comment = request.body().toObject(service.gson)
         val result = service.comments.createListingComment(id, comment)
@@ -25,6 +27,7 @@ fun setupComments(service: Sparrow) {
     }
 
     Spark.post("/$dir/user/:id") { request, response ->
+        service.requireAuth(request)
         val id = request.params("id").toInt()
         val comment: Comment = request.body().toObject(service.gson)
         val result = service.comments.createUserComment(id, comment)
@@ -33,6 +36,7 @@ fun setupComments(service: Sparrow) {
     }
 
     Spark.delete("/$dir/:id") { request, response ->
+        service.requireAuth(request)
         val id = request.params("id").toInt()
         val result = service.comments.deleteComment(id)
         response.status(result.status)

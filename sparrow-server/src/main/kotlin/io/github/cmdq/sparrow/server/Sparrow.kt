@@ -174,7 +174,7 @@ class Sparrow(
             if (listing.description.isEmpty())
                 return ServiceResponse(status = 400)
             val user = datastore.retrieveUser(listing.owner)
-                    ?: return ServiceResponse("shit")
+                    ?: return ServiceResponse("User not found")
             val id = datastore.storeListing(listing)
             if (listing.type == ListingType.borrow) {
                 val user2 = user.copy(
@@ -207,8 +207,8 @@ class Sparrow(
         }
     }
 
-    fun checkAuth(auth: String): Boolean {
-        if (!auth.contains(':'))
+    fun checkAuth(auth: String?): Boolean {
+        if (auth == null || !auth.contains(':'))
             return false
 
         val index = auth.indexOf(':')
