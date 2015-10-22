@@ -7,6 +7,68 @@
 	cursor: default;
 	flex: 1;
 
+
+	.comments-container {
+		width: 88%;
+		margin-top: 20px;
+		margin-bottom: 20px;
+
+		.offer-wrapper {
+			margin-top: 5px;
+			width: 100%;
+			margin-left: -15px;
+			display: flex;
+			justify-content: space-between;
+			padding: 15px;
+			border: 1px solid #f3f3f3;
+			border-radius: 4px;
+			//background-color: #fafafa;
+
+			&:hover {
+				background-color: #BAE49F;
+				cursor: pointer;
+
+				.comment {
+					color: #333333;
+					opacity: 0.7;
+				}
+
+				.user {
+					padding: 4px 7px;
+					font-size: 14px;
+					color: white;
+					border: none;
+					background-color: #AAD48F;
+					margin-right: 10px;
+				}
+
+
+				.bounty {
+					color: white;
+					font-weight: bold;
+				}
+			}
+
+			.comment {
+				font-size: 16px;
+			}
+
+			.user {
+				padding: 4px 7px;
+				font-size: 14px;
+				color: #aaaaaa;
+				border: 1px solid #dedede;
+				margin-right: 10px;
+			}
+
+
+			.bounty {
+				color: $blue;
+				font-weight: bold;
+			}
+		}
+	}
+
 	h2 {
 		text-align: left;
 		font-family: 'Proxima Nova';
@@ -21,10 +83,11 @@
     flex-direction: column;
 		background: #FFFFFF;
 		border-radius: 5px;
-		border: 1px solid #eaeaea;
-		padding: 5px 10px;
+		border: 1px solid #efefef;
+		padding: 5px 10px 0px 10px;
 
 		.outer-list-wrapper {
+			width: 600px;
 			max-width: 600px;
 			.des {
 				padding-left: 15px;

@@ -3,6 +3,7 @@ import RequestedItem from '../components/RequestedItem';
 import ListingActions from '../actions/ListingActions';
 import ResponseForm from '../components/ResponseForm';
 import ListingStore from '../stores/ListingStore';
+import Offer from '../components/Offer';
 
 class ListingDetails extends Component {
 
@@ -33,6 +34,20 @@ class ListingDetails extends Component {
     //this.forceUpdate();
   }
 
+  renderComments() {
+    let rawComments = this.state.clicked.comments;
+
+    return (
+      <div className='comments-container'>
+        {
+          rawComments.map( (c) => {
+            return <Offer offer={c} />;
+          })
+        }
+      </div>
+    );
+  }
+
   render() {
     console.log("here", this.state);
     let item, form;
@@ -45,9 +60,7 @@ class ListingDetails extends Component {
         <h2>All lending offers for this listing</h2>
         <div className='modal'>
           { item }
-          <div className='comment-container'>
-
-          </div>
+          { this.renderComments() }
           { form }
         </div>
       </div>

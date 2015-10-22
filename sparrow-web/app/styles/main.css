@@ -2352,11 +2352,12 @@ footer {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #FFFFFF;
   border-radius: 5px;
+  background-color: #D9F0FF;
   padding: 10px;
   padding-bottom: 30px;
-  width: 100%; }
+  width: 100%;
+  padding-top: 15px; }
   .modal-res .list-wrapper .price {
     margin-right: 0 !important; }
   .modal-res .list-wrapper .btn-lend {
@@ -2397,6 +2398,46 @@ footer {
   background: rgba(255, 255, 255, 0.9);
   cursor: default;
   flex: 1; }
+  .comments-wrapper .comments-container {
+    width: 88%;
+    margin-top: 20px;
+    margin-bottom: 20px; }
+    .comments-wrapper .comments-container .offer-wrapper {
+      margin-top: 5px;
+      width: 100%;
+      margin-left: -15px;
+      display: flex;
+      justify-content: space-between;
+      padding: 15px;
+      border: 1px solid #f3f3f3;
+      border-radius: 4px; }
+      .comments-wrapper .comments-container .offer-wrapper:hover {
+        background-color: #BAE49F;
+        cursor: pointer; }
+        .comments-wrapper .comments-container .offer-wrapper:hover .comment {
+          color: #333333;
+          opacity: 0.7; }
+        .comments-wrapper .comments-container .offer-wrapper:hover .user {
+          padding: 4px 7px;
+          font-size: 14px;
+          color: white;
+          border: none;
+          background-color: #AAD48F;
+          margin-right: 10px; }
+        .comments-wrapper .comments-container .offer-wrapper:hover .bounty {
+          color: white;
+          font-weight: bold; }
+      .comments-wrapper .comments-container .offer-wrapper .comment {
+        font-size: 16px; }
+      .comments-wrapper .comments-container .offer-wrapper .user {
+        padding: 4px 7px;
+        font-size: 14px;
+        color: #aaaaaa;
+        border: 1px solid #dedede;
+        margin-right: 10px; }
+      .comments-wrapper .comments-container .offer-wrapper .bounty {
+        color: #46abe9;
+        font-weight: bold; }
   .comments-wrapper h2 {
     text-align: left;
     font-family: 'Proxima Nova';
@@ -2409,9 +2450,10 @@ footer {
     flex-direction: column;
     background: #FFFFFF;
     border-radius: 5px;
-    border: 1px solid #eaeaea;
-    padding: 5px 10px; }
+    border: 1px solid #efefef;
+    padding: 5px 10px 0px 10px; }
     .comments-wrapper .modal .outer-list-wrapper {
+      width: 600px;
       max-width: 600px; }
       .comments-wrapper .modal .outer-list-wrapper .des {
         padding-left: 15px;
@@ -2528,6 +2570,8 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center; }
+  .home-page .outer-list-wrapper {
+    width: 95%; }
   .home-page .wrapper {
     display: flex;
     min-width: 90%;

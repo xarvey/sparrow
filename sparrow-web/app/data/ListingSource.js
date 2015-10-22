@@ -9,7 +9,13 @@ const mockData = [
     comments: [
       {
         comment: 'come to Minar Forest!',
-        bounty: '$10'
+        bounty: '$10',
+        user: 'Chief Tatamo'
+      },
+      {
+        comment: 'I won\'t charge you bruh',
+        bounty: '$200',
+        user: 'Real bro'
       }
     ],
     description: 'I just lost my house due to the recent wildfire. Please halp.'
@@ -21,6 +27,13 @@ const mockData = [
     title: 'Need a glasses',
     duration: '1 day',
     bounty: 'free',
+    comments: [
+      {
+        comment: 'come to Minar Forest!',
+        bounty: '$10',
+        user: 'Real bro'
+      }
+    ],
     description: 'I just lost my house due to the recent wildfire. Please halp.'
   },
   {
@@ -30,6 +43,13 @@ const mockData = [
     title: 'I don\'t need you',
     duration: '1 second',
     bounty: '$30,000',
+    comments: [
+      {
+        comment: 'come to Minar Forest!',
+        bounty: '$10',
+        user: 'Real bro'
+      }
+    ],
     description: 'I just lost my house due to the recent wildfire. Please halp.'
   }
 ];

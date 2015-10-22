@@ -3,6 +3,10 @@
   justify-content: center;
   align-items: center;
 
+  .outer-list-wrapper {
+    width: 95%;
+  }
+
   .wrapper {
     display: flex;
     min-width: 90%;
