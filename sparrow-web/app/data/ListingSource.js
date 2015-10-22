@@ -6,6 +6,7 @@ const mockData = [
     title: 'Can I please borrow a nest?',
     duration: '2 hours',
     bounty: '$0-$20',
+    tags: ['nest', 'halp', 'boo' ],
     comments: [
       {
         comment: 'come to Minar Forest!',
@@ -27,6 +28,7 @@ const mockData = [
     title: 'Need a glasses',
     duration: '1 day',
     bounty: 'free',
+    tags: ['glasses', 'vision'],
     comments: [
       {
         comment: 'come to Minar Forest!',
@@ -43,6 +45,7 @@ const mockData = [
     title: 'I don\'t need you',
     duration: '1 second',
     bounty: '$30,000',
+    tags: ['glasses', 'vision'],
     comments: [
       {
         comment: 'come to Minar Forest!',

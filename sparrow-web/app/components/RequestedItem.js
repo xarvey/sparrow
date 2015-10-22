@@ -44,7 +44,16 @@ class RequestedItem extends Component {
               <p>{ this.props.item.time }</p>
             </div>
           </div>
-          <div className='list-text'>{ this.props.item.title }</div>
+          <div className='list-text'>
+            { this.props.item.title }
+            <div className='tags'>
+              {
+                this.props.item.tags.map( (tag) => {
+                  return <span className='tag'>{ tag }</span>;
+                })
+              }
+            </div>
+          </div>
 
         </left>
         <right>
