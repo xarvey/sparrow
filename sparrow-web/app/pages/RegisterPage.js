@@ -31,7 +31,7 @@ const RegisterPage = React.createClass({
     const newUser = {
       name: this.refs.name.value,
       email: this.refs.email.value,
-      passcode: this.refs.pass.value,
+      password: this.refs.pass.value,
       zipCode: this.refs.zipCode.value
     };
 

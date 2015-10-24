@@ -1,11 +1,12 @@
 const alt = require('../alt');
 const UserActions = require('../actions/UserActions');
 const request = require('superagent');
+const $ = require('jquery');
 
 class UserStore {
   constructor() {
     this.errorMessage = null;
-    this.endPointURL = 'http://128.211.242.49:9000';
+    this.endPointURL = 'http://vohras.tk:9000';
     this.registered = false;
     this.logined = false;
 
@@ -17,16 +18,15 @@ class UserStore {
   }
 
   handleRegister(userInfo) {
-    console.log('RECEIVED?');
     request
       .post(this.endPointURL + '/users')
-      .set('Content-Type', 'application/json')
       .send(userInfo)
       .end((err, res) => {
         if (err) {
           console.error('register error!');
           return;
         }
+        console.log(res);
         this.setState({ registered: res });
       });
   }

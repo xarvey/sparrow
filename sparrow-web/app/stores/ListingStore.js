@@ -12,7 +12,8 @@ class ListingStore {
       handleUpdateListings: ListingActions.UPDATE_LISTINGS,
       handleFetchListings: ListingActions.FETCH_LISTINGS,
       handleListingsFailed: ListingActions.LISTINGS_FAILED,
-      handleGetListingById: ListingActions.GET_LISTING_BY_ID
+      handleGetListingById: ListingActions.GET_LISTING_BY_ID,
+      handleGetListingByIds: ListingActions.GET_LISTING_BY_IDS
     });
 
     this.exportAsync(ListingSource);
@@ -33,6 +34,19 @@ class ListingStore {
 
   handleListingsFailed(errorMessage) {
     this.errorMessage = errorMessage;
+  }
+
+  handleGetListingByIds(listid) {
+    let ret = []
+    for(let li of this.listings) {
+      for(let id of listid) {
+        if(li.id == id) {
+          ret.push(li);
+          break;
+        }
+      }
+    }
+    this.clicked = ret;
   }
 
   handleGetListingById(id) {

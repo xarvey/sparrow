@@ -2768,4 +2768,130 @@ footer {
     background-color: #46abe9;
     color: white; }
 
+.profile-wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.9);
+  cursor: default;
+  flex: 1; }
+  .profile-wrapper .user-pic {
+    margin-top: 30px;
+    width: 100px;
+    height: 100px; }
+  .profile-wrapper h2 {
+    text-align: left;
+    font-family: 'Proxima Nova';
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 3px; }
+  .profile-wrapper span {
+    margin-bottom: 20px; }
+  .profile-wrapper .modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: #FFFFFF;
+    border-radius: 5px;
+    border: 1px solid #efefef;
+    padding: 5px 10px 0px 10px; }
+    .profile-wrapper .modal .outer-list-wrapper {
+      width: 500px;
+      max-width: 500px; }
+      .profile-wrapper .modal .outer-list-wrapper .des {
+        padding-left: 15px;
+        font-size: 14px;
+        color: #999999;
+        word-wrap: break-word;
+        width: 100%; }
+      .profile-wrapper .modal .outer-list-wrapper .list-wrapper {
+        display: flex;
+        flex-direction: row;
+        width: 95%;
+        border-radius: 5px;
+        padding: 15px;
+        vertical-align: middle;
+        justify-content: space-between;
+        text-decoration: none;
+        color: #333333; }
+        .profile-wrapper .modal .outer-list-wrapper .list-wrapper .btn-lend {
+          display: none !important; }
+        .profile-wrapper .modal .outer-list-wrapper .list-wrapper left {
+          display: flex;
+          flex-direction: row;
+          flex: 1;
+          align-items: center; }
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info {
+            display: none !important; }
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper left .list-text {
+            font-size: 18px;
+            left: 100px; }
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper left .tags .tag {
+            font-size: 12px;
+            color: #cccccc;
+            padding: 2px 5px;
+            border-radius: 5px;
+            border: 1px solid #eeeeee;
+            margin-right: 5px; }
+        .profile-wrapper .modal .outer-list-wrapper .list-wrapper right {
+          display: flex;
+          flex-direction: row;
+          vertical-align: middle;
+          align-items: center; }
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details {
+            display: flex;
+            flex-direction: row;
+            color: #999;
+            padding: 5px;
+            justify-content: flex-end;
+            width: 100px; }
+            .profile-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details .price {
+              color: #46abe9;
+              font-weight: bold;
+              margin-right: 0px; }
+    .profile-wrapper .modal .textbox {
+      width: 88%;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      text-align: left;
+      padding: 15px 15px;
+      font-size: 16px;
+      border-radius: 3px;
+      border: 1px solid #eaeaea; }
+    .profile-wrapper .modal .row {
+      display: flex;
+      width: 95%; }
+      .profile-wrapper .modal .row .offer {
+        margin-right: 5px;
+        flex: 1;
+        width: 45%;
+        -webkit-appearance: none;
+        border: 0;
+        text-align: center;
+        margin-top: 10px;
+        padding: 15px 0px;
+        border-radius: 3px;
+        border-color: #ddd;
+        font-size: 16px;
+        cursor: pointer !important;
+        background-image: none;
+        background-color: #46abe9;
+        color: white; }
+      .profile-wrapper .modal .row .cancel-offer {
+        flex: 1;
+        width: 45%;
+        -webkit-appearance: none;
+        border: 0;
+        text-align: center;
+        margin-top: 10px;
+        padding: 15px 0px;
+        border-radius: 3px;
+        border-color: #ddd;
+        font-size: 16px;
+        cursor: pointer !important;
+        background-image: none;
+        color: white;
+        background-color: #FB6A6A; }
+
 /*# sourceMappingURL=main.css.map */

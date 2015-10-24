@@ -17,6 +17,10 @@ class ListingActions {
     this.dispatch(id);
   }
 
+  getListingByIds(ids) {
+    this.dispatch(ids);
+  }
+
 }
 
 module.exports = alt.createActions(ListingActions);
