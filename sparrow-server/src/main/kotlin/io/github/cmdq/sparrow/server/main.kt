@@ -92,13 +92,12 @@ fun main(args: Array<String>) {
     setupListings(service)
     setupComments(service)
 
-    // set global content type
+    // set cors filter and global content type
     Spark.before { request, response ->
+        CorsFilter.apply(request, response)
         response.header("Content-type", "application/json")
     }
-
-    // apply CORS filter
-    CorsFilter.apply()
+    Spark.options("/*") { request, response -> "" }
 
     // set bad request exception handlers
     listOf(

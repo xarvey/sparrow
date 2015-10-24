@@ -20,14 +20,7 @@ object CorsFilter {
         corsHeaders.put("Access-Control-Allow-Credentials", "true")
     }
 
-    fun apply() {
-        val filter = object : Filter {
-            override fun handle(request: Request, response: Response) {
-                corsHeaders.forEach { key, value ->
-                    response.header(key, value)
-                }
-            }
-        }
-        Spark.after(filter)
+    fun apply(request: Request, response: Response) {
+        corsHeaders.forEach { key, value -> response.header(key, value) }
     }
 }
