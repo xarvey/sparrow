@@ -12,7 +12,7 @@ fun setupUsers(service: Sparrow) {
     val dir = "users"
 
     Spark.get("/$dir/:id") { request, response ->
-        service.requireAuth(request)
+        //service.requireAuth(request)
         val id = request.params("id").toInt()
         val result = service.users.getUser(id)
         response.status(result.status)
