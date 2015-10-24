@@ -113,44 +113,51 @@
 						cursor: pointer;
 					}
 
-					left {
+					.user-info {
+						margin-top: -5px;
+						display: flex;
+						flex-direction: row;
+
+						text-decoration: none;
+						vertical-align: middle;
+						align-items: center;
+						width: 150px;
+						.user-pic {
+							margin-right: 10px;
+							width: 37px;
+							height: 37px;
+							background: url(../images/cat.png);
+							border-radius: 50%;
+							border: 1px solid #eeeeee;
+						}
+
+						.user-text {
+							h3 {
+								color: #333333;
+								font-size: 16px;
+								margin: 10px 0 0 0;
+							}
+
+							p {
+								color: #555555;
+								font-size: 12px;
+								margin: 5px 0;
+							}
+						}
+					}
+
+
+					.left {
 						display: flex;
 						flex-direction: row;
 						flex: 1;
 						align-items: center;
-
-						.user-info {
-							display: flex;
-							flex-direction: row;
-
-							vertical-align: middle;
-							align-items: center;
-							width: 150px;
-							.user-pic {
-								margin-right: 10px;
-								width: 37px;
-								height: 37px;
-								background: url(../images/cat.png);
-								border-radius: 50%;
-								border: 1px solid #eeeeee;
-							}
-
-							.user-text {
-								h3 {
-									font-size: 16px;
-									margin: 10px 0 0 0;
-								}
-
-								p {
-									font-size: 12px;
-									margin: 5px 0;
-								}
-							}
-						}
+						text-decoration: none;
 
 						.list-text {
 							font-size: 18px;
-							left: 100px;
+							left: 50px;
+							color: #333333;
 						}
 
 						.tags {
@@ -166,7 +173,8 @@
 
 					}
 
-					right {
+					.right {
+						text-decoration: none;
 						display: flex;
 						flex-direction: row;
 						vertical-align: middle;

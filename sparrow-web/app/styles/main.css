@@ -2474,57 +2474,64 @@ footer {
         .comments-wrapper .modal .outer-list-wrapper .list-wrapper:hover {
           background-color: #f8f8f8;
           cursor: pointer; }
-        .comments-wrapper .modal .outer-list-wrapper .list-wrapper left {
+        .comments-wrapper .modal .outer-list-wrapper .list-wrapper .user-info {
+          margin-top: -5px;
+          display: flex;
+          flex-direction: row;
+          text-decoration: none;
+          vertical-align: middle;
+          align-items: center;
+          width: 150px; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .user-info .user-pic {
+            margin-right: 10px;
+            width: 37px;
+            height: 37px;
+            background: url(../images/cat.png);
+            border-radius: 50%;
+            border: 1px solid #eeeeee; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .user-info .user-text h3 {
+            color: #333333;
+            font-size: 16px;
+            margin: 10px 0 0 0; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .user-info .user-text p {
+            color: #555555;
+            font-size: 12px;
+            margin: 5px 0; }
+        .comments-wrapper .modal .outer-list-wrapper .list-wrapper .left {
           display: flex;
           flex-direction: row;
           flex: 1;
-          align-items: center; }
-          .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info {
-            display: flex;
-            flex-direction: row;
-            vertical-align: middle;
-            align-items: center;
-            width: 150px; }
-            .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info .user-pic {
-              margin-right: 10px;
-              width: 37px;
-              height: 37px;
-              background: url(../images/cat.png);
-              border-radius: 50%;
-              border: 1px solid #eeeeee; }
-            .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info .user-text h3 {
-              font-size: 16px;
-              margin: 10px 0 0 0; }
-            .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info .user-text p {
-              font-size: 12px;
-              margin: 5px 0; }
-          .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .list-text {
+          align-items: center;
+          text-decoration: none; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .left .list-text {
             font-size: 18px;
-            left: 100px; }
-          .comments-wrapper .modal .outer-list-wrapper .list-wrapper left .tags .tag {
+            left: 50px;
+            color: #333333; }
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .left .tags .tag {
             font-size: 12px;
             color: #cccccc;
             padding: 2px 5px;
             border-radius: 5px;
             border: 1px solid #eeeeee;
             margin-right: 5px; }
-        .comments-wrapper .modal .outer-list-wrapper .list-wrapper right {
+        .comments-wrapper .modal .outer-list-wrapper .list-wrapper .right {
+          text-decoration: none;
           display: flex;
           flex-direction: row;
           vertical-align: middle;
           align-items: center; }
-          .comments-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details {
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .right .list-details {
             display: flex;
             flex-direction: row;
             color: #999;
             padding: 5px;
             justify-content: flex-end;
             width: 100px; }
-            .comments-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details .price {
+            .comments-wrapper .modal .outer-list-wrapper .list-wrapper .right .list-details .price {
               color: #46abe9;
               font-weight: bold;
               margin-right: 0px; }
-          .comments-wrapper .modal .outer-list-wrapper .list-wrapper right .btn-lend {
+          .comments-wrapper .modal .outer-list-wrapper .list-wrapper .right .btn-lend {
             display: none !important; }
     .comments-wrapper .modal .list-wrapper:hover {
       cursor: default !important;
@@ -2609,62 +2616,71 @@ footer {
         .home-page .wrapper .list-container .list-wrapper:hover {
           background-color: #f8f8f8;
           cursor: pointer; }
-        .home-page .wrapper .list-container .list-wrapper left {
+        .home-page .wrapper .list-container .list-wrapper .user-info {
+          display: flex;
+          flex-direction: row;
+          vertical-align: middle;
+          align-items: center;
+          margin-right: 10px;
+          width: 150px;
+          text-decoration: none; }
+          .home-page .wrapper .list-container .list-wrapper .user-info:hover {
+            margin-top: -1;
+            transform: scale(1.03); }
+          .home-page .wrapper .list-container .list-wrapper .user-info .user-pic {
+            margin-right: 10px;
+            width: 37px;
+            height: 37px;
+            background: url(../images/cat.png);
+            border-radius: 50%;
+            border: 1px solid #eeeeee; }
+          .home-page .wrapper .list-container .list-wrapper .user-info .user-text h3 {
+            color: #333333;
+            font-size: 16px;
+            margin: 10px 0 0 0; }
+          .home-page .wrapper .list-container .list-wrapper .user-info .user-text p {
+            color: #555555;
+            font-size: 12px;
+            margin: 5px 0; }
+        .home-page .wrapper .list-container .list-wrapper .left {
+          text-decoration: none;
           display: flex;
           flex-direction: row;
           flex: 1;
           align-items: center; }
-          .home-page .wrapper .list-container .list-wrapper left .user-info {
-            display: flex;
-            flex-direction: row;
-            vertical-align: middle;
-            align-items: center;
-            margin-right: 10px;
-            width: 150px; }
-            .home-page .wrapper .list-container .list-wrapper left .user-info .user-pic {
-              margin-right: 10px;
-              width: 37px;
-              height: 37px;
-              background: url(../images/cat.png);
-              border-radius: 50%;
-              border: 1px solid #eeeeee; }
-            .home-page .wrapper .list-container .list-wrapper left .user-info .user-text h3 {
-              font-size: 16px;
-              margin: 10px 0 0 0; }
-            .home-page .wrapper .list-container .list-wrapper left .user-info .user-text p {
-              font-size: 12px;
-              margin: 5px 0; }
-          .home-page .wrapper .list-container .list-wrapper left .list-text {
+          .home-page .wrapper .list-container .list-wrapper .left .list-text {
+            color: #333333;
             font-size: 18px;
             left: 100px; }
-          .home-page .wrapper .list-container .list-wrapper left .tags .tag {
+          .home-page .wrapper .list-container .list-wrapper .left .tags .tag {
             font-size: 12px;
             color: #cccccc;
             padding: 2px 5px;
             border-radius: 5px;
             border: 1px solid #eeeeee;
             margin-right: 5px; }
-        .home-page .wrapper .list-container .list-wrapper right {
+        .home-page .wrapper .list-container .list-wrapper .right {
+          text-decoration: none;
           display: flex;
           flex-direction: row;
           vertical-align: middle;
           align-items: center; }
-          .home-page .wrapper .list-container .list-wrapper right .list-details {
+          .home-page .wrapper .list-container .list-wrapper .right .list-details {
             display: flex;
             flex-direction: row;
             color: #999;
             padding: 5px; }
-            .home-page .wrapper .list-container .list-wrapper right .list-details .time {
+            .home-page .wrapper .list-container .list-wrapper .right .list-details .time {
               margin-right: 12px;
               padding-right: 12px;
               border-right: 1px solid #eee; }
-              .home-page .wrapper .list-container .list-wrapper right .list-details .time i {
+              .home-page .wrapper .list-container .list-wrapper .right .list-details .time i {
                 margin-right: 5px; }
-            .home-page .wrapper .list-container .list-wrapper right .list-details .price {
+            .home-page .wrapper .list-container .list-wrapper .right .list-details .price {
               color: #46abe9;
               font-weight: bold;
               margin-right: 20px; }
-          .home-page .wrapper .list-container .list-wrapper right .btn-lend {
+          .home-page .wrapper .list-container .list-wrapper .right .btn-lend {
             -webkit-appearance: none;
             border: 0;
             border-radius: 3px;
@@ -2675,7 +2691,7 @@ footer {
             font-weight: bold;
             font-size: 14px;
             padding: 10px 15px; }
-            .home-page .wrapper .list-container .list-wrapper right .btn-lend:hover {
+            .home-page .wrapper .list-container .list-wrapper .right .btn-lend:hover {
               cursor: pointer;
               background-color: white; }
 
@@ -2817,36 +2833,39 @@ footer {
         color: #333333; }
         .profile-wrapper .modal .outer-list-wrapper .list-wrapper .btn-lend {
           display: none !important; }
-        .profile-wrapper .modal .outer-list-wrapper .list-wrapper left {
+        .profile-wrapper .modal .outer-list-wrapper .list-wrapper .user-info {
+          display: none !important; }
+        .profile-wrapper .modal .outer-list-wrapper .list-wrapper .left {
+          text-decoration: none;
           display: flex;
           flex-direction: row;
           flex: 1;
           align-items: center; }
-          .profile-wrapper .modal .outer-list-wrapper .list-wrapper left .user-info {
-            display: none !important; }
-          .profile-wrapper .modal .outer-list-wrapper .list-wrapper left .list-text {
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper .left .list-text {
+            color: #333333;
             font-size: 18px;
             left: 100px; }
-          .profile-wrapper .modal .outer-list-wrapper .list-wrapper left .tags .tag {
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper .left .tags .tag {
             font-size: 12px;
             color: #cccccc;
             padding: 2px 5px;
             border-radius: 5px;
             border: 1px solid #eeeeee;
             margin-right: 5px; }
-        .profile-wrapper .modal .outer-list-wrapper .list-wrapper right {
+        .profile-wrapper .modal .outer-list-wrapper .list-wrapper .right {
+          text-decoration: none;
           display: flex;
           flex-direction: row;
           vertical-align: middle;
           align-items: center; }
-          .profile-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details {
+          .profile-wrapper .modal .outer-list-wrapper .list-wrapper .right .list-details {
             display: flex;
             flex-direction: row;
             color: #999;
             padding: 5px;
             justify-content: flex-end;
             width: 100px; }
-            .profile-wrapper .modal .outer-list-wrapper .list-wrapper right .list-details .price {
+            .profile-wrapper .modal .outer-list-wrapper .list-wrapper .right .list-details .price {
               color: #46abe9;
               font-weight: bold;
               margin-right: 0px; }

@@ -35,36 +35,36 @@ class RequestedItem extends Component {
 
     return (
       <div className='outer-list-wrapper'>
-      <Link to={ detailsLink } className='list-wrapper'>
-        <left>
-          <div className='user-info'>
+      <div className='list-wrapper'>
+        <Link to='/user/1' className='user-info'>
             <img src={ displayPic } alt='display picture' className='user-pic' />
             <div className='user-text'>
               <h3>{ this.props.item.owner }</h3>
               <p>{ this.props.item.time }</p>
             </div>
-          </div>
-          <div className='list-text'>
-            { this.props.item.title }
-            <div className='tags'>
-              {
-                this.props.item.tags.map( (tag) => {
-                  return <span className='tag'>{ tag }</span>;
-                })
-              }
+        </Link>
+          <Link to={detailsLink} className='left'>
+            <div className='list-text'>
+              { this.props.item.title }
+              <div className='tags'>
+                {
+                  this.props.item.tags.map( (tag) => {
+                    return <span className='tag'>{ tag }</span>;
+                  })
+                }
+              </div>
             </div>
-          </div>
 
-        </left>
-        <right>
-          <div className='list-details'>
-            <div className='price'>
-              { this.props.item.bounty }
+          </Link>
+          <Link to={detailsLink} className='right'>
+            <div className='list-details'>
+              <div className='price'>
+                { this.props.item.bounty }
+              </div>
             </div>
-          </div>
-          <button className='btn-lend'>LEND</button>
-        </right>
-      </Link>
+            <button className='btn-lend'>LEND</button>
+          </Link>
+      </div>
       { des }
       </div>
     );

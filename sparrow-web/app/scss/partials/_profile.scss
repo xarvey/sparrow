@@ -61,17 +61,19 @@
 						display: none !important;
 					}
 
-					left {
+					.user-info {
+						display: none !important;
+					}
+
+					.left {
+						text-decoration: none;
 						display: flex;
 						flex-direction: row;
 						flex: 1;
 						align-items: center;
 
-						.user-info {
-							display: none !important;
-						}
-
 						.list-text {
+							color: #333333;
 							font-size: 18px;
 							left: 100px;
 						}
@@ -89,7 +91,8 @@
 
 					}
 
-					right {
+					.right {
+						text-decoration: none;
 						display: flex;
 						flex-direction: row;
 						vertical-align: middle;

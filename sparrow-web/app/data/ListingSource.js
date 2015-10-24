@@ -11,12 +11,14 @@ const mockData = [
       {
         comment: 'come to Minar Forest!',
         bounty: '$10',
-        user: 'Chief Tatamo'
+        user: 'eagle',
+        userid: 1
       },
       {
         comment: 'I won\'t charge you bruh',
         bounty: '$200',
-        user: 'Real bro'
+        user: 'albatross',
+        userid: 3
       }
     ],
     description: 'I just lost my house due to the recent wildfire. Please halp.'
@@ -33,7 +35,8 @@ const mockData = [
       {
         comment: 'come to Minar Forest!',
         bounty: '$10',
-        user: 'Real bro'
+        user: 'albatross',
+        userid: 3
       }
     ],
     description: 'I just lost my house due to the recent wildfire. Please halp.'
@@ -50,7 +53,8 @@ const mockData = [
       {
         comment: 'come to Minar Forest!',
         bounty: '$10',
-        user: 'Real bro'
+        user: 'eagle',
+        userid: 2
       }
     ],
     description: 'I just lost my house due to the recent wildfire. Please halp.'
