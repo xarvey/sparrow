@@ -15,6 +15,13 @@
 .AppleDouble
 .LSOverride
 
+#Intellij idea
+*.idea
+*.iml
+
+#npm
+*.log
+
 # Icon must end with two \r
 Icon
 
