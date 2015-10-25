@@ -40,10 +40,12 @@ class UserStore {
       .send(userInfo)
       .end((err, res) => {
         if (err) {
-          console.error('login error!');
-          return;
+          alert('login error');
         }
-        document.cookie = "username=" + userInfo.user + '; expires=Thu, 18 Dec 2020 12:00:00 UTC';
+        document.cookie = 'username=' + userInfo.user + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
+        document.cookie = 'password=' + userInfo.password + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
+        document.cookie=  'userid='+res.body.id +';  expires=Thu, 18 Dec 2030 12:00:00 UTC'
+
         this.setState({ logined: res });
       });
   }
