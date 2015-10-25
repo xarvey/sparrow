@@ -6,7 +6,7 @@ const $ = require('jquery');
 class UserStore {
   constructor() {
     this.errorMessage = null;
-    this.endPointURL = 'http://vohras.tk:9000';
+    this.endPointURL = 'http://127.0.0.1:9000';
     this.registered = false;
     this.logined = false;
 
@@ -34,8 +34,9 @@ class UserStore {
   handleLogin(userInfo) {
     console.log('try to login');
     request
-      .post(this.endPointURL + '/noLogInYet')
+      .get(this.endPointURL + '/login')
       .set('Content-Type', 'application/json')
+      .set('Authentication',userInfo.user+':'+userInfo.password)
       .send(userInfo)
       .end((err, res) => {
         if (err) {

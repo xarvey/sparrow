@@ -96,6 +96,7 @@ fun main(args: Array<String>) {
     Spark.before { request, response ->
         CorsFilter.apply(request, response)
         response.header("Content-type", "application/json")
+        response.header("Authentication", "*")
     }
     Spark.options("/*") { request, response -> "" }
 

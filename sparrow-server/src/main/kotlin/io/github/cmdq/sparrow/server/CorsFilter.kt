@@ -16,7 +16,7 @@ object CorsFilter {
     init {
         corsHeaders.put("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,OPTIONS")
         corsHeaders.put("Access-Control-Allow-Origin", "*")
-        corsHeaders.put("Access-Control-Allow-Headers", "Content-Type,Authorization,X-Requested-With,Content-Length,Accept,Origin,")
+        corsHeaders.put("Access-Control-Allow-Headers", "Content-Type,Authentication,Authorization,X-Requested-With,Content-Length,Accept,Origin,")
         corsHeaders.put("Access-Control-Allow-Credentials", "true")
     }
 

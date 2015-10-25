@@ -11,8 +11,15 @@ import spark.Spark
 fun setupUsers(service: Sparrow) {
     val dir = "users"
 
+    Spark.get("/login") { request, response ->
+        service.requireAuth(request)
+        val result = service.users.getUser(0);
+        response.status(result.status)
+        result.body.toJson(service.gson)
+    }
+
     Spark.get("/$dir/:id") { request, response ->
-        //service.requireAuth(request)
+        service.requireAuth(request)
         val id = request.params("id").toInt()
         val result = service.users.getUser(id)
         response.status(result.status)
