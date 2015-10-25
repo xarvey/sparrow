@@ -39,7 +39,7 @@ class RequestedItem extends Component {
         <Link to='/user/1' className='user-info'>
             <img src={ displayPic } alt='display picture' className='user-pic' />
             <div className='user-text'>
-              <h3>{ this.props.item.owner }</h3>
+              <h3>{ this.props.item.ownerName }</h3>
               <p>{ this.props.item.time }</p>
             </div>
         </Link>

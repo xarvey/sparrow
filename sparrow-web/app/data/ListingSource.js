@@ -1,3 +1,5 @@
+const request = require('superagent');
+
 const mockData = [
   {
     id: 1,
@@ -62,20 +64,47 @@ const mockData = [
 ];
 
 const ListingActions = require('../actions/ListingActions');
-
+const endPoint='http://127.0.0.1:9000';
+var realData=[];
 const ListingSource = {
   fetchListings() {
     return {
       remote(state, id) {
         console.log('before return', id);
+        request
+          .get(endPoint+'/frontpage/borrow/0')
+          .end((err, res) => {
+            if (err) {
+              console.error('fail to fetch listings!');
+              return;
+            }
+
+            realData=res.body;
+          });
+
         return new Promise(function(resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
           setTimeout(function() {
+
             // change this to `false` to see the error action being handled.
-            if (mockData.length) {
+            if (realData.length) {
               // resolve with some mock data
-              resolve({ listings: mockData, id: id } );
+              var ownerName;
+              for (let i=0; i<realData.length; i++)
+                {
+                  request
+                    .get(endPoint+'/users/'+realData[i].owner)
+                    .end((err, res) => {
+                      if (err) {
+                        console.error('fail to fetch listings!');
+                        return;
+                      }
+                      realData[i].ownerName=res.body.name;
+                    });
+                }
+                console.log(realData);
+              resolve({ listings: realData, id: id } );
             } else {
               reject('Things have broken');
             }
