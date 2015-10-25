@@ -9,7 +9,7 @@ import java.util.*
 
 class CommentServiceTest {
     val mockListing = Listing(1, 1, ListingType.borrow, title="Listing", description="stuff")
-    val mockComment = Comment(1, 1, 1, Date().time, false, "Stuff")
+    val mockComment = Comment(1, 1, 1, Date(), false, "Stuff")
     val mockUser = User(1, "", "", "", Date().time)
 
     fun testGetComment(comment: Comment?, status: Int) {
@@ -34,7 +34,7 @@ class CommentServiceTest {
     }
 
     @Test fun testGetCommentValid() {
-        testGetComment(Comment(1, 1, 1, Date().time, false, "Stuff"), 200)
+        testGetComment(Comment(1, 1, 1, Date(), false, "Stuff"), 200)
     }
 
     @Test fun testGetCommentNotFound() {
@@ -67,15 +67,15 @@ class CommentServiceTest {
     }
 
     @Test fun testCreateListingCommentValid() {
-        testCreateListingComment(mockListing, Comment(1, 1, 1, Date().time, false, "Stuff"), 200)
+        testCreateListingComment(mockListing, Comment(1, 1, 1, Date(), false, "Stuff"), 200)
     }
 
     @Test fun testCreateListingCommentNotFound() {
-        testCreateListingComment(null, Comment(1, 1, 1, Date().time, false, "Stuff"), 404)
+        testCreateListingComment(null, Comment(1, 1, 1, Date(), false, "Stuff"), 404)
     }
 
     @Test fun testCreateListingCommentEmpty() {
-        testCreateListingComment(mockListing, Comment(1,1,1,Date().time, false, ""), 400)
+        testCreateListingComment(mockListing, Comment(1,1,1,Date(), false, ""), 400)
     }
 
     fun testCreateUserComment(testUser: User?, testComment: Comment, status: Int) {
@@ -104,15 +104,15 @@ class CommentServiceTest {
     }
 
     @Test fun testCreateUserCommentValid() {
-        testCreateUserComment(mockUser, Comment(1, 1, 1, Date().time, false, "Stuff"), 200)
+        testCreateUserComment(mockUser, Comment(1, 1, 1, Date(), false, "Stuff"), 200)
     }
 
     @Test fun testCreateUserCommentNotFound() {
-        testCreateUserComment(null, Comment(1, 1, 1, Date().time, false, "Stuff"), 404)
+        testCreateUserComment(null, Comment(1, 1, 1, Date(), false, "Stuff"), 404)
     }
 
     @Test fun testCreateUserCommentEmpty() {
-        testCreateUserComment(mockUser, Comment(1,1,1,Date().time, false, ""), 400)
+        testCreateUserComment(mockUser, Comment(1,1,1,Date(), false, ""), 400)
     }
 
     fun testRemoveComment(testListing: Listing?, testUser: User?, testComment: Comment?, testId: Int, status: Int) {

@@ -3,6 +3,7 @@ package io.github.cmdq.sparrow.server
 import com.google.gson.Gson
 import io.github.cmdq.sparrow.server.data.Datastore
 import io.github.cmdq.sparrow.server.model.*
+import java.util.*
 
 class Sparrow(
         val datastore: Datastore,
@@ -45,7 +46,7 @@ class Sparrow(
         override fun createListingComment(listingId: Int, comment: Comment): ServiceResponse {
             if (comment.text.isEmpty())
                 return ServiceResponse("Empty comment", 400)
-            val id = datastore.storeComment(comment)
+            val id = datastore.storeComment(comment.copy(creationDate = Date()))
             val listing = datastore.retrieveListing(listingId) ?: return ServiceResponse("Listing not found", 404)
             val newListing = listing.copy(
                     comments = listing.comments + id
@@ -57,7 +58,7 @@ class Sparrow(
         override fun createUserComment(userId: Int, comment: Comment): ServiceResponse {
             if (comment.text.isEmpty())
                 return ServiceResponse("Empty comment", 400)
-            val id = datastore.storeComment(comment)
+            val id = datastore.storeComment(comment.copy(creationDate = Date()))
             val user = datastore.retrieveUser(userId) ?: return ServiceResponse("User not found", 404)
             val newUser = user.copy(
                     comments = user.comments + id
@@ -175,7 +176,7 @@ class Sparrow(
                 return ServiceResponse(status = 400)
             val user = datastore.retrieveUser(listing.owner)
                     ?: return ServiceResponse("User not found")
-            val id = datastore.storeListing(listing)
+            val id = datastore.storeListing(listing.copy(creationDate = Date()))
             if (listing.type == ListingType.borrow) {
                 val user2 = user.copy(
                         borrowListings = user.borrowListings + listing.id
