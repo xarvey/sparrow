@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ListingStore from 'stores/ListingStore';
 
 const request = require('superagent');
 
@@ -35,6 +36,7 @@ class ResponseForm extends Component {
           console.error('listing error!');
           return;
         }
+        ListingStore.fetchListings(this.props.item.id);
       });
   }
 

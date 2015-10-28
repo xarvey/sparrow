@@ -90,7 +90,7 @@ const ListingSource = {
             // change this to `false` to see the error action being handled.
             if (realData.length) {
               // resolve with some mock data
-              var ownerName;
+              let count = 0
               for (let i=0; i<realData.length; i++)
                 {
                   request
@@ -101,10 +101,12 @@ const ListingSource = {
                         return;
                       }
                       realData[i].ownerName=res.body.name;
+                      count++;
+                      if(count == realData.length)
+                        resolve({ listings: realData, id: id } );
                     });
                 }
                 console.log(realData);
-              resolve({ listings: realData, id: id } );
             } else {
               reject('No data');
             }

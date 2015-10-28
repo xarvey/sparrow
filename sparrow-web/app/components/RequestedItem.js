@@ -20,6 +20,7 @@ class RequestedItem extends Component {
 
   state = {
     showModal: false,
+    owner: ''
   }
 
   render() {
