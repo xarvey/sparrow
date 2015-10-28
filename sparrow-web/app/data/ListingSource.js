@@ -64,7 +64,7 @@ const mockData = [
 ];
 
 const ListingActions = require('../actions/ListingActions');
-const endPoint='http://127.0.0.1:9000';
+const endPoint='http://vohras.tk:9000';
 var realData=[];
 const ListingSource = {
   fetchListings() {
@@ -106,7 +106,7 @@ const ListingSource = {
                 console.log(realData);
               resolve({ listings: realData, id: id } );
             } else {
-              reject('Things have broken');
+              reject('No data');
             }
           }, 250);
         });

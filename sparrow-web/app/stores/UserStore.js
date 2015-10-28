@@ -6,7 +6,7 @@ const $ = require('jquery');
 class UserStore {
   constructor() {
     this.errorMessage = null;
-    this.endPointURL = 'http://127.0.0.1:9000';
+    this.endPointURL = 'http://vohras.tk:9000';
     this.registered = false;
     this.logined = false;
 

@@ -78,7 +78,7 @@ class ListingPage extends Component {
     const title = document.getElementById('Title').value;
     const description = document.getElementById('Description').value;
     const bounty = document.getElementById('Bounty').value;
-    const endPointURL = 'http://127.0.0.1:9000'
+    const endPointURL = 'http://vohras.tk:9000'
     let tags = document.getElementById('Tags').value;
 
     if (title === null || title.length === 0 || description === null || description.length === 0 || bounty === null || tags === null || tags.length === 0) {

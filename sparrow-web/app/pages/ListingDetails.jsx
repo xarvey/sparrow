@@ -35,8 +35,9 @@ class ListingDetails extends Component {
   }
 
   renderComments() {
+    if(!this.state.clicked)
+      return;
     let rawComments = this.state.clicked.comments;
-
     return (
       <div className='comments-container'>
         {
