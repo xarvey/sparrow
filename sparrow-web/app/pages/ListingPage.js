@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import DocumentTitle from 'react-document-title';
+import { Route, Router } from 'react-router';
 
 const MissingFieldError = 'Missing field';
 const OverflowError = 'Field overflow';
@@ -116,6 +117,7 @@ class ListingPage extends Component {
             console.error('listing error!');
             return;
           }
+          window.location.href = '/borrow';
         });
     }
   }

@@ -60,7 +60,7 @@ class RequestedItem extends Component {
           <Link to={detailsLink} className='right'>
             <div className='list-details'>
               <div className='price'>
-                { this.props.item.bounty }
+                ${ this.props.item.bounty }
               </div>
             </div>
             <button className='btn-lend'>LEND</button>
