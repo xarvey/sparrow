@@ -9,12 +9,23 @@ class ResponseForm extends Component {
     item: PropTypes.object.isRequired,
   }
 
+  state = {
+    posted: false
+  }
+
   render() {
+    let form = this.state.posted ?
+      (
+        <span>You have submitted the offer!</span>
+      ):
+      (
+        <textarea ref='message' cols='50' rows='4' className='textbox' id='message' placeholder='Message'/>
+      )
+    let button = this.state.posted? null : <button type='button' onClick={this.submitComment.bind(this)}className='offer'>Offer to Lend</button>
     return (
       <div className='modal-res'>
-        <textarea ref='message' cols='50' rows='4' className='textbox' id='message' placeholder='Message'/>
-        <input ref='bounty' type='text' className='textbox' id = 'bounty' placeholder = 'Bounty'/>
-        <button type='button' onClick={this.submitComment.bind(this)}className='offer'>Offer to Lend</button>
+        {form}
+        {button}
       </div>
     );
   }
@@ -37,6 +48,7 @@ class ResponseForm extends Component {
           return;
         }
         ListingStore.fetchListings(this.props.item.id);
+        this.setState({posted: true});
       });
   }
 

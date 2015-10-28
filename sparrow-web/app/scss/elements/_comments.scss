@@ -1,7 +1,7 @@
 .comments-wrapper{
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	//justify-content: center;
   flex-direction: column;
   background: rgba(255,255,255,0.9);
 	cursor: default;
@@ -73,8 +73,9 @@
 		text-align: left;
 		font-family: 'Proxima Nova';
 		font-size: 20px;
-		font-weight: 500;
+		font-weight: 600;
 		margin-top: 50px;
+		margin-bottom: 30px;
 	}
 
   .modal {
@@ -91,7 +92,7 @@
 			width: 600px;
 			max-width: 600px;
 			.des {
-				padding-left: 15px;
+				padding-left: 23px;
 				font-size: 14px;
 				color: #999999;
 				word-wrap: break-word;
