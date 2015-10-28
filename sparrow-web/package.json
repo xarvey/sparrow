@@ -50,7 +50,8 @@
     "react-dom": "^0.14.0-rc1",
     "react-intl": "^1.2.0",
     "react-router": "^1.0.0-rc1",
-    "superagent": "^1.4.0"
+    "superagent": "^1.4.0",
+	"sendgrid": "^1.9.2"
   },
   "devDependencies": {
     "babel-core": "^5.8.3",
