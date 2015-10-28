@@ -49,7 +49,8 @@ class ProfilePage extends Component {
 
   state = {
     user: null,
-    items: null
+    items: null,
+    location: '',
   }
 
   componentWillMount() {
@@ -67,6 +68,12 @@ class ProfilePage extends Component {
           return;
         }
         this.setState({user: res.body});
+        request
+          .get('http://api.zippopotam.us/us/' + res.body.zipCode)
+          .end((err, res) => {
+            let place = res.body.places[0];
+            this.setState({location: place['place name'] + ', '+ place['state abbreviation']});
+          });
         ListingStore.fetchListings();
       });
     ListingStore.listen(this._onChange.bind(this));
@@ -103,7 +110,7 @@ class ProfilePage extends Component {
       <div className='profile-wrapper'>
         <img src={ displayPic } alt='display picture' className='user-pic' />
         <h2>{ user.name }</h2>
-        <span> Location: {user.zipCode} </span>
+        <span> { this.state.location } </span>
         <div className='modal'>
           <div className='list-container'>
             {
