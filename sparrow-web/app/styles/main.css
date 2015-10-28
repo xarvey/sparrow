@@ -2442,7 +2442,8 @@ footer {
     text-align: left;
     font-family: 'Proxima Nova';
     font-size: 20px;
-    font-weight: 500; }
+    font-weight: 500;
+    margin-top: 50px; }
   .comments-wrapper .modal {
     display: flex;
     justify-content: center;
@@ -2492,7 +2493,8 @@ footer {
           .comments-wrapper .modal .outer-list-wrapper .list-wrapper .user-info .user-text h3 {
             color: #333333;
             font-size: 16px;
-            margin: 10px 0 0 0; }
+            margin: 10px 0 0 0;
+            line-height: 17px; }
           .comments-wrapper .modal .outer-list-wrapper .list-wrapper .user-info .user-text p {
             color: #555555;
             font-size: 12px;
@@ -2637,6 +2639,7 @@ footer {
           .home-page .wrapper .list-container .list-wrapper .user-info .user-text h3 {
             color: #333333;
             font-size: 16px;
+            line-height: 17px;
             margin: 10px 0 0 0; }
           .home-page .wrapper .list-container .list-wrapper .user-info .user-text p {
             color: #555555;

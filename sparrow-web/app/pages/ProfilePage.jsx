@@ -4,6 +4,8 @@ import imageResolver from 'utils/image-resolver';
 import ListingStore from 'stores/ListingStore';
 import RequestedItem from 'components/RequestedItem';
 
+const request = require('superagent');
+
 let displayPic;
 if (process.env.BROWSER) {
   displayPic = require('images/cat.png');
@@ -36,7 +38,7 @@ const emptyUser = {
   id: -1,
   name: '',
   zipCode: '',
-  lendListings: [],
+  borrowListings: [],
 }
 
 class ProfilePage extends Component {
@@ -56,9 +58,18 @@ class ProfilePage extends Component {
   }
 
   componentDidMount() {
-    this.setState({user: mockUsers[this.props.params.id-1]});
+    const endPointURL = 'http://vohras.tk:9000'
+    request
+      .get(endPointURL+'/users/'+this.props.params.id)
+      .end((err, res) => {
+        if (err) {
+          console.error('fail to fetch users!');
+          return;
+        }
+        this.setState({user: res.body});
+        ListingStore.fetchListings();
+      });
     ListingStore.listen(this._onChange.bind(this));
-    ListingStore.fetchListings();
     console.log('items',this.state.items);
   }
 
@@ -67,14 +78,18 @@ class ProfilePage extends Component {
     console.log('change inside profile!', this.state.user, listings);
     if(listings) {
       let ret = [];
-      for(let li of listings) {
-        for(let id of this.state.user.lendListings) {
+      /*for(let li of listings) {
+        for(let id of this.state.user.borrowListings) {
           if(li.id == id) {
             ret.push(li);
             break;
           }
         }
-      }
+      }*/
+      ret = listings.filter( (item) => {
+        return item.owner = this.props.params.id;
+      });
+      console.log("SET ITEM STATES");
       this.setState({items: ret});
     }
     //this.forceUpdate();
@@ -83,6 +98,7 @@ class ProfilePage extends Component {
   render() {
     console.log("here", this.state);
     let user = this.state.user
+    if(!user) return <div></div>
     return (
       <div className='profile-wrapper'>
         <img src={ displayPic } alt='display picture' className='user-pic' />
