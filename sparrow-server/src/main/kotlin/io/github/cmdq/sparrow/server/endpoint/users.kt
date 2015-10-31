@@ -1,6 +1,7 @@
 package io.github.cmdq.sparrow.server.endpoint
 
 import io.github.cmdq.sparrow.server.Sparrow
+import io.github.cmdq.sparrow.server.model.ServiceResponse
 import io.github.cmdq.sparrow.server.model.User
 import io.github.cmdq.sparrow.server.model.UserCreation
 import io.github.cmdq.sparrow.server.requireAuth
@@ -13,7 +14,9 @@ fun setupUsers(service: Sparrow) {
 
     Spark.get("/login") { request, response ->
         service.requireAuth(request)
-        val result = service.users.getUser(0);
+        val auth = request.headers("Authentication")
+        val email = auth.substring(0, auth.indexOf(':'))
+        val result = ServiceResponse(service.datastore.retrieveUser(email)!!)
         response.status(result.status)
         result.body.toJson(service.gson)
     }
