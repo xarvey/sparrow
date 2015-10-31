@@ -47,6 +47,7 @@ class UserStore {
         document.cookie=  'userid='+res.body.id +';  expires=Thu, 18 Dec 2030 12:00:00 UTC'
 
         this.setState({ logined: res });
+        window.location.href = '/borrow';
       });
   }
 
