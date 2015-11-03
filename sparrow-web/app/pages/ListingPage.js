@@ -82,7 +82,8 @@ class ListingPage extends Component {
     const endPointURL = 'http://vohras.tk:9000'
     let tags = document.getElementById('Tags').value;
 
-    if (title === null || title.length === 0 || description === null || description.length === 0 || bounty === null || tags === null || tags.length === 0) {
+    //defect #3
+    if (description === null || description.length === 0 || bounty === null || tags === null || tags.length === 0) {
       console.log(MissingFieldError);
       this.handleErrorMessage(MissingFieldError);
       return;
