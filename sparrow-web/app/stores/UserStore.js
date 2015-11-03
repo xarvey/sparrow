@@ -62,6 +62,7 @@ class UserStore {
       .end((err, res) => {
         if (err) {
           alert('login error');
+          return ;
         }
         document.cookie = 'username=' + userInfo.user + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
         document.cookie = 'password=' + userInfo.password + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';

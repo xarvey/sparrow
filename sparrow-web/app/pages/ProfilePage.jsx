@@ -3,6 +3,7 @@ import ListingActions from 'actions/ListingActions';
 import imageResolver from 'utils/image-resolver';
 import ListingStore from 'stores/ListingStore';
 import RequestedItem from 'components/RequestedItem';
+import UserComment from 'components/UserComment';
 
 const request = require('superagent');
 
@@ -94,12 +95,30 @@ class ProfilePage extends Component {
         }
       }*/
       ret = listings.filter( (item) => {
-        return item.owner = this.props.params.id;
+        return item.owner == this.props.params.id;
       });
       console.log("SET ITEM STATES");
       this.setState({items: ret});
     }
     //this.forceUpdate();
+  }
+
+  renderComments(user) {
+    if(!user)
+      return;
+    let rawComments = user.comments;
+    let itemid = this.props.params.id;
+    console.log(itemid);
+    return (
+      <div className='comments-container'>
+        {
+          rawComments.map( (c) => {
+            console.log('itemid',itemid);
+            return <UserComment offer={c} item={itemid} owner={this.props.params.id}/>;
+          })
+        }
+      </div>
+    );
   }
 
   render() {
@@ -119,6 +138,11 @@ class ProfilePage extends Component {
               })
             }
           </div>
+        </div>
+        <br/>
+          <br/>
+          <div className='modal'>
+          { this.renderComments(user) }
         </div>
       </div>
     );

@@ -39,7 +39,8 @@ class FinishPage extends Component {
     console.log('props', this.props)
 
     //item = <RequestedItem item={this.props.} showDescription={true} />
-    form = <FinishedResponse item={ 0 }/>
+    console.log('useridfucking',this.props.params.id.split(';')[1]);
+    form = <FinishedResponse id={this.props.params.id.split(';')[1]}/>
 
     return (
       <div className='comments-wrapper'>

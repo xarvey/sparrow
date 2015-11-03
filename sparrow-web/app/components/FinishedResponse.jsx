@@ -6,7 +6,7 @@ const request = require('superagent');
 class FinishedResponse extends Component {
 
   static propTypes = {
-    item: PropTypes.object.isRequired,
+    id: PropTypes.object.isRequired,
   }
 
   state = {
@@ -34,12 +34,12 @@ class FinishedResponse extends Component {
     const endPointURL = 'http://vohras.tk:9000';
     const commentInfo = {
       owner: this.getcookie('userid'),
-      parent: this.props.item.id,
+      parent: this.props.id,
       text: this.refs.message.value,
       isPrivate: false
     }
     request
-      .post(endPointURL + '/comments/listing/' + this.props.item.id)
+      .post(endPointURL + '/comments/user/' + this.props.id)
       .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
       .send(commentInfo)
       .end((err, res) => {
@@ -47,7 +47,6 @@ class FinishedResponse extends Component {
           console.error('listing error!');
           return;
         }
-        ListingStore.fetchListings(this.props.item.id);
         this.setState({posted: true});
       });
   }
