@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link }        from 'react-router';
 import DocumentTitle from 'react-document-title';
-
+const request = require('superagent');
 import UserActions from '../actions/UserActions';
 
 const userStore = require('../stores/UserStore');
