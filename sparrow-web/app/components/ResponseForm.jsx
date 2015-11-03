@@ -21,7 +21,7 @@ class ResponseForm extends Component {
       (
         <textarea ref='message' cols='50' rows='4' className='textbox' id='message' placeholder='Message'/>
       )
-    let button = this.state.posted? null : <button type='button' onClick={this.submitComment.bind(this)}className='offer'>Offer to Lend</button>
+    let button = this.state.posted? null : <button type='button' onClick={this.submitComment.bind(this)}className='offer'>{this.props.item.type == 'borrow'? 'Offer to lend':'Borrow'}</button>
     return (
       <div className='modal-res'>
         {form}

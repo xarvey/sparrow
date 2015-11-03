@@ -12,12 +12,12 @@ class ListingDetails extends Component {
     params: PropTypes.object.isRequired
   }
 
-  state = ListingStore.getState();
+  state = {}
 
   componentWillMount() {
     ListingStore.listen(this._onChange.bind(this));
     ListingActions.getListingById(this.props.params.id);
-    this.state = ListingStore.getState();
+    //this.state = ListingStore.getState();
   }
 
   componentDidMount() {
@@ -26,6 +26,10 @@ class ListingDetails extends Component {
       console.log('before call', this.props.params.id);
       ListingStore.fetchListings(this.props.params.id);
     }
+  }
+
+  componentWillUnmount() {
+    ListingStore.unlisten(this._onChange.bind(this));
   }
 
   _onChange() {

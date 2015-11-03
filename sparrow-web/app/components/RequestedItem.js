@@ -34,6 +34,10 @@ class RequestedItem extends Component {
     }
     const detailsLink = '/listing/'+this.props.item.id;
 
+    let sentence = 'LEND';
+    if (window.location.href.indexOf('lend')>0)
+      sentence = 'BORROW';
+
     return (
       <div className='outer-list-wrapper'>
       <div className='list-wrapper'>
@@ -63,7 +67,7 @@ class RequestedItem extends Component {
                 ${ this.props.item.bounty }
               </div>
             </div>
-            <button className='btn-lend'>LEND</button>
+            <button className='btn-lend'>{sentence}</button>
           </Link>
       </div>
       { des }

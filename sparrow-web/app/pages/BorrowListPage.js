@@ -9,7 +9,7 @@ const AltContainer = require('alt/AltContainer');
 class BorrowListPage extends Component {
 
   componentDidMount() {
-    ListingStore.fetchListings();
+      ListingStore.fetchListings();
   }
 
   render() {

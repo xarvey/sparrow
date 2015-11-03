@@ -65,12 +65,13 @@ const mockData = [
 
 const ListingActions = require('../actions/ListingActions');
 const endPoint='http://vohras.tk:9000';
-var realData=[];
 const ListingSource = {
   fetchListings() {
     return {
       remote(state, id) {
         console.log('before return', id);
+        let realData=[];
+
         request
           .get(endPoint+'/frontpage/borrow/0')
           .end((err, res) => {
@@ -78,39 +79,52 @@ const ListingSource = {
               console.error('fail to fetch listings!');
               return;
             }
-
             realData=res.body;
           });
 
         return new Promise(function(resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
-          setTimeout(function() {
+          //setTimeout(function() {
 
             // change this to `false` to see the error action being handled.
-            if (realData.length) {
-              // resolve with some mock data
-              let count = 0
-              for (let i=0; i<realData.length; i++)
-                {
-                  request
-                    .get(endPoint+'/users/'+realData[i].owner)
-                    .end((err, res) => {
-                      if (err) {
-                        console.error('fail to fetch listings!');
-                        return;
-                      }
-                      realData[i].ownerName=res.body.name;
-                      count++;
-                      if(count == realData.length)
-                        resolve({ listings: realData, id: id } );
-                    });
+            request
+              .get(endPoint+'/frontpage/lend/0')
+              .end((err, res) => {
+                if (err) {
+                  console.error('fail to fetch listings!');
+                  return;
                 }
-                console.log(realData);
-            } else {
-              reject('No data');
-            }
-          }, 250);
+                console.log('concat',res.body);
+                realData = realData.concat(res.body);
+                console.log('real doeta', realData)
+                if (realData.length) {
+                  // resolve with some mock data
+                  console.log('real doeta', realData)
+                  let count = 0
+                  for (let i=0; i<realData.length; i++)
+                    {
+                      let x = i;
+                      request
+                        .get(endPoint+'/users/'+realData[x].owner)
+                        .end((err, res) => {
+                          console.log(x,realData);
+                          if (err) {
+                            console.error('fail to fetch listings!');
+                            return;
+                          }
+                          realData[x].ownerName=res.body.name;
+                          count++;
+                          if(count == realData.length)
+                            resolve({ listings: realData, id: id } );
+                        });
+                    }
+                    console.log(realData);
+                } else {
+                  reject('No data');
+                }
+              });
+          //}, 250);
         });
       },
       local() {
@@ -123,6 +137,7 @@ const ListingSource = {
       loading: ListingActions.fetchListings
     };
   }
+
 };
 
 module.exports = ListingSource;
