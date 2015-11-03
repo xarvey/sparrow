@@ -26,7 +26,6 @@ class UserStore {
           console.error('register error!');
           return;
         }
-        document.cookie = "username=" + userInfo.user + '; expires=Thu, 18 Dec 2020 12:00:00 UTC';
         this.setState({ registered: res });
       });
   }

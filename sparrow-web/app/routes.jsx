@@ -22,6 +22,10 @@ export default (
       component: { header: Header, content: require('./pages/ListingPage') }
     }) }
     { generateRoute({
+      paths: ['/editListing/:id'],
+      component: { header: Header, content: require('./pages/ListingPage') }
+    }) }
+    { generateRoute({
       paths: ['/login'],
       component: { header: Header, content: require('./pages/LoginPage') }
     }) }

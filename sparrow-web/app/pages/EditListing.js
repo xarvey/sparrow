@@ -49,7 +49,7 @@ class ListingPage extends Component {
 
   render() {
     return (
-      <DocumentTitle title='Create new item listing'>
+      <DocumentTitle title='Edit your item listing'>
         <section className='listing-page'>
         <h2>Create your item listing</h2>
           <div>
@@ -99,7 +99,8 @@ class ListingPage extends Component {
       this.handleErrorMessage(TagFormatError);
     } else {
       var itemInfo={};
-      itemInfo.owner=this.getcookie('userid');
+      itemInfo.id=this.getcookie('userid');
+
       itemInfo.type=this.state.type;
       itemInfo.title=title;
       itemInfo.description=description;
@@ -108,7 +109,7 @@ class ListingPage extends Component {
       itemInfo.comments=[];
       console.log(itemInfo);
       request
-        .post(endPointURL + '/listings')
+        .put(endPointURL + '/listings/'+)
         .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
         .send(itemInfo)
         .end((err, res) => {
