@@ -8,7 +8,7 @@ import org.junit.Test
 import java.util.*
 
 public class ListingServiceTest {
-    val mockListing = Listing(1, 1, ListingType.borrow, title="Listing", description="stuff")
+    val mockListing = Listing(1, 1, ListingType.borrow, creationDate=Date(), title="Listing", description="stuff")
     val mockFilter = FilterParams()
     val mockUser = User(1, "", "", "", Date().time)
 
@@ -115,7 +115,7 @@ public class ListingServiceTest {
 
         val service = Sparrow(object: MockDatastore() {
             override fun storeListing(newListing: Listing): Int {
-                assert(newListing == listing)
+                assert(newListing == listing.copy(creationDate = newListing.creationDate))
                 called = true
                 return listing.id
             }

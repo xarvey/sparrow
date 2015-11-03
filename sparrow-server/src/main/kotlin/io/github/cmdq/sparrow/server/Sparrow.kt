@@ -158,7 +158,7 @@ class Sparrow(
         }
 
         override fun getFilteredListings(filter: FilterParams): ServiceResponse {
-            if (filter.keywords?.length() ?: 0 > 140)
+            if (filter.keywords?.length ?: 0 > 140)
                 return ServiceResponse("Search is too long", 400)
             if (filter.keywords?.isEmpty() ?: false)
                 return ServiceResponse("Search field is empty", 400)

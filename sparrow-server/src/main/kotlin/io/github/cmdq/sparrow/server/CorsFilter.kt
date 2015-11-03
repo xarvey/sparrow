@@ -20,6 +20,7 @@ object CorsFilter {
         corsHeaders.put("Access-Control-Allow-Credentials", "true")
     }
 
+    @Suppress("UNUSED_PARAMETER")
     fun apply(request: Request, response: Response) {
         corsHeaders.forEach { key, value -> response.header(key, value) }
     }

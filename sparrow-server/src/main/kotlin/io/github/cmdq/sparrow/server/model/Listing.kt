@@ -6,7 +6,7 @@ data class Listing(
         val id: Int,
         val owner: Int,
         val type: ListingType,
-        val creationDate: Date = Date(),
+        val creationDate: Date,
         val title: String,
         val description: String,
         val tags: List<String> = emptyList(),

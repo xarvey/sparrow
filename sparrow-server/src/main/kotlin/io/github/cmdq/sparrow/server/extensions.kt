@@ -13,7 +13,7 @@ val String.end: Int
     get() = this.length - 1
 
 val String.length: Int
-    get() = this.length()
+    get() = this.length
 
 
 fun String.isEmail(): Boolean = with(indexOf('@')) { this > 0 || this < end }
