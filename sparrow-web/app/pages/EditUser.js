@@ -6,7 +6,7 @@ import UserActions from '../actions/UserActions';
 
 const userStore = require('../stores/UserStore');
 // const PasswordError = 'Password length invalid';
-
+const request = require('superagent');
 const RegisterPage = React.createClass({
 
   componentDidMount() {
@@ -42,19 +42,17 @@ const RegisterPage = React.createClass({
     console.log(event);
     const newUser = {
       name: this.refs.name.value,
-      email: this.getcookie(username),
-      password: this.refs.pass.value,
-      confirmPass: this.refs.confirmPass.value,
-      zipCode: this.refs.zipCode.value
+      email: this.refs.email.value,
+      password: this.getcookie('password'),
+      confirmPass: this.getcookie('password'),
+      zipCode: this.getcookie('zipcode')
     };
 
     var validateResult = true;
-    if(newUser.name == undefined || newUser.email == undefined || newUser.password == undefined || newUser.zipCode == undefined || newUser.confirmPass == undefined) {
+    if(newUser.name == undefined || newUser.password == undefined || newUser.confirmPass == undefined) {
       validateResult = false;
     }
     if(validateResult) {
-      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-      validateResult &= re.test(newUser.email);
       if (newUser.password.length > 16 || newUser.password.length < 8) {
         validateResult = false;
       }
@@ -62,18 +60,20 @@ const RegisterPage = React.createClass({
         validateResult = false;
       }
     }
+    console.log(newUser)
     if(validateResult) {
       request
-        .put(this.endPointURL + '/users')
+        .put('http://vohras.tk:9000/users')
+        .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
         .send(newUser)
         .end((err, res) => {
           if (err) {
             console.error('register error!');
             return;
-          }})
-          document.cookie = 'username=' + newUser.user + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
+          }
+          document.cookie = 'name=' + newUser.name + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
           document.cookie = 'password=' + newUser.password + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
-
+        })
     }
     else {
       alert("Input Error");
@@ -90,17 +90,14 @@ const RegisterPage = React.createClass({
           <form className='input'>
             <input ref='name' type='text' className='textbox' placeholder = 'Name'/>
             <br/>
-            <input ref='pass' type='password' className='textbox' placeholder = 'Password'/>
-            <br/>
-            <input ref='confirmPass' type='password' className='textbox' placeholder = 'Confirm Password'/>
-            <br/>
-            <input ref='zipCode' type='text' className='textbox' placeholder = 'Zip Code'/>
+
+            <input ref='email' type='text' className='textbox' placeholder = 'Email'/>
+
           </form>
 
           <div className='buttons'>
-            <button type='button' id='register' onClick={ this.register } >Register</button>
+            <button type='button' id='register' onClick={ this.register } >Update</button>
           </div>
-			<span>Already have an account? &nbsp;<Link to='/login'> Login</Link></span>
             { this.errorDisplay() }
 
 

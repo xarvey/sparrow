@@ -81,6 +81,7 @@ class UserStore {
         document.cookie = 'password=' + userInfo.password + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
         document.cookie=  'userid='+res.body.id +';  expires=Thu, 18 Dec 2030 12:00:00 UTC';
         document.cookie= 'name='+res.body.name +';  expires=Thu, 18 Dec 2030 12:00:00 UTC';
+        document.cookie= 'zipcode='+res.body.zipCode +';  expires=Thu, 18 Dec 2030 12:00:00 UTC';
 
         this.setState({ logined: res });
         window.location.href = '/borrow';
