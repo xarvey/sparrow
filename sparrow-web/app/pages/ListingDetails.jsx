@@ -4,6 +4,7 @@ import ListingActions from '../actions/ListingActions';
 import ResponseForm from '../components/ResponseForm';
 import ListingStore from '../stores/ListingStore';
 import Offer from '../components/Offer';
+const request = require('superagent');
 
 class ListingDetails extends Component {
 
@@ -60,12 +61,18 @@ class ListingDetails extends Component {
       <div className='comments-wrapper'>
         <h2>All lending offers for this listing</h2>
         <div className='modal'>
+          <button onClick={this.delete.bind(this)}>Delete</button>
           { item }
           { this.renderComments() }
           { form }
         </div>
       </div>
     );
+  }
+
+  delete() {
+    ListingActions.deleteListingById(this.props.params.id);
+    window.location.href = '/borrow';
   }
 
 }

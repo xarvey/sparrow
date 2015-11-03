@@ -109,7 +109,7 @@ class ListingPage extends Component {
       itemInfo.comments=[];
       console.log(itemInfo);
       request
-        .put(endPointURL + '/listings/'+)
+        .put(endPointURL + '/listings/8')
         .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
         .send(itemInfo)
         .end((err, res) => {

@@ -13,6 +13,10 @@ class ListingActions {
     this.dispatch(errorMessage);
   }
 
+  deleteListingById(id) {
+    this.dispatch(id);
+  }
+
   getListingById(id) {
     this.dispatch(id);
   }
