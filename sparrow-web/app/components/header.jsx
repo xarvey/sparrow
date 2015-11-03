@@ -26,11 +26,22 @@ class Header extends Component {
   _getIntlMessage = IntlMixin.getIntlMessage
 
   state = {
-    spinner: false
+    spinner: false,
   }
 
   _handleRequestStoreChange = ({ inProgress }) =>
     this.setState({ spinner: inProgress })
+
+  getcookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return " ";
+  }
 
   render() {
     let borrow = 'tab';
@@ -40,6 +51,17 @@ class Header extends Component {
     } else if (this.props.type === 'lend') {
       lend = lend + ' active';
     }
+
+    let name = this.getcookie('name');
+    let userid = this.getcookie('userid');
+
+    let login = ( <Link to='/login' className='login-btn'>Login</Link> )
+    let create = (<Link to='/create' className='active'>Create</Link> )
+
+    if(userid.trim().length > 0) {
+        login = <Link to={'/user/'+userid}><strong>{name}</strong></Link>
+    }
+
     return (
       <header>
         <div className='wrapper'>
@@ -52,8 +74,9 @@ class Header extends Component {
             <Link to='/lend' className={ lend }>Lend Offers</Link>
           </div>
           <div className='login'>
-            <Link to='/login' className='login-btn'>Login</Link>
+            {login}
           </div>
+          {create}
         </div>
       </header>
     );

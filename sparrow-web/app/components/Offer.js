@@ -17,6 +17,8 @@ class Offer extends Component {
 
   static propTypes = {
     offer: PropTypes.number.isRequired,
+    item: PropTypes.number.isRequired,
+    owner: PropTypes.number.isRequired
   }
 
   state = {
@@ -26,7 +28,8 @@ class Offer extends Component {
       bounty: ''
     },
     owner: {
-      name: ''
+      name: '',
+      id: ''
     },
     error: false
   }
@@ -35,11 +38,26 @@ class Offer extends Component {
     this.getComment(this.props.offer);
   }
 
+  getcookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return " ";
+  }
+
   render() {
     if(this.state.error) return <div></div>;
     console.log('refresh');
+    let url = '/finish/'+this.props.item+';'+this.state.owner.id;
+    console.log('propsid',this.props.owner);
+    if(this.props.owner != this.getcookie('userid'))
+      url = 'javascript:;';
     return (
-      <div className='offer-wrapper'>
+      <Link to={url} className='offer-wrapper'>
         <div>
           <span className='user'>{this.state.owner.name}</span>
           <span className='comment'>{this.state.offer.text}</span>
@@ -47,7 +65,7 @@ class Offer extends Component {
         <div>
           <span className='bounty'>{this.state.offer.bounty}  </span>
         </div>
-      </div>
+      </Link>
     );
   }
 
