@@ -35,15 +35,22 @@ class ListingDetails extends Component {
     //this.forceUpdate();
   }
 
+  offerClicked() {
+    console.log('wtf');
+  }
+
   renderComments() {
     if(!this.state.clicked)
       return;
     let rawComments = this.state.clicked.comments;
+    let itemid = this.props.params.id;
+    console.log(itemid);
     return (
       <div className='comments-container'>
         {
           rawComments.map( (c) => {
-            return <Offer offer={c} />;
+            console.log('itemid',itemid);
+            return <Offer offer={c} item={itemid} owner={this.state.clicked.owner}/>;
           })
         }
       </div>

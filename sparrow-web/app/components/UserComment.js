@@ -13,11 +13,10 @@ if (process.env.BROWSER) {
   displayPic = imageResolver('images/cat.png');
 }
 
-class Offer extends Component {
+class UserComment extends Component {
 
   static propTypes = {
     offer: PropTypes.number.isRequired,
-    item: PropTypes.number.isRequired,
     owner: PropTypes.number.isRequired
   }
 
@@ -52,20 +51,13 @@ class Offer extends Component {
   render() {
     if(this.state.error) return <div></div>;
     console.log('refresh');
-    let url = '/finish/'+this.props.item+';'+this.state.owner.id;
-    console.log('propsid',this.props.owner);
-    if(this.props.owner != this.getcookie('userid'))
-      url = 'javascript:;';
     return (
-      <Link to={url} className='offer-wrapper'>
+      <div className='offer-wrapper'>
         <div>
-          <span className='user'>{this.state.owner.name}</span>
+          <span className='user'>{this.state.owner.name}<br/></span>
           <span className='comment'>{this.state.offer.text}</span>
         </div>
-        <div>
-          <span className='bounty'>{this.state.offer.bounty}  </span>
-        </div>
-      </Link>
+      </div>
     );
   }
 
@@ -95,4 +87,4 @@ class Offer extends Component {
 
 }
 
-export default Offer;
+export default UserComment;

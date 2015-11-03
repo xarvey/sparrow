@@ -19,10 +19,15 @@
 			margin-left: -15px;
 			display: flex;
 			justify-content: space-between;
+			text-decoration: none;
 			padding: 15px;
 			border: 1px solid #f3f3f3;
 			border-radius: 4px;
 			//background-color: #fafafa;
+
+			& * {
+				text-decoration: none;
+			}
 
 			&:hover {
 				background-color: #BAE49F;
@@ -50,6 +55,7 @@
 			}
 
 			.comment {
+				color: #333333;
 				font-size: 16px;
 			}
 

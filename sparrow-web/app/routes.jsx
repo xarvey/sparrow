@@ -6,6 +6,7 @@ import BorrowHeader from './components/BorrowHeader';
 import Header from './components/header';
 import ListingDetails from './pages/ListingDetails'
 import ProfilePage from './pages/ProfilePage'
+import FinishPage from './pages/FinishPage'
 
 export default (
   <Route component={ require('./components/app') }>
@@ -40,6 +41,10 @@ export default (
     { generateRoute({
       paths: ['/user/:id'],
       component: { header: Header, content: require('./pages/ProfilePage') }
+    }) }
+    { generateRoute({
+      paths: ['/finish/:id'],
+      component: { header: Header, content: require('./pages/FinishPage') }
     }) }
     { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],
