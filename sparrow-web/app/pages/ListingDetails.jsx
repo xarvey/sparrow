@@ -55,8 +55,9 @@ class ListingDetails extends Component {
   }
 
   renderComments() {
-    if(localStorage.getItem('deleted') && JSON.parse(localStorage.getItem('deleted')).indexOf(this.props.params.id) > -1)
-        return <p>You already submitted the request<br/><br/></p>
+    // defect #23
+    //if(localStorage.getItem('deleted') && JSON.parse(localStorage.getItem('deleted')).indexOf(this.props.params.id) > -1)
+    //    return <p>You already submitted the request<br/><br/></p>
     if(!this.state.clicked)
       return;
     let rawComments = this.state.clicked.comments;
@@ -79,7 +80,8 @@ class ListingDetails extends Component {
     let item, form;
     if(this.state.clicked) {
       item = <RequestedItem item={this.state.clicked} showDescription={true} />
-      if(this.getcookie('userid').trim().length > 0)
+      // defect #21 (remove || true to fix)
+      if(this.getcookie('userid').trim().length > 0 || true)
         form = <ResponseForm item={ this.state.clicked }/>
       else {
         form = <p>You have to login to post<br/><br/></p>

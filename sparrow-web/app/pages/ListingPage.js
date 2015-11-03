@@ -87,7 +87,7 @@ class ListingPage extends Component {
       console.log(MissingFieldError);
       this.handleErrorMessage(MissingFieldError);
       return;
-    } else if (title.length > 140 || description > 140 || bounty > Number.MAX_VALUE) {
+    } else if (title.length > 140 || description > 140 /* #defect 4: || bounty > Number.MAX_VALUE*/) {
       console.log(OverflowError);
       this.handleErrorMessage(OverflowError);
       return;
