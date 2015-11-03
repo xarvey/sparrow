@@ -3,7 +3,7 @@ import { Link }        from 'react-router';
 import DocumentTitle from 'react-document-title';
 import UserActions from '../actions/UserActions';
 
-const PasswordError = 'Password length invalid';
+const InputError = 'Invalid input';
 
 const LoginPage = React.createClass({
 
@@ -48,9 +48,10 @@ const LoginPage = React.createClass({
   login() {
     const usr = document.getElementById('Username').value;
     const pass = document.getElementById('Password').value;
-    if (pass.length > 16 || pass.length < 1) {
-      console.log(PasswordError);
-      this.handleError(PasswordError);
+    console.log(usr);
+    if (pass.length > 16 || pass.length < 8 || usr.length < 1) {
+      console.log(InputError);
+      this.handleError(InputError);
     } else {
       const loginAttempt = {
         'user': usr,

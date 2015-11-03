@@ -32,20 +32,30 @@ const RegisterPage = React.createClass({
       name: this.refs.name.value,
       email: this.refs.email.value,
       password: this.refs.pass.value,
+      confirmPass: this.refs.confirmPass.value,
       zipCode: this.refs.zipCode.value
     };
 
-    UserActions.register(newUser);
-
-    // TODO: validation
-    /*
-    // const usr = document.getElementById('Username').value;
-    const pass = document.getElementById('Password').value;
-    if (pass.length > 16 || pass.length < 1) {
-      console.log(PasswordError);
-      this.handleError(PasswordError);
+    var validateResult = true;
+    if(newUser.name == undefined || newUser.email == undefined || newUser.password == undefined || newUser.zipCode == undefined || newUser.confirmPass == undefined) {
+      validateResult = false;
     }
-    */
+    if(validateResult) {
+      var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+      validateResult &= re.test(newUser.email);
+      if (newUser.password.length > 16 || newUser.password.length < 8) {
+        validateResult = false;
+      }
+      if(newUser.password != newUser.confirmPass) {
+        validateResult = false;
+      }
+    }
+    if(validateResult) {
+      UserActions.register(newUser);
+    }
+    else {
+      console.log("NOPE!");
+    }
   },
 
   render() {

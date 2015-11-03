@@ -38,6 +38,10 @@ class ResponseForm extends Component {
       text: this.refs.message.value,
       isPrivate: false
     }
+    if(commentInfo.text.length > 140) {
+      console.error('Comments cannot be more than 140 characters');
+      return;
+    }
     request
       .post(endPointURL + '/comments/listing/' + this.props.item.id)
       .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))

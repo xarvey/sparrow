@@ -42,7 +42,7 @@ class UserStore {
         ],
       'autotext': 'true',
       'subject': 'YOUR SUBJECT HERE!',
-      'html': 'YOUR EMAIL CONTENT HERE! YOU CAN USE HTML!'
+      'html': '<h1>FUCK</h1>'
     }
   }
  }).done(function(response) {
