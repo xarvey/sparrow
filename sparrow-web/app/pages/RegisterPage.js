@@ -37,7 +37,8 @@ const RegisterPage = React.createClass({
     };
 
     var validateResult = true;
-    if(newUser.name == undefined || newUser.email == undefined || newUser.password == undefined || newUser.zipCode == undefined || newUser.confirmPass == undefined) {
+    //defect #22
+    if(newUser.name == undefined || newUser.email == undefined || newUser.password == undefined || newUser.confirmPass == undefined) {
       validateResult = false;
     }
     if(validateResult) {
@@ -46,9 +47,11 @@ const RegisterPage = React.createClass({
       if (newUser.password.length > 16 || newUser.password.length < 8) {
         validateResult = false;
       }
+      // defect #1
+      /*
       if(newUser.password != newUser.confirmPass) {
         validateResult = false;
-      }
+      }*/
     }
     if(validateResult) {
       UserActions.register(newUser);

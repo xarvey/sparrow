@@ -50,8 +50,9 @@ const LoginPage = React.createClass({
     const pass = document.getElementById('Password').value;
     console.log(usr);
     if (pass.length > 16 || pass.length < 8 || usr.length < 1) {
-      console.log(InputError);
-      this.handleError(InputError);
+      // defect #2
+      /*console.log(InputError);
+      this.handleError(InputError);*/
     } else {
       const loginAttempt = {
         'user': usr,
