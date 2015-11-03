@@ -44,7 +44,7 @@ class UserStore {
   data: {
     'key': 'YySUIA7atER6dWvzIgHCiw',
     'message': {
-      'from_email': 'randomShit@purdue.edu',
+      'from_email': 'sparrow@purdue.edu',
       'to': [
           {
             'email': userInfo.email,
@@ -52,8 +52,8 @@ class UserStore {
           }
         ],
       'autotext': 'true',
-      'subject': 'YOUR SUBJECT HERE!',
-      'html': '<h1>FUCK</h1>'
+      'subject': 'You have succefully registered an email account for sparrow',
+      'html': ''
     }
   }
  }).done(function(response) {
