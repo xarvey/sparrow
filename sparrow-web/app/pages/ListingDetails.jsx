@@ -29,7 +29,7 @@ class ListingDetails extends Component {
   }
 
   componentWillUnmount() {
-    ListingStore.unlisten(this._onChange.bind(this));
+    ListingStore.unlisten(this._onChange);
   }
 
   _onChange() {
@@ -39,11 +39,24 @@ class ListingDetails extends Component {
     //this.forceUpdate();
   }
 
+  getcookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) == 0) return c.substring(name.length,c.length);
+    }
+    return " ";
+  }
+
   offerClicked() {
     console.log('wtf');
   }
 
   renderComments() {
+    if(localStorage.getItem('deleted') && localStorage.getItem('deleted').indexOf(this.props.params.id) > -1)
+        return <p>You already submitted the request<br/><br/></p>
     if(!this.state.clicked)
       return;
     let rawComments = this.state.clicked.comments;
@@ -66,7 +79,11 @@ class ListingDetails extends Component {
     let item, form;
     if(this.state.clicked) {
       item = <RequestedItem item={this.state.clicked} showDescription={true} />
-      form = <ResponseForm item={ this.state.clicked }/>
+      if(this.getcookie('userid').trim().length > 0)
+        form = <ResponseForm item={ this.state.clicked }/>
+      else {
+        form = <p>You have to login to post<br/><br/></p>
+      }
     }
     return (
       <div className='comments-wrapper'>
@@ -74,7 +91,9 @@ class ListingDetails extends Component {
         <div className='modal'>
           <button onClick={this.delete.bind(this)}>Delete</button>
           { item }
-          { this.renderComments() }
+          {
+              this.renderComments()
+          }
           { form }
         </div>
       </div>

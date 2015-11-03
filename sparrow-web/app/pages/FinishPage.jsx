@@ -30,28 +30,36 @@ class FinishPage extends Component {
           console.error('fail to fetch users!');
           return;
         }
+        let item = this.props.params.id.split(';')[0];
         this.setState({offerer: res.body});
+        let x = localStorage.getItem('deleted')
+        if(x)
+          localStorage.setItem('deleted', x.push(item));
+        else {
+          localStorage.setItem('deleted', [item])
+        }
+
         $.ajax({
-  type: "POST",
-  url: "https://mandrillapp.com/api/1.0/messages/send.json",
-  data: {
-    'key': 'YySUIA7atER6dWvzIgHCiw',
-    'message': {
-      'from_email': 'Sparrow@purdue.edu',
-      'to': [
-          {
-            'email': this.state.offerer.email,
-            'type': 'to'
+          type: "POST",
+          url: "https://mandrillapp.com/api/1.0/messages/send.json",
+          data: {
+            'key': 'YySUIA7atER6dWvzIgHCiw',
+            'message': {
+              'from_email': 'Sparrow@purdue.edu',
+              'to': [
+                  {
+                    'email': this.state.offerer.email,
+                    'type': 'to'
+                  }
+                ],
+              'autotext': 'true',
+              'subject': 'Someone has posted on your listings',
+              'html': 'Please check at http://localhost:3002/listing/'+item
+            }
           }
-        ],
-      'autotext': 'true',
-      'subject': 'Someone has posted on your listings',
-      'html': 'Please check at http://localhost:3002/listing/'+this.props.params.id.split(';')[0]
+        });
+      });
     }
-  }
-});
-});
-      }
 
 
   render() {
@@ -61,7 +69,6 @@ class FinishPage extends Component {
     console.log('props', this.props)
 
     //item = <RequestedItem item={this.props.} showDescription={true} />
-    console.log('useridfucking',this.props.params.id.split(';')[1]);
     form = <FinishedResponse id={this.props.params.id.split(';')[1]}/>
 
     return (
