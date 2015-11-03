@@ -32,12 +32,12 @@ class FinishPage extends Component {
         }
         let item = this.props.params.id.split(';')[0];
         this.setState({offerer: res.body});
-        let x = localStorage.getItem('deleted')
-        if(x)
-          localStorage.setItem('deleted', x.push(item));
-        else {
-          localStorage.setItem('deleted', [item])
+        let x = JSON.parse(localStorage.getItem('deleted'))
+        if(!x) {
+          x = []
         }
+        x.push(item);
+        localStorage.setItem('deleted', JSON.stringify(x));
 
         $.ajax({
           type: "POST",

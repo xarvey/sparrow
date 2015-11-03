@@ -55,7 +55,7 @@ class ListingDetails extends Component {
   }
 
   renderComments() {
-    if(localStorage.getItem('deleted') && localStorage.getItem('deleted').indexOf(this.props.params.id) > -1)
+    if(localStorage.getItem('deleted') && JSON.parse(localStorage.getItem('deleted')).indexOf(this.props.params.id) > -1)
         return <p>You already submitted the request<br/><br/></p>
     if(!this.state.clicked)
       return;
