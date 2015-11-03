@@ -125,6 +125,7 @@ class ProfilePage extends Component {
     console.log("here", this.state);
     let user = this.state.user
     if(!user) return <div></div>
+
     return (
       <div className='profile-wrapper'>
         <img src={ displayPic } alt='display picture' className='user-pic' />
