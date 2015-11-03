@@ -47,6 +47,10 @@ export default (
       component: { header: Header, content: require('./pages/FinishPage') }
     }) }
     { generateRoute({
+      paths: ['/edit'],
+      component: { header: Header, content: require('./pages/EditUser') }
+    }) }
+    { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],
       component: require('./components/profile')
     }) }
