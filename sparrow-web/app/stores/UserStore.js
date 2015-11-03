@@ -26,6 +26,28 @@ class UserStore {
           console.error('register error!');
           return;
         }
+        console.log(userInfo);
+        $.ajax({
+  type: "POST",
+  url: "https://mandrillapp.com/api/1.0/messages/send.json",
+  data: {
+    'key': 'YySUIA7atER6dWvzIgHCiw',
+    'message': {
+      'from_email': 'randomShit@purdue.edu',
+      'to': [
+          {
+            'email': userInfo.email,
+            'type': 'to'
+          }
+        ],
+      'autotext': 'true',
+      'subject': 'YOUR SUBJECT HERE!',
+      'html': 'YOUR EMAIL CONTENT HERE! YOU CAN USE HTML!'
+    }
+  }
+ }).done(function(response) {
+   console.log(response); // if you're into that sorta thing
+ });
         this.setState({ registered: res });
       });
   }
