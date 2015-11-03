@@ -71,6 +71,9 @@ const RegisterPage = React.createClass({
             console.error('register error!');
             return;
           }})
+          document.cookie = 'username=' + newUser.user + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
+          document.cookie = 'password=' + newUser.password + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
+
     }
     else {
       alert("Input Error");
