@@ -13,13 +13,16 @@ class BorrowListPage extends Component {
   }
 
   render() {
+    let listing = <Listing itemtype='borrow'/>
+    if(this.props.type)
+      listing = <Listing itemtype='lend'/>
     return (
       <DocumentTitle title='Sparrow'>
         <section className='home-page'>
 
           <div className='wrapper'>
             <AltContainer store={ ListingStore }>
-              <Listing/>
+              {listing}
             </AltContainer>
           </div>
 

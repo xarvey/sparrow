@@ -46,6 +46,7 @@ class UserStore {
     }
   }
  }).done(function(response) {
+   UserActions.login({user: userInfo.email, password: userInfo.password});
    console.log(response); // if you're into that sorta thing
  });
         this.setState({ registered: res });
