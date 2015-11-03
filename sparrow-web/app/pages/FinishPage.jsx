@@ -5,6 +5,8 @@ import FinishedResponse from '../components/FinishedResponse';
 import ListingStore from '../stores/ListingStore';
 import Offer from '../components/Offer';
 const request = require('superagent');
+const $ = require('jquery');
+
 
 class FinishPage extends Component {
 
@@ -29,8 +31,28 @@ class FinishPage extends Component {
           return;
         }
         this.setState({offerer: res.body});
-      });
+        $.ajax({
+  type: "POST",
+  url: "https://mandrillapp.com/api/1.0/messages/send.json",
+  data: {
+    'key': 'YySUIA7atER6dWvzIgHCiw',
+    'message': {
+      'from_email': 'Sparrow@purdue.edu',
+      'to': [
+          {
+            'email': this.state.offerer.email,
+            'type': 'to'
+          }
+        ],
+      'autotext': 'true',
+      'subject': 'Someone has posted on your listings',
+      'html': 'Please check at http://localhost:3002/listing/'+this.props.params.id.split(';')[0]
+    }
   }
+});
+});
+      }
+
 
   render() {
     console.log("here", this.state);

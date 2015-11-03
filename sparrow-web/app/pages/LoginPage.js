@@ -27,7 +27,7 @@ const LoginPage = React.createClass({
         <section className='login-page'>
 
           <div className='input'>
-            <input type='text' className='textbox' id = 'Username' placeholder = 'Username'/>
+            <input type='text' className='textbox' id = 'Username' placeholder = 'Email Address'/>
             <br></br>
             <input type='password' className='textbox' id = 'Password' placeholder = 'Password'/>
           </div>

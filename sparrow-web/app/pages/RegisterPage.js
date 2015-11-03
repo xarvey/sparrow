@@ -54,7 +54,7 @@ const RegisterPage = React.createClass({
       UserActions.register(newUser);
     }
     else {
-      console.log("NOPE!");
+      alert("Input Error");
     }
   },
 

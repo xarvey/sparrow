@@ -43,6 +43,18 @@ class Header extends Component {
     return " ";
   }
 
+  logout() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+    window.location.href="/borrow";
+  }
+
   render() {
     let borrow = 'tab';
     let lend = 'tab';
@@ -56,10 +68,12 @@ class Header extends Component {
     let userid = this.getcookie('userid');
 
     let login = ( <Link to='/login' className='login-btn'>Login</Link> )
-    let create = (<Link to='/create' className='active'>Create</Link> )
-
+    let create = null;
+    let logout = null;
     if(userid.trim().length > 0) {
         login = <Link to={'/user/'+userid}><strong>{name}</strong></Link>
+        create = (<Link to='/create' className='active'>Create</Link> )
+        logout = <button onClick={this.logout.bind(this)} > Logout</button>
     }
 
     return (
@@ -77,6 +91,7 @@ class Header extends Component {
             {login}
           </div>
           {create}
+          {logout}
         </div>
       </header>
     );

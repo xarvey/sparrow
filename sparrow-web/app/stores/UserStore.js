@@ -17,6 +17,17 @@ class UserStore {
     });
   }
 
+   deleteAllCookies() {
+      var cookies = document.cookie.split(";");
+
+      for (var i = 0; i < cookies.length; i++) {
+      	var cookie = cookies[i];
+      	var eqPos = cookie.indexOf("=");
+      	var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      	document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+      }
+  }
+
   handleRegister(userInfo) {
     request
       .post(this.endPointURL + '/users')
@@ -65,6 +76,7 @@ class UserStore {
           alert('login error');
           return ;
         }
+        this.deleteAllCookies();
         document.cookie = 'username=' + userInfo.user + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
         document.cookie = 'password=' + userInfo.password + '; expires=Thu, 18 Dec 2030 12:00:00 UTC';
         document.cookie=  'userid='+res.body.id +';  expires=Thu, 18 Dec 2030 12:00:00 UTC';
