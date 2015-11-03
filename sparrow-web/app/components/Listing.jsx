@@ -7,7 +7,15 @@ class Listing extends Component {
     listings: PropTypes.array.isRequired
   }
 
+//defect
   render() {
+    if (this.props.listings.length<1)
+    return (
+      <div className='list-container'>
+          No Listing Yet !!
+      </div>
+    );
+
     return (
       <div className='list-container'>
         {

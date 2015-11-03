@@ -43,6 +43,18 @@ class Header extends Component {
     return " ";
   }
 
+  logout() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      var eqPos = cookie.indexOf("=");
+      var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+    window.location.href="/borrow";
+  }
+
   render() {
     let borrow = 'tab';
     let lend = 'tab';
@@ -77,6 +89,7 @@ class Header extends Component {
             {login}
           </div>
           {create}
+          <button onClick={this.logout.bind(this)} > Logout</button>
         </div>
       </header>
     );
