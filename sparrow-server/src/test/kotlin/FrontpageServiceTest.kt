@@ -10,12 +10,12 @@ import kotlin.test.fail
 class FrontpageServiceTest {
 
     companion object {
-        fun generateListings(type: ListingType, n: Int) = (1..n) map { i ->
+        fun generateListings(type: ListingType, n: Int) = (1..n).map { i ->
             Listing(n + i, i, type, Date(i.toLong()), "Listing $i", "A $type listing")
         }
     }
 
-    val types = ListingType.values().toList()
+    val types = ListingType.values.toList()
 
     class MockData(val type: ListingType, val n: Int): MockDatastore() {
         override fun queryListings(filter: FilterParams): List<Listing> {
@@ -29,7 +29,7 @@ class FrontpageServiceTest {
 
     @Test
     fun invalid() {
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockDatastore())
             assert(sparrow.frontpage.getPage(type, -1, 10).status == 400)
             assert(sparrow.frontpage.getPage(type, 0, -1).status == 400)
@@ -39,7 +39,7 @@ class FrontpageServiceTest {
 
     @Test
     fun empty() {
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, 0))
             val result = sparrow.frontpage.getPage(type, page = 0, pageSize = 10)
             assert(result.body == emptyList<Listing>())
@@ -50,7 +50,7 @@ class FrontpageServiceTest {
     fun firstPagePartial() {
         val count = 3
         val pageSize = 5
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, count))
             val result = sparrow.frontpage.getPage(type, page = 0, pageSize = pageSize)
             val it = result.body
@@ -67,7 +67,7 @@ class FrontpageServiceTest {
     fun firstPageFull() {
         val count = 5
         val pageSize = 5
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, count))
             val result = sparrow.frontpage.getPage(type, page = 0, pageSize = pageSize)
             val it = result.body
@@ -84,7 +84,7 @@ class FrontpageServiceTest {
     fun innerPage() {
         val total = 20
         val pageSize = 5
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, total))
             val result = sparrow.frontpage.getPage(type, page = 1, pageSize = pageSize)
             val it = result.body
@@ -102,7 +102,7 @@ class FrontpageServiceTest {
         val total = 18
         val count = 3
         val pageSize = 5
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, total))
             val result = sparrow.frontpage.getPage(type, page = 3, pageSize = pageSize)
             val it = result.body
@@ -119,7 +119,7 @@ class FrontpageServiceTest {
     fun lastPageFull() {
         val total = 20
         val pageSize = 5
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, total))
             val result = sparrow.frontpage.getPage(type, page = 3, pageSize = pageSize)
             val it = result.body
@@ -136,7 +136,7 @@ class FrontpageServiceTest {
     fun beyond() {
         val total = 5
         val pageSize = 2
-        types forEach { type ->
+        types.forEach { type ->
             val sparrow = Sparrow(MockData(type, total))
             val result = sparrow.frontpage.getPage(type, page = 10, pageSize = pageSize)
             val it = result.body
