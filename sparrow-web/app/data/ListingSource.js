@@ -70,24 +70,23 @@ const ListingSource = {
     return {
       remote(state, id) {
         console.log('before return', id);
-        let realData=[];
-
-        request
-          .get(endPoint+'/frontpage/borrow/0')
-          .end((err, res) => {
-            if (err) {
-              console.error('fail to fetch listings!');
-              return;
-            }
-            realData=res.body;
-          });
-
         return new Promise(function(resolve, reject) {
           // simulate an asynchronous flow where data is fetched on
           // a remote server somewhere.
           //setTimeout(function() {
 
             // change this to `false` to see the error action being handled.
+            let realData=[];
+
+            request
+              .get(endPoint+'/frontpage/borrow/0')
+              .end((err, res) => {
+                if (err) {
+                  console.error('fail to fetch listings!');
+                  return;
+                }
+                realData=res.body;
+
             request
               .get(endPoint+'/frontpage/lend/0')
               .end((err, res) => {
@@ -124,7 +123,7 @@ const ListingSource = {
                   reject('No data');
                 }
               });
-          //}, 250);
+            });
         });
       },
       local() {
