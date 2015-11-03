@@ -108,7 +108,7 @@ fun main(args: Array<String>) {
     ).forEach {
         Spark.exception(it) { exception: Exception, request: Request, response: Response ->
             response.status(400)
-            val message = exception.getMessage() ?: "Bad request"
+            val message = exception.message ?: "Bad request"
             response.body(message.toJson(Gson()))
         }
     }

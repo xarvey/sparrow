@@ -39,13 +39,14 @@ class FlatDatastore(
 
     override fun retrieveUser(id: Int): User? = persistence.users[id]
 
-    override fun retrieveUser(email: String): User? = persistence.users[persistence.usersByEmail[email]]
+    override fun retrieveUser(email: String): User? = persistence.users.getRaw(persistence.usersByEmail[email])
 
-    override fun retrieveUserAuth(email: String): UserAuth? = persistence.auth[persistence.usersByEmail[email]]
+    override fun retrieveUserAuth(email: String): UserAuth? = persistence.auth.getRaw(persistence.usersByEmail[email])
 
     override fun updateUser(user: User) {
         with (persistence) {
-            usersByEmail.remove(users[user.id]?.email)
+            val email = users[user.id]?.email
+            if (email != null) usersByEmail.remove(email)
             users[user.id] = user
             usersByEmail[user.email] = user.id
         }
@@ -90,12 +91,12 @@ class FlatDatastore(
     }
 
     override fun queryListings(filter: FilterParams): List<Listing> {
-        return persistence.listings.values().filter {
+        return persistence.listings.values.filter {
             filter.type == null || filter.type == it.type
         }.filter {
             filter.keywords == null || it.tags.fold(false) { r, tag -> r || filter.keywords.contains(tag) }
         }.filter {
-            filter.zipCode == null || filter.zipCode.contains(persistence.users[it.owner]?.zipCode)
+            filter.zipCode == null || filter.zipCode.containsRaw(persistence.users[it.owner]?.zipCode)
         }.filter {
             filter.users == null || filter.users.contains(it.owner)
         }.filter {
