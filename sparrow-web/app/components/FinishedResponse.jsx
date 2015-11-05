@@ -3,10 +3,10 @@ import ListingStore from 'stores/ListingStore';
 
 const request = require('superagent');
 
-class ResponseForm extends Component {
+class FinishedResponse extends Component {
 
   static propTypes = {
-    item: PropTypes.object.isRequired,
+    id: PropTypes.object.isRequired,
   }
 
   state = {
@@ -16,14 +16,14 @@ class ResponseForm extends Component {
   render() {
     let form = this.state.posted ?
       (
-        <span>You have submitted the offer!</span>
+        <span>You have submitted the comment!</span>
       ):
       (
-        <textarea ref='message' cols='50' rows='4' className='textbox' id='message' placeholder='Message'/>
+        <textarea ref='message' cols='50' rows='4' className='textbox' id='message' placeholder='Provide the feedback'/>
       )
-    let button = this.state.posted? null : <button type='button' onClick={this.submitComment.bind(this)}className='offer'>{this.props.item.type == 'borrow'? 'Offer to lend':'Borrow'}</button>
+    let button = this.state.posted? null : <button type='button' onClick={this.submitComment.bind(this)} className='offer'>Submit</button>
     return (
-      <div className='modal-res'>
+      <div>
         {form}
         {button}
       </div>
@@ -34,16 +34,12 @@ class ResponseForm extends Component {
     const endPointURL = 'http://vohras.tk:9000';
     const commentInfo = {
       owner: this.getcookie('userid'),
-      parent: this.props.item.id,
+      parent: this.props.id,
       text: this.refs.message.value,
       isPrivate: false
     }
-    if(commentInfo.text.length > 140) {
-      console.error('Comments cannot be more than 140 characters');
-      return;
-    }
     request
-      .post(endPointURL + '/comments/listing/' + this.props.item.id)
+      .post(endPointURL + '/comments/user/' + this.props.id)
       .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
       .send(commentInfo)
       .end((err, res) => {
@@ -51,7 +47,6 @@ class ResponseForm extends Component {
           console.error('listing error!');
           return;
         }
-        ListingStore.fetchListings(this.props.item.id);
         this.setState({posted: true});
       });
   }
@@ -69,4 +64,4 @@ class ResponseForm extends Component {
 
 }
 
-export default ResponseForm;
+export default FinishedResponse;

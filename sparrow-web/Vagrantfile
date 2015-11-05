@@ -1,0 +1,23 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/trusty64"
+  config.vm.network "forwarded_port", guest: 3001, host: 4444
+  config.vm.network "forwarded_port", guest: 3002, host: 4445
+
+  config.vm.provision "shell", inline: <<-SHELL
+    sudo apt-get update
+    sudo apt-get install -y build-essential git
+    sudo apt-get install -y nodejs npm
+
+    ln -s /usr/bin/nodejs /usr/bin/node || true
+    sudo npm install -g n
+    sudo npm install -g nodemon
+    sudo n 4.0.0
+
+    cd /vagrant
+    sudo npm install
+    # sudo npm run dev
+  SHELL
+end

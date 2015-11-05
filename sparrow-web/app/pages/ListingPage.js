@@ -85,18 +85,22 @@ class ListingPage extends Component {
     if (title === null || title.length === 0 || description === null || description.length === 0 || bounty === null || tags === null || tags.length === 0) {
       console.log(MissingFieldError);
       this.handleErrorMessage(MissingFieldError);
+      return;
     } else if (title.length > 140 || description > 140 || bounty > Number.MAX_VALUE) {
       console.log(OverflowError);
       this.handleErrorMessage(OverflowError);
+      return;
     } else if (isNaN(bounty) || bounty.length === 0) {
       console.log(NumberInvalidError);
       this.handleErrorMessage(NumberInvalidError);
+      return;
     }
 
     tags = tags.split(' ');
     if (tags.length === 0) {
       console.log(TagFormatError);
       this.handleErrorMessage(TagFormatError);
+      return;
     } else {
       var itemInfo={};
       itemInfo.owner=this.getcookie('userid');

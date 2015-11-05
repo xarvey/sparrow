@@ -54,6 +54,9 @@ body {
 h1 {
   font-family: 'quicksandbold', Helvetica, sans-serif; }
 
+a * {
+  text-decoration: none !important; }
+
                  /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
@@ -2408,9 +2411,12 @@ footer {
       margin-left: -15px;
       display: flex;
       justify-content: space-between;
+      text-decoration: none;
       padding: 15px;
       border: 1px solid #f3f3f3;
       border-radius: 4px; }
+      .comments-wrapper .comments-container .offer-wrapper * {
+        text-decoration: none; }
       .comments-wrapper .comments-container .offer-wrapper:hover {
         background-color: #BAE49F;
         cursor: pointer; }
@@ -2428,6 +2434,7 @@ footer {
           color: white;
           font-weight: bold; }
       .comments-wrapper .comments-container .offer-wrapper .comment {
+        color: #333333;
         font-size: 16px; }
       .comments-wrapper .comments-container .offer-wrapper .user {
         padding: 4px 7px;
