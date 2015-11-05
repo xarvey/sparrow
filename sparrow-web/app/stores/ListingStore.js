@@ -67,7 +67,7 @@ class ListingStore {
     request
       .get(this.endPointURL + '/listings/'+id)
       .end((err,res) => {
-        if (res.body.owner==this.getcookie('userid'))
+        //if (res.body.owner==this.getcookie('userid')) defect 20
         request
           .del(this.endPointURL + '/listings/'+id)
           .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
@@ -77,7 +77,7 @@ class ListingStore {
               return;
             }
           });
-        else alert("You cannot delete others item");
+      //  else alert("You cannot delete others item");
       }
 
     )

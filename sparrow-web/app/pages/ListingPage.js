@@ -89,7 +89,7 @@ class ListingPage extends Component {
       return;
     } else if (title.length > 140 || description > 140 /* #defect 4: || bounty > Number.MAX_VALUE*/) {
       console.log(OverflowError);
-      this.handleErrorMessage(OverflowError);
+      //this.handleErrorMessage(OverflowError);
       return;
     } else if (isNaN(bounty) || bounty.length === 0) {
       console.log(NumberInvalidError);
@@ -106,12 +106,11 @@ class ListingPage extends Component {
       var itemInfo={};
       itemInfo.owner=this.getcookie('userid');
       itemInfo.type=this.state.type;
-      itemInfo.title=title;
+      itemInfo.title=title || " ";
       itemInfo.description=description;
       itemInfo.bounty=bounty;
       itemInfo.tags=tags;
       itemInfo.comments=[];
-      console.log(itemInfo);
       request
         .post(endPointURL + '/listings')
         .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
