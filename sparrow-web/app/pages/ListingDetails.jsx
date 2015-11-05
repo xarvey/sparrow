@@ -91,6 +91,8 @@ class ListingDetails extends Component {
       <div className='comments-wrapper'>
         <h2>All lending offers for this listing</h2>
         <div className='modal'>
+          <button onClick={this.edit.bind(this)}>Edit</button>
+
           <button onClick={this.delete.bind(this)}>Delete</button>
           { item }
           {
@@ -106,6 +108,11 @@ class ListingDetails extends Component {
     ListingActions.deleteListingById(this.props.params.id);
     window.location.href = '/borrow';
   }
+
+  edit() {
+    window.location.href = '/editlisting/'+this.props.params.id;
+  }
+
 
 }
 

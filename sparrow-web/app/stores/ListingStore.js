@@ -63,6 +63,26 @@ class ListingStore {
     return " ";
   }
 
+
+  handleEditListingByID(id,listingInfo) {
+    request
+      .put(this.endPointURL + '/listings/')
+      .end((err,res) => {
+        request
+          .put(this.endPointURL + '/listings/')
+          .send(listingInfo)
+          .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
+          .end((err, res) => {
+            if (err) {
+              console.error('delete error!');
+              return;
+            }
+          });
+      }
+
+    )
+  }
+
   handleDeleteListingByID(id) {
     request
       .get(this.endPointURL + '/listings/'+id)

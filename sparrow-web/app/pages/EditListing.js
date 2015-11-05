@@ -51,7 +51,7 @@ class ListingPage extends Component {
     return (
       <DocumentTitle title='Edit your item listing'>
         <section className='listing-page'>
-        <h2>Create your item listing</h2>
+        <h2>Edit your item listing</h2>
           <div>
             <form>
               <div className='type'>
@@ -84,23 +84,23 @@ class ListingPage extends Component {
 
     if (title === null || title.length === 0 || description === null || description.length === 0 || bounty === null || tags === null || tags.length === 0) {
       console.log(MissingFieldError);
-      this.handleErrorMessage(MissingFieldError);
+      //this.handleErrorMessage(MissingFieldError);
     } else if (title.length > 140 || description > 140 || bounty > Number.MAX_VALUE) {
       console.log(OverflowError);
-      this.handleErrorMessage(OverflowError);
+      //this.handleErrorMessage(OverflowError);
     } else if (isNaN(bounty) || bounty.length === 0) {
       console.log(NumberInvalidError);
-      this.handleErrorMessage(NumberInvalidError);
+      //this.handleErrorMessage(NumberInvalidError);
     }
 
     tags = tags.split(' ');
     if (tags.length === 0) {
       console.log(TagFormatError);
-      this.handleErrorMessage(TagFormatError);
+      //this.handleErrorMessage(TagFormatError);
     } else {
       var itemInfo={};
-      itemInfo.id=this.getcookie('userid');
-
+      itemInfo.id= this.props.params.id;
+      itemInfo.owner=this.getcookie('userid');
       itemInfo.type=this.state.type;
       itemInfo.title=title;
       itemInfo.description=description;
@@ -109,7 +109,7 @@ class ListingPage extends Component {
       itemInfo.comments=[];
       console.log(itemInfo);
       request
-        .put(endPointURL + '/listings/8')
+        .put(endPointURL + '/listings')
         .set('Authentication',this.getcookie('username')+':'+this.getcookie('password'))
         .send(itemInfo)
         .end((err, res) => {
