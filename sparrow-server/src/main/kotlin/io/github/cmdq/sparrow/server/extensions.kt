@@ -12,12 +12,8 @@ operator fun CommandLine.get(option: String): String? = this.getOptionValue(opti
 val String.end: Int
     get() = this.length - 1
 
-val String.length: Int
-    get() = this.length
-
-
-fun String.isEmail(): Boolean = with(indexOf('@')) { this > 0 || this < end }
-fun String.isZipCode(): Boolean = this.count() == 5 && this.fold(true) {r, c -> r && c.isDigit()}
+fun String.isEmail(): Boolean = with(indexOf('@')) { this > 0 && this < end }
+fun String.isZipCode(): Boolean = this.count() == 5 && this.fold(true) { r, c -> r && c.isDigit() }
 
 val String.hashString: String
     get() = this.hashCode().toString()
