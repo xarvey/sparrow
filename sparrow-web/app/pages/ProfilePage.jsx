@@ -50,7 +50,7 @@ class ProfilePage extends Component {
 
   state = {
     user: null,
-    items: null,
+    items: [],
     location: '',
   }
 
