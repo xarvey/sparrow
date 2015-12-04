@@ -21,6 +21,10 @@ class ListingActions {
     this.dispatch(id);
   }
 
+  editlisting(id) {
+    this.dispatch(id);
+  }
+
   getListingByIds(ids) {
     this.dispatch(ids);
   }
