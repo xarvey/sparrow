@@ -131,7 +131,6 @@ class ProfilePage extends Component {
         <img src={ displayPic } alt='display picture' className='user-pic' />
         <h2>{ user.name }</h2>
         <span> { this.state.location } </span>
-        <Link to={'/edit'}>Edit</Link>
         <div className='modal'>
           <div className='list-container'>
             {
