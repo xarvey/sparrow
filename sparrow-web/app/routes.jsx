@@ -4,9 +4,10 @@ import { generateRoute } from 'utils/localized-routes';
 import LendHeader from './components/LendHeader';
 import BorrowHeader from './components/BorrowHeader';
 import Header from './components/header';
-import ListingDetails from './pages/ListingDetails'
-import ProfilePage from './pages/ProfilePage'
-import FinishPage from './pages/FinishPage'
+import ListingDetails from './pages/ListingDetails';
+import ProfilePage from './pages/ProfilePage';
+import FinishPage from './pages/FinishPage';
+import EditPage from './pages/EditPage';
 
 export default (
   <Route component={ require('./components/app') }>
@@ -45,6 +46,10 @@ export default (
     { generateRoute({
       paths: ['/finish/:id'],
       component: { header: Header, content: require('./pages/FinishPage') }
+    }) }
+    { generateRoute({
+      paths: ['/edit'],
+      component: { header: Header, content: require('./pages/EditUser') }
     }) }
     { generateRoute({
       paths: ['/profile/:seed', '/profil/:seed'],
