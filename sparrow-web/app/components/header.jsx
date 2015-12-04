@@ -70,10 +70,12 @@ class Header extends Component {
     let login = ( <Link to='/login' className='login-btn'>Login</Link> )
     let create = null;
     let logout = null;
+    let edit = null;
     if(userid.trim().length > 0) {
-        login = <Link to={'/user/'+userid}><strong>{name}</strong></Link>
+        login = <Link to={'/user/'+userid}><strong>{name.split(' ')[0]}</strong></Link>
         create = (<Link to='/create' className='active'>Create</Link> )
         logout = <button onClick={this.logout.bind(this)} > Logout</button>
+        edit = (<Link to='/edit' className='active'>Edit</Link> )
     }
 
     return (
@@ -91,6 +93,9 @@ class Header extends Component {
             {login}
           </div>
           {create}
+          &nbsp; &nbsp;
+          {edit}
+          &nbsp; &nbsp;
           {logout}
         </div>
       </header>

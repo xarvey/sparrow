@@ -11,7 +11,10 @@ class Listing extends Component {
   render() {
     //defect #25
     /*
-    if (this.props.listings.length<1)
+    if (this.props.listings.filter((item) => {
+      console.log('item',item.type, this.props.itemtype);
+      return item.type == this.props.itemtype;
+    }).length<1)
     return (
       <div className='list-container'>
           No Listing Yet !!
