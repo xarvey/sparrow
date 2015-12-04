@@ -7,7 +7,6 @@ import Header from './components/header';
 import ListingDetails from './pages/ListingDetails';
 import ProfilePage from './pages/ProfilePage';
 import FinishPage from './pages/FinishPage';
-import EditPage from './pages/EditPage';
 
 export default (
   <Route component={ require('./components/app') }>
